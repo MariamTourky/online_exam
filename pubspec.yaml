@@ -20,6 +20,7 @@ dependencies:
   go_router:
   shared_preferences:
   equatable:
+  dartz:
 
 dev_dependencies:
   flutter_test:
@@ -38,12 +39,17 @@ flutter:
   #   - images/a_dot_burr.jpeg
 
 
-  # fonts:
-  #   - family: Schyler
-  #     fonts:
-  #       - asset: fonts/Schyler-Regular.ttf
-  #       - asset: fonts/Schyler-Italic.ttf
-  #         style: italic
+  fonts:
+    - family: Inter
+      fonts:
+        - asset: assets/fonts/Inter-Regular.otf
+          weight: 400
+        - asset: assets/fonts/Inter-Medium.otf
+          weight: 500
+        - asset: assets/fonts/Inter-SemiBold.otf
+          weight: 600
+        - asset: assets/fonts/Inter-Bold.otf
+          weight: 700
 
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/to/font-from-package
