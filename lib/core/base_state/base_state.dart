@@ -1,14 +1,19 @@
-sealed class BaseResponse<T> {
-  bool get isSuccess => this is SuccessResponse<T>;
-  bool get isError => this is ErrorResponse<T>;
-}
+class BaseState<T> {
+  final bool? isLoading;
+  final String? errorMessage;
+  final T? data;
 
-class SuccessResponse<T> extends BaseResponse<T> {
-  final T data;
-  SuccessResponse({required this.data});
-}
+  BaseState({this.isLoading = false, this.errorMessage, this.data});
 
-class ErrorResponse<T> extends BaseResponse<T> {
-  final Exception error;
-  ErrorResponse({required this.error});
+  BaseState<T> copyWith({
+    bool? isLoading,
+    String? errorMessage,
+    T? data,
+  }) {
+    return BaseState<T>(
+      isLoading: isLoading ?? this.isLoading,
+      errorMessage: errorMessage ?? this.errorMessage,
+      data: data ?? this.data,
+    );
+  }
 }

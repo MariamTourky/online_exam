@@ -1,4 +1,7 @@
-sealed class BaseResponse<T> {}
+sealed class BaseResponse<T> {
+  bool get isSuccess => this is SuccessResponse<T>;
+  bool get isError => this is ErrorResponse<T>;
+}
 
 class SuccessResponse<T> extends BaseResponse<T> {
   final T data;
@@ -7,8 +10,5 @@ class SuccessResponse<T> extends BaseResponse<T> {
 
 class ErrorResponse<T> extends BaseResponse<T> {
   final Exception error;
-  String message = "something went wrong";
-  ErrorResponse({required this.error}) {
-    message = "dfljkghdkjf";
-  }
+  ErrorResponse({required this.error});
 }
