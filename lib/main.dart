@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:online_exam/config/routes/route_names.dart';
 
 import 'config/routes/app_router.dart';
 import 'core/di/config/di.dart';
@@ -15,11 +16,11 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
 
-    final goRouter = getIt<AppRouter>().router;
+    final appRouter = getIt<AppRouter>().router;
 
     return MaterialApp.router(
       debugShowCheckedModeBanner: false,
-      routerConfig: goRouter,
+      routerConfig: appRouter,
       title: 'Online Exam',
       theme: ThemeData(
         useMaterial3: true,

@@ -1,9 +1,11 @@
 import 'package:go_router/go_router.dart';
+import 'package:injectable/injectable.dart';
 import '../../features/forget_password/presentation/views/forget_password_view.dart';
 import '../../features/home/presentation/views/home_view.dart';
 import '../../features/login/presentation/views/login_view.dart';
 import '../../features/sign_up/presentation/views/sign_up_view.dart';
 import 'route_names.dart';
+@lazySingleton
 class AppRouter {
   GoRouter get router => GoRouter(
     debugLogDiagnostics: true,
@@ -23,12 +25,11 @@ class AppRouter {
       ),
       GoRoute(
         path: RouteNames.home,
-       builder: (context, state) => const HomeView(),
+        builder: (context, state) => const HomeView(),
       ),
     ],
   );
-}
-      // GoRoute(
+}      // GoRoute(
       //   path: RouteNames.emailVerification,
       //   builder: (context, state) => const EmailVerificationView(),
       // ),
