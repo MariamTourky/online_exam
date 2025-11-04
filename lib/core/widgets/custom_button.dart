@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:online_exam/config/theme/app_colors.dart';
 
 class CustomButton extends StatelessWidget {
   final bool isEnabled;
@@ -19,7 +20,7 @@ class CustomButton extends StatelessWidget {
     return ElevatedButton(
       onPressed: isEnabled && !isLoading ? onPressed : null,
       style: ElevatedButton.styleFrom(
-        backgroundColor: isEnabled ? Colors.blue : Colors.grey,
+        backgroundColor: isEnabled ? AppColors.primaryBlue : AppColors.gray,
         padding: const EdgeInsets.symmetric(vertical: 14),
       ),
       child: isLoading
