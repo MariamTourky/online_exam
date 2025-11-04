@@ -23,7 +23,12 @@ class AppConstants {
   // ====================== Hints / Inputs
 
   static const String enterYourEmail = 'Enter your email';
-  static const String enterYourPassword = 'Enter your password';
+  static const String enterYourfirstName = 'Enter First Name';
+  static const String enterYourlastName = 'Enter Last Name';
+  static const String enterYourPassword = 'Enter Password';
+  static const String enterRePassword= "Re-enter password";
+  static const String enterYourPhoneNumber = 'Enter Your Phone Number';
+
   static const String pleaseEnterAssociatedEmail ='Please enter your email associated with your account';
 
   // ===================== Verification & Reset

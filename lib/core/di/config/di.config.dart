@@ -17,6 +17,20 @@ import 'package:online_exam/core/di/modules/dio_module.dart' as _i471;
 import 'package:online_exam/core/di/modules/shared_prefs_module.dart' as _i818;
 import 'package:online_exam/core/network/api_service.dart' as _i1063;
 import 'package:online_exam/core/storage/shared_prefs_service.dart' as _i1016;
+import 'package:online_exam/features/sign_up/data/repositories/sign_up_data_source_contract/sign_up_data_source_contract.dart'
+    as _i1020;
+import 'package:online_exam/features/sign_up/data/repositories/sign_up_domain_impl/sign_up_domain_impl.dart'
+    as _i509;
+import 'package:online_exam/features/sign_up/data_sources/remote/sign_up_remote_data_source.dart'
+    as _i664;
+import 'package:online_exam/features/sign_up/data_sources/remote/sign_up_service/sign_up_service.dart'
+    as _i81;
+import 'package:online_exam/features/sign_up/domain/repositories_contract/sign_up_data_contract.dart'
+    as _i964;
+import 'package:online_exam/features/sign_up/domain/use_cases/sign_up_usecase.dart'
+    as _i983;
+import 'package:online_exam/features/sign_up/presentation/manager/signup_cubit.dart'
+    as _i926;
 import 'package:shared_preferences/shared_preferences.dart' as _i460;
 
 extension GetItInjectableX on _i174.GetIt {
@@ -39,6 +53,24 @@ extension GetItInjectableX on _i174.GetIt {
     );
     gh.lazySingleton<_i1063.ApiService>(
       () => _i1063.ApiService(gh<_i361.Dio>()),
+    );
+    gh.lazySingleton<_i81.SignUpService>(
+      () => _i81.SignUpService(gh<_i361.Dio>()),
+    );
+    gh.lazySingleton<_i1020.SignUpDataSourceContract>(
+      () => _i664.SignUpRemoteDataSourceImpl(gh<_i81.SignUpService>()),
+    );
+    gh.lazySingleton<_i964.SignUpDataContract>(
+      () => _i509.SignUpDomainImpl(
+        gh<_i1020.SignUpDataSourceContract>(),
+        gh<_i1016.SharedPrefsService>(),
+      ),
+    );
+    gh.lazySingleton<_i983.SignUpUseCase>(
+      () => _i983.SignUpUseCase(gh<_i964.SignUpDataContract>()),
+    );
+    gh.factory<_i926.SignupCubit>(
+      () => _i926.SignupCubit(gh<_i983.SignUpUseCase>()),
     );
     return this;
   }
