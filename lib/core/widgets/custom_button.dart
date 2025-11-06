@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:online_exam/config/theme/AppTheme.dart';
 
 class CustomButton extends StatelessWidget {
   final bool isEnabled;
@@ -17,17 +18,14 @@ class CustomButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ElevatedButton(
+
       onPressed: isEnabled && !isLoading ? onPressed : null,
-      style: ElevatedButton.styleFrom(
-        backgroundColor: isEnabled ? Colors.blue : Colors.grey,
-        padding: const EdgeInsets.symmetric(vertical: 14),
-      ),
       child: isLoading
-          ? const CircularProgressIndicator(color: Colors.white)
+          ? const CircularProgressIndicator(color: AppTheme.white)
           : Text(
-        text,
-        style: const TextStyle(fontSize: 16, color: Colors.white),
-      ),
+              text,
+              style: const TextStyle(fontSize: 16, color: AppTheme.white),
+            ),
     );
   }
 }

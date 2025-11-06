@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'app_colors.dart';
+import 'package:online_exam/config/theme/AppTheme.dart';
 
 class AppTextStyles {
   const AppTextStyles._();
@@ -9,28 +9,27 @@ class AppTextStyles {
     fontFamily: _fontFamily,
     fontWeight: FontWeight.w500,
     fontSize: 20,
-    color: AppColors.black,
+    color: AppTheme.black,
   );
 
   static const TextStyle baseRegularBlack = TextStyle(
     fontFamily: _fontFamily,
     fontWeight: FontWeight.w400,
     fontSize: 16,
-    color: AppColors.black,
+    color: AppTheme.black,
   );
-
 
   static const TextStyle baseMedium16 = TextStyle(
     fontFamily: _fontFamily,
     fontWeight: FontWeight.w500,
     fontSize: 16,
-    color: AppColors.primaryBlue,
+    color: AppTheme.primaryBlue,
   );
 
   static const TextStyle baseRegular14 = TextStyle(
     fontFamily: _fontFamily,
     fontWeight: FontWeight.w400,
     fontSize: 14,
-    color: AppColors.gray,
+    color: AppTheme.gray,
   );
 }

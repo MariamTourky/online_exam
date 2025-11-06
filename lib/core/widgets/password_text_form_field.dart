@@ -30,6 +30,7 @@ class PasswordTextFormField extends StatelessWidget {
       decoration: InputDecoration(
         labelText: label,
         hintText: hint,
+     
         suffixIcon: IconButton(
           icon: Icon(isVisible ? Icons.visibility : Icons.visibility_off),
           onPressed: onToggleVisibility,

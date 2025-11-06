@@ -27,7 +27,9 @@ class SignUpView extends StatelessWidget {
         },
         builder: (context, state) {
           return Scaffold(
-            appBar: AppBar(title: const Text(AppConstants.signup)),
+            appBar: AppBar(title: const Text(AppConstants.signup
+          
+            )),
             body:  SignupForm(),
           );
         },
