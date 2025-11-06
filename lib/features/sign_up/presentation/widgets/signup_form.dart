@@ -58,6 +58,9 @@ class SignupForm extends StatelessWidget {
               hint: AppConstants.enterYourEmail,
               validator: Validators.validateEmail,
               keyboardType: TextInputType.emailAddress,
+              onChanged: (_){
+                viewModel.doIntent(SignupIntent.formChanged);
+              },
             ),
             const SizedBox(height: 16),
 
