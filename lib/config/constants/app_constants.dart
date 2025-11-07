@@ -29,7 +29,7 @@ class AppConstants {
   static const String enterRePassword= "Re-enter password";
   static const String enterYourPhoneNumber = 'Enter Your Phone Number';
 
-  static const String pleaseEnterAssociatedEmail ='Please enter your email associated with your account';
+  static const String pleaseEnterAssociatedEmail ='Please enter your email associated \n with your account';
 
   // ===================== Verification & Reset
 

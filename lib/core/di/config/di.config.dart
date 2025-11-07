@@ -31,6 +31,24 @@ import 'package:online_exam/features/login/domain/use_cases/login_usecase.dart'
     as _i821;
 import 'package:online_exam/features/login/presentation/manager/login_cubit.dart'
     as _i135;
+import 'package:online_exam/features/recovery_password/data/repositories/recovery_password_data_source_contract/recovery_password_data_scource_contract.dart'
+    as _i377;
+import 'package:online_exam/features/recovery_password/data/repositories/recovery_password_domain_impl/recovery_password_domain_impl.dart'
+    as _i339;
+import 'package:online_exam/features/recovery_password/data_sources/remote/recovery_password_data_impl.dart'
+    as _i826;
+import 'package:online_exam/features/recovery_password/data_sources/remote/recovery_password_service/recovery_password_service.dart'
+    as _i917;
+import 'package:online_exam/features/recovery_password/domain/repositories_contract/recovery_password_data_contract.dart'
+    as _i512;
+import 'package:online_exam/features/recovery_password/domain/use_cases/forget_password_usecase.dart'
+    as _i341;
+import 'package:online_exam/features/recovery_password/domain/use_cases/reset_password_usecase.dart'
+    as _i503;
+import 'package:online_exam/features/recovery_password/domain/use_cases/verify_reset_code_usecase.dart'
+    as _i170;
+import 'package:online_exam/features/recovery_password/presentation/manager/forget_password/forget_password_cubit.dart'
+    as _i330;
 import 'package:online_exam/features/sign_up/data/repositories/sign_up_data_source_contract/sign_up_data_source_contract.dart'
     as _i1020;
 import 'package:online_exam/features/sign_up/data/repositories/sign_up_domain_impl/sign_up_domain_impl.dart'
@@ -71,6 +89,9 @@ extension GetItInjectableX on _i174.GetIt {
     gh.lazySingleton<_i121.LoginService>(
       () => _i121.LoginService(gh<_i361.Dio>()),
     );
+    gh.lazySingleton<_i917.RecoveryPasswordService>(
+      () => _i917.RecoveryPasswordService(gh<_i361.Dio>()),
+    );
     gh.lazySingleton<_i81.SignUpService>(
       () => _i81.SignUpService(gh<_i361.Dio>()),
     );
@@ -79,6 +100,9 @@ extension GetItInjectableX on _i174.GetIt {
     );
     gh.lazySingleton<_i1020.SignUpDataSourceContract>(
       () => _i664.SignUpRemoteDataSourceImpl(gh<_i81.SignUpService>()),
+    );
+    gh.lazySingleton<_i377.RecoverPasswordDataScourcContract>(
+      () => _i826.RecoverPasswordDataImpl(gh<_i917.RecoveryPasswordService>()),
     );
     gh.lazySingleton<_i964.SignUpDataContract>(
       () => _i509.SignUpDomainImpl(
@@ -101,8 +125,29 @@ extension GetItInjectableX on _i174.GetIt {
     gh.factory<_i135.LoginCubit>(
       () => _i135.LoginCubit(gh<_i821.LoginUseCase>()),
     );
+    gh.lazySingleton<_i512.RecoveryPasswordDataContract>(
+      () => _i339.RercoveryPasswordDomainImpl(
+        gh<_i377.RecoverPasswordDataScourcContract>(),
+      ),
+    );
+    gh.lazySingleton<_i341.ForgetPasswordUseCase>(
+      () =>
+          _i341.ForgetPasswordUseCase(gh<_i512.RecoveryPasswordDataContract>()),
+    );
+    gh.lazySingleton<_i503.ResetPasswordUseCase>(
+      () =>
+          _i503.ResetPasswordUseCase(gh<_i512.RecoveryPasswordDataContract>()),
+    );
+    gh.lazySingleton<_i170.VerifyResetCodeUseCase>(
+      () => _i170.VerifyResetCodeUseCase(
+        gh<_i512.RecoveryPasswordDataContract>(),
+      ),
+    );
     gh.factory<_i926.SignupCubit>(
       () => _i926.SignupCubit(gh<_i983.SignUpUseCase>()),
+    );
+    gh.factory<_i330.ForgetPasswordCubit>(
+      () => _i330.ForgetPasswordCubit(gh<_i341.ForgetPasswordUseCase>()),
     );
     return this;
   }

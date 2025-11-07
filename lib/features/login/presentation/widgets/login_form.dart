@@ -60,7 +60,7 @@ class LoginForm extends StatelessWidget {
               alignment: AlignmentGeometry.bottomRight,
               child: CustomNavigationText(
                 text: AppConstants.forgetPassword,
-                navigateTo: () => context.go(RouteNames.forgetPassword),
+                navigateTo: () => context.push(RouteNames.forgetPassword),
               ),
             ),
             const SizedBox(height: 24),
