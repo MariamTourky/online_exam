@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../config/constants/app_constants.dart';
 import '../../../../config/constants/schaffold_messages.dart';
 import '../../../../config/theme/app_text_styles.dart';
-import '../../../../core/utils/validators/show_snak_bar.dart';
+import '../../../../core/utils/show_snak_bar.dart';
 import '../manager/signup_cubit.dart';
 import '../widgets/signup_form.dart';
 
