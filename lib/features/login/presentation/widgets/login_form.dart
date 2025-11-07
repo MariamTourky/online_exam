@@ -87,7 +87,7 @@ class LoginForm extends StatelessWidget {
                   const SizedBox(width: 8),
                   CustomNavigationText(
                     text: AppConstants.signup,
-                    navigateTo: () => context.go(RouteNames.signup),
+                    navigateTo: () => context.push(RouteNames.signup),
                   ),
                 ],
               ),

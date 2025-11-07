@@ -13,6 +13,6 @@ class CustomNavigationText extends StatelessWidget {
         onTap: navigateTo,
         child:  Text(
             text,
-            style:AppTextStyles.baseMedium16),);
+            style:AppTextStyles.medium16BlueLined),);
   }
 }

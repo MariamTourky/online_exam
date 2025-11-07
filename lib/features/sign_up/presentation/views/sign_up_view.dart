@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 import '../../../../config/constants/app_constants.dart';
 import '../../../../config/constants/schaffold_messages.dart';
 import '../../../../config/theme/app_text_styles.dart';
@@ -25,10 +26,15 @@ class SignUpView extends StatelessWidget {
         return Scaffold(
           appBar: AppBar(
             toolbarHeight: 70,
-              surfaceTintColor: Colors.transparent,
-              title: const Text(
+            surfaceTintColor: Colors.transparent,
+            titleSpacing: 0,
+            title: const Text(
                   AppConstants.signup,
                   style: AppTextStyles.medium20Black),
+            leading: IconButton(
+              icon: Icon(Icons.arrow_back_ios_new), // choose any icon you like
+              onPressed: () => context.pop(),
+            ),
           ),
           body:  SignupForm(),
         );
