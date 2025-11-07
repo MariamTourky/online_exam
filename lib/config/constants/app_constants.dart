@@ -12,7 +12,6 @@ class AppConstants {
   static const String dontHaveAccount = "Don't have an account?";
   static const String alreadyHaveAccount = 'Already have an account?';
   static const String continueText = 'Continue';
-  static const String loginsuccess= "Login Successfully";
 
   // ====================== User Info Fields
 
