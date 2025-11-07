@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../config/constants/app_constants.dart';
 import '../../../../config/constants/schaffold_messages.dart';
-import '../../../../core/di/config/di.dart';
+import '../../../../config/theme/app_text_styles.dart';
+import '../../../../core/utils/validators/show_snak_bar.dart';
 import '../manager/signup_cubit.dart';
 import '../widgets/signup_form.dart';
 
@@ -11,29 +12,27 @@ class SignUpView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (_) => getIt<SignupCubit>(),
-      child: BlocConsumer<SignupCubit, SignupState>(
-        listener: (context, state) {
-          if (state.success) {
-            ScaffoldMessenger.of(context).showSnackBar(
-              const SnackBar(content: Text(SchaffoldMessages.signUpSuccessfully)),
-            );
-          } else if (state.errorMessage != null) {
-            ScaffoldMessenger.of(context).showSnackBar(
-              SnackBar(content: Text(state.errorMessage!)),
-            );
-          }
-        },
-        builder: (context, state) {
-          return Scaffold(
-            appBar: AppBar(title: const Text(AppConstants.signup
-          
-            )),
-            body:  SignupForm(),
-          );
-        },
-      ),
+    return BlocConsumer<SignupCubit, SignupState>(
+      listener: (context, state) {
+        if (state.errorMessage != null && state.errorMessage!.isNotEmpty) {
+          showAppSnackbar(context, state.errorMessage!, isError: true);
+        }
+        if (state.success) {
+          showAppSnackbar(context,SchaffoldMessages.signUpSuccessfully );
+        }
+      },
+      builder: (context, state) {
+        return Scaffold(
+          appBar: AppBar(
+            toolbarHeight: 70,
+              surfaceTintColor: Colors.transparent,
+              title: const Text(
+                  AppConstants.signup,
+                  style: AppTextStyles.medium20Black),
+          ),
+          body:  SignupForm(),
+        );
+      },
     );
   }
 }

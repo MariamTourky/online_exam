@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:online_exam/config/routes/route_names.dart';
-import 'package:online_exam/config/theme/AppTheme.dart';
+import 'package:online_exam/config/theme/app_theme.dart';
 
 import 'config/routes/app_router.dart';
 import 'core/di/config/di.dart';

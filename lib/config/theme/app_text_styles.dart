@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:online_exam/config/theme/AppTheme.dart';
+import 'package:online_exam/config/theme/app_theme.dart';
 
 class AppTextStyles {
   const AppTextStyles._();

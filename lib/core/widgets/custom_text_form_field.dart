@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import '../../../../features/sign_up/presentation/manager/signup_cubit.dart';
-import '../../../../features/sign_up/presentation/manager/signup_intents.dart';
+
 
 class CustomTextFormField extends StatelessWidget {
   final TextEditingController controller;
@@ -10,8 +8,8 @@ class CustomTextFormField extends StatelessWidget {
   final String? Function(String?)? validator;
   final TextInputType keyboardType;
   final TextInputAction textInputAction;
-  final bool autoValidate;
-final void Function(String)? onChanged;
+  final void Function(String)? onChanged;
+
   const CustomTextFormField({
     super.key,
     required this.controller,
@@ -20,7 +18,6 @@ final void Function(String)? onChanged;
     required this.validator,
     this.keyboardType = TextInputType.text,
     this.textInputAction = TextInputAction.next,
-    this.autoValidate = false,
     this.onChanged,
   });
 
@@ -31,16 +28,12 @@ final void Function(String)? onChanged;
       textInputAction: textInputAction,
       keyboardType: keyboardType,
       validator: validator,
-      autovalidateMode: autoValidate
-          ? AutovalidateMode.onUserInteraction
-          : AutovalidateMode.disabled,
+      autovalidateMode: AutovalidateMode.onUserInteraction,
       onChanged: onChanged,
       decoration: InputDecoration(
         labelText: label,
         hintText: hint,
-
       ),
     );
   }
 }
-

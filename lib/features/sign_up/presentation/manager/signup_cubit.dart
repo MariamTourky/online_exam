@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:injectable/injectable.dart';
 import 'package:online_exam/features/sign_up/presentation/manager/signup_intents.dart';
 import '../../../../core/error/failure.dart';
+import '../../../../core/utils/validators/validators.dart';
 import '../../domain/entities/user_sign_up_entity.dart';
 import '../../domain/use_cases/sign_up_usecase.dart';
 
@@ -37,7 +38,17 @@ class SignupCubit extends Cubit<SignupState> {
   }
 
   void _validateForm() {
-    final isValid = formKey.currentState?.validate() ?? false;
+    final isValid =
+            Validators.validateName(usernameController.text) == null &&
+            Validators.validateName(firstNameController.text) == null &&
+            Validators.validateName(lastNameController.text) == null &&
+            Validators.validateEmail(emailController.text) == null &&
+            Validators.validatePassword(passwordController.text) == null &&
+            Validators.validateRePassword(
+                rePasswordController.text, passwordController.text) ==
+                null &&
+            Validators.validatePhone(phoneController.text) == null;
+
     emit(state.copyWith(isFormValid: isValid));
   }
 
@@ -68,7 +79,8 @@ class SignupCubit extends Cubit<SignupState> {
       phone: phoneController.text.trim(),
     );
 
-    final Either<Failure, UserSignUpEntity> result = await _signUpUseCase(userEntity);
+    final Either<Failure, UserSignUpEntity> result =
+    await _signUpUseCase(userEntity);
 
     result.fold(
           (failure) => emit(state.copyWith(
