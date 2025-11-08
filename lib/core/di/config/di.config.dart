@@ -17,6 +17,20 @@ import 'package:online_exam/core/di/modules/dio_module.dart' as _i471;
 import 'package:online_exam/core/di/modules/shared_prefs_module.dart' as _i818;
 import 'package:online_exam/core/network/api_service.dart' as _i1063;
 import 'package:online_exam/core/storage/shared_prefs_service.dart' as _i1016;
+import 'package:online_exam/features/login/data/repositories/login_data_source_contract/login_data_source_contract.dart'
+    as _i1036;
+import 'package:online_exam/features/login/data/repositories/login_domain_impl/login_domain_impl.dart'
+    as _i536;
+import 'package:online_exam/features/login/data_sources/remote/login_remote_data_source.dart'
+    as _i648;
+import 'package:online_exam/features/login/data_sources/remote/login_service/login_service.dart'
+    as _i121;
+import 'package:online_exam/features/login/domain/repositories_contract/login_data_contract.dart'
+    as _i346;
+import 'package:online_exam/features/login/domain/use_cases/login_usecase.dart'
+    as _i821;
+import 'package:online_exam/features/login/presentation/manager/login_cubit.dart'
+    as _i135;
 import 'package:shared_preferences/shared_preferences.dart' as _i460;
 
 extension GetItInjectableX on _i174.GetIt {
@@ -40,7 +54,24 @@ extension GetItInjectableX on _i174.GetIt {
     gh.lazySingleton<_i1063.ApiService>(
       () => _i1063.ApiService(gh<_i361.Dio>()),
     );
-
+    gh.lazySingleton<_i121.LoginService>(
+      () => _i121.LoginService(gh<_i361.Dio>()),
+    );
+    gh.lazySingleton<_i1036.LoginDataSourceContract>(
+      () => _i648.LoginRemoteDataSourceImpl(gh<_i121.LoginService>()),
+    );
+    gh.lazySingleton<_i346.LoginDataContract>(
+      () => _i536.LoginDomainImpl(
+        gh<_i1036.LoginDataSourceContract>(),
+        gh<_i1016.SharedPrefsService>(),
+      ),
+    );
+    gh.lazySingleton<_i821.LoginUseCase>(
+      () => _i821.LoginUseCase(gh<_i346.LoginDataContract>()),
+    );
+    gh.factory<_i135.LoginCubit>(
+      () => _i135.LoginCubit(gh<_i821.LoginUseCase>()),
+    );
     return this;
   }
 }
