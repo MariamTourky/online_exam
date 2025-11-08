@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:online_exam/config/routes/route_names.dart';
 
 import 'config/routes/app_router.dart';
+import 'config/theme/app_theme.dart';
 import 'core/di/config/di.dart';
 
 Future<void> main() async {
@@ -22,10 +23,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       routerConfig: appRouter,
       title: 'Online Exam',
-      theme: ThemeData(
-        useMaterial3: true,
-        fontFamily: 'Inter',
-      ),
+      theme: AppTheme.lightTheme()
     );
   }
 }

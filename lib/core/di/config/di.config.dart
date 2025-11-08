@@ -17,6 +17,20 @@ import 'package:online_exam/core/di/modules/dio_module.dart' as _i471;
 import 'package:online_exam/core/di/modules/shared_prefs_module.dart' as _i818;
 import 'package:online_exam/core/network/api_service.dart' as _i1063;
 import 'package:online_exam/core/storage/shared_prefs_service.dart' as _i1016;
+import 'package:online_exam/features/recovery_password/data/repositories/recovery_password_data_source_contract/recovery_password_data_scource_contract.dart'
+    as _i377;
+import 'package:online_exam/features/recovery_password/data/repositories/recovery_password_domain_impl/recovery_password_domain_impl.dart'
+    as _i339;
+import 'package:online_exam/features/recovery_password/data_sources/remote/recovery_password_data_impl.dart'
+    as _i826;
+import 'package:online_exam/features/recovery_password/data_sources/remote/recovery_password_service/recovery_password_service.dart'
+    as _i917;
+import 'package:online_exam/features/recovery_password/domain/repositories_contract/recovery_password_data_contract.dart'
+    as _i512;
+import 'package:online_exam/features/recovery_password/domain/use_cases/forget_password_usecase.dart'
+    as _i341;
+import 'package:online_exam/features/recovery_password/presentation/manager/forget_password/forget_password_cubit.dart'
+    as _i330;
 import 'package:shared_preferences/shared_preferences.dart' as _i460;
 
 extension GetItInjectableX on _i174.GetIt {
@@ -40,7 +54,24 @@ extension GetItInjectableX on _i174.GetIt {
     gh.lazySingleton<_i1063.ApiService>(
       () => _i1063.ApiService(gh<_i361.Dio>()),
     );
-
+    gh.lazySingleton<_i917.RecoveryPasswordService>(
+      () => _i917.RecoveryPasswordService(gh<_i361.Dio>()),
+    );
+    gh.lazySingleton<_i377.RecoverPasswordDataScourcContract>(
+      () => _i826.RecoverPasswordDataImpl(gh<_i917.RecoveryPasswordService>()),
+    );
+    gh.lazySingleton<_i512.RecoveryPasswordDataContract>(
+      () => _i339.RercoveryPasswordDomainImpl(
+        gh<_i377.RecoverPasswordDataScourcContract>(),
+      ),
+    );
+    gh.lazySingleton<_i341.ForgetPasswordUseCase>(
+      () =>
+          _i341.ForgetPasswordUseCase(gh<_i512.RecoveryPasswordDataContract>()),
+    );
+    gh.factory<_i330.ForgetPasswordCubit>(
+      () => _i330.ForgetPasswordCubit(gh<_i341.ForgetPasswordUseCase>()),
+    );
     return this;
   }
 }
