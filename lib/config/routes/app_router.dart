@@ -2,6 +2,7 @@ import 'package:go_router/go_router.dart';
 import 'package:injectable/injectable.dart';
 import 'package:online_exam/features/login/presentation/manager/login_cubit.dart';
 import 'package:online_exam/features/recovery_password/presentation/manager/forget_password/forget_password_cubit.dart';
+import 'package:online_exam/features/recovery_password/presentation/manager/reset_password/reset_password_cubit.dart';
 import 'package:online_exam/features/recovery_password/presentation/views/verify_reset_code_view.dart';
 import 'package:online_exam/features/sign_up/presentation/manager/signup_cubit.dart';
 import '../../core/di/config/di.dart';
@@ -18,7 +19,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 class AppRouter {
   GoRouter get router => GoRouter(
     debugLogDiagnostics: true,
-    initialLocation: RouteNames.login,
+    initialLocation: RouteNames.resetPassword,
     routes: [
       GoRoute(
         path: RouteNames.login,
@@ -46,7 +47,10 @@ class AppRouter {
       ),
  GoRoute(
    path: RouteNames.resetPassword,
-  builder: (context, state) => const ResetPasswordView(),
+  builder: (context, state) => BlocProvider(
+    create: (_) => getIt<ResetPasswordCubit>(),
+    child: const ResetPasswordView(),
+  ),
  ),
       GoRoute(
         path: RouteNames.home,

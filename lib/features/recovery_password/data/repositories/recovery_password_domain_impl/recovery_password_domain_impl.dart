@@ -8,11 +8,15 @@ import 'package:online_exam/features/recovery_password/domain/entities/reset_pas
 import 'package:online_exam/features/recovery_password/domain/entities/verify_reset_code_entity.dart';
 import 'package:online_exam/features/recovery_password/domain/repositories_contract/recovery_password_data_contract.dart';
 
+import '../../../../../core/storage/shared_prefs_service.dart';
+import '../../../../../core/storage/storage_keys.dart';
+
 @LazySingleton(as: RecoveryPasswordDataContract)
 class RercoveryPasswordDomainImpl implements RecoveryPasswordDataContract {
   final RecoverPasswordDataScourcContract _recoverPasswordDataScourcContract;
+  final SharedPrefsService _prefs;
 
-  RercoveryPasswordDomainImpl(this._recoverPasswordDataScourcContract);
+  RercoveryPasswordDomainImpl(this._recoverPasswordDataScourcContract, this._prefs);
 
   @override
   Future<Either<Failure, ForgotPasswordEntity>> forgetPassword(String email) async {
@@ -39,8 +43,13 @@ class RercoveryPasswordDomainImpl implements RecoveryPasswordDataContract {
     final result = await _recoverPasswordDataScourcContract.resetPassword(request);
 
     return result.fold(
-          (failure) => Left(failure),
-          (response) => Right(response.toEntity()),
+          (failure) async  => Left(failure),
+          (response) async {
+        if (response.token != null && response.token!.isNotEmpty) {
+          await _prefs.saveString(StorageKeys.token, response.token!);
+        }
+        return Right(response.toEntity());
+      },
     );
   }
 }

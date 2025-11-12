@@ -2,5 +2,6 @@ class SchaffoldMessages{
   static const String signUpSuccessfully="Signup Successful";
   static const String loginsuccess= "Login Successfully";
   static const String codeVerified="Code verified successfully!";
+  static const String updatePasswordScuccessfully='Password Updated successfully';
 
 }

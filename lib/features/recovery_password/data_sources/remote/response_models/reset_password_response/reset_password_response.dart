@@ -2,14 +2,15 @@ import 'package:json_annotation/json_annotation.dart';
 import '../../../../domain/entities/reset_password_entity.dart';
 
 part 'reset_password_response.g.dart';
-
 @JsonSerializable()
 class ResetPasswordResponse {
   final String message;
+  final String? token;
   final int? code;
 
   ResetPasswordResponse({
     required this.message,
+    this.token,
     this.code,
   });
 
@@ -18,7 +19,9 @@ class ResetPasswordResponse {
 
   Map<String, dynamic> toJson() => _$ResetPasswordResponseToJson(this);
 
-  ResetPasswordEntity toEntity() =>
-      ResetPasswordEntity(message: message, code: code);
-
+  ResetPasswordEntity toEntity() => ResetPasswordEntity(
+    message: message,
+    token: token,
+    code: code,
+  );
 }
