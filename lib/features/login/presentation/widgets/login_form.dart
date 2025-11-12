@@ -9,10 +9,9 @@ import '../../../../config/routes/route_names.dart';
 import '../../../../config/theme/app_text_styles.dart';
 import '../../../../core/utils/validators/validators.dart';
 import '../../../../core/widgets/custom_button.dart';
-import '../../../../core/widgets/custom_navigation_text.dart';
+import '../../../../core/widgets/custom_action_text.dart';
 import '../manager/login_cubit.dart';
 import '../manager/login_intents.dart';
-
 
 class LoginForm extends StatelessWidget {
   const LoginForm({super.key});
@@ -25,7 +24,7 @@ class LoginForm extends StatelessWidget {
       key: cubit.formKey,
       onChanged: () => cubit.doIntent(LoginIntent.formChanged),
       child: Padding(
-        padding: const EdgeInsets.only(top: 24.0,right: 16,left: 16),
+        padding: const EdgeInsets.only(top: 24.0, right: 16, left: 16),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
@@ -40,7 +39,7 @@ class LoginForm extends StatelessWidget {
 
             BlocBuilder<LoginCubit, LoginState>(
               buildWhen: (p, c) =>
-              p.togglePasswordVisibility != c.togglePasswordVisibility,
+                  p.togglePasswordVisibility != c.togglePasswordVisibility,
               builder: (context, state) {
                 return PasswordTextFormField(
                   controller: cubit.passwordController,
@@ -58,23 +57,25 @@ class LoginForm extends StatelessWidget {
 
             Align(
               alignment: AlignmentGeometry.bottomRight,
-              child: CustomNavigationText(
+              child: CustomActionText(
                 text: AppConstants.forgetPassword,
-                navigateTo: () => context.push(RouteNames.forgetPassword),
+                onTapAction: () => context.push(RouteNames.forgetPassword),
               ),
             ),
             const SizedBox(height: 24),
 
             BlocBuilder<LoginCubit, LoginState>(
               buildWhen: (p, c) =>
-              p.isFormValid != c.isFormValid ||
-                  p.isLoading != c.isLoading,
+                  p.isFormValid != c.isFormValid || p.isLoading != c.isLoading,
               builder: (context, state) {
                 return CustomButton(
                   text: AppConstants.login,
                   isEnabled: state.isFormValid && !state.isLoading,
                   isLoading: state.isLoading,
-                  onPressed: () => cubit.doIntent(LoginIntent.submit),
+                  onPressed: () {
+                    cubit.doIntent(LoginIntent.submit);
+                    context.go(RouteNames.home);
+                  },
                 );
               },
             ),
@@ -83,11 +84,14 @@ class LoginForm extends StatelessWidget {
               padding: const EdgeInsets.symmetric(horizontal: 40.0),
               child: Row(
                 children: [
-                  Text(AppConstants.dontHaveAccount,style: AppTextStyles.baseRegularBlack,),
+                  Text(
+                    AppConstants.dontHaveAccount,
+                    style: AppTextStyles.baseRegularBlack,
+                  ),
                   const SizedBox(width: 8),
-                  CustomNavigationText(
+                  CustomActionText(
                     text: AppConstants.signup,
-                    navigateTo: () => context.push(RouteNames.signup),
+                    onTapAction: () => context.push(RouteNames.signup),
                   ),
                 ],
               ),

@@ -5,7 +5,7 @@ import '../../../../config/constants/app_constants.dart';
 import '../../../../config/routes/route_names.dart';
 import '../../../../config/theme/app_text_styles.dart';
 import '../../../../core/utils/validators/validators.dart';
-import '../../../../core/widgets/custom_navigation_text.dart';
+import '../../../../core/widgets/custom_action_text.dart';
 import '../manager/signup_cubit.dart';
 import '../manager/signup_intents.dart';
 import '../../../../core/widgets/custom_text_form_field.dart';
@@ -123,7 +123,7 @@ class SignupForm extends StatelessWidget {
                   isEnabled: state.isFormValid,
                   isLoading: state.isLoading,
                   text: AppConstants.signup,
-                  onPressed: () => cubit.doIntent(SignupIntent.submit),
+                  onPressed: () { cubit.doIntent(SignupIntent.submit);context.go(RouteNames.login);}
                 );
               },
             ),
@@ -134,9 +134,9 @@ class SignupForm extends StatelessWidget {
                 children: [
                   Text(AppConstants.alreadyHaveAccount,style: AppTextStyles.baseRegularBlack,),
                   const SizedBox(width: 8),
-                  CustomNavigationText(
+                  CustomActionText(
                     text: AppConstants.login,
-                    navigateTo: () => context.go(RouteNames.login),
+                    onTapAction: () => context.go(RouteNames.login),
                   ),
                 ],
               ),

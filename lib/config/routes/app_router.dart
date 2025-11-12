@@ -7,6 +7,7 @@ import 'package:online_exam/features/sign_up/presentation/manager/signup_cubit.d
 import '../../core/di/config/di.dart';
 import '../../features/home/presentation/views/home_view.dart';
 import '../../features/login/presentation/views/login_view.dart';
+import '../../features/recovery_password/presentation/manager/verify_reset_code/verify_reset_code_cubit.dart';
 import '../../features/recovery_password/presentation/views/forget_password_view.dart';
 import '../../features/recovery_password/presentation/views/reset_password_view.dart';
 import '../../features/sign_up/presentation/views/sign_up_view.dart';
@@ -27,12 +28,22 @@ class AppRouter {
         builder: (context, state) => BlocProvider( create: (_) => getIt<SignupCubit>(),child:const SignUpView())),
       GoRoute(
         path: RouteNames.forgetPassword,
-        builder: (context, state) => BlocProvider( create: (_) => getIt<ForgetPasswordCubit>(),child:const ForgetPasswordView()),
+        builder: (context, state) => BlocProvider(
+          create: (_) => getIt<ForgetPasswordCubit>(),
+          child: const ForgetPasswordView(),
+        ),
       ),
-       GoRoute(
-   path: RouteNames.emailVerification,
-   builder: (context, state) => const VerifyResetCodeView(),
- ),
+
+      GoRoute(
+        path: RouteNames.emailVerification,
+        builder: (context, state) {
+          final email = state.extra as String;
+          return BlocProvider(
+            create: (_) => getIt<VerifyResetCodeCubit>(param1: email),
+            child: const VerifyResetCodeView(),
+          );
+        },
+      ),
  GoRoute(
    path: RouteNames.resetPassword,
   builder: (context, state) => const ResetPasswordView(),

@@ -21,6 +21,7 @@ dependencies:
   shared_preferences:
   equatable:
   dartz:
+  flutter_otp_text_field:
 
 dev_dependencies:
   flutter_test:
