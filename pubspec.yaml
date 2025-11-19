@@ -1,6 +1,6 @@
 name: online_exam
 description: "A new Flutter project."
-publish_to: 'none' # Remove this line if you wish to publish to pub.dev
+publish_to: "none" # Remove this line if you wish to publish to pub.dev
 
 version: 1.0.0+1
 
@@ -8,37 +8,35 @@ environment:
   sdk: ^3.9.2
 
 dependencies:
+  cupertino_icons: ^1.0.8
+  dartz: null
+  dio: ^5.9.0
+  equatable: null
   flutter:
     sdk: flutter
-  retrofit:
-  logger:  # for logging purpose
-  json_annotation:
-  cupertino_icons: ^1.0.8
-  flutter_bloc:
-  injectable:
-  get_it:
-  go_router:
-  shared_preferences:
-  equatable:
-  dartz:
+  flutter_bloc: null
+  get_it: null
+  go_router: null
+  injectable: null
+  retrofit: ^4.9.0
+  json_annotation: ^4.9.0
+  logger: ^2.6.2
+
+  shared_preferences: null
 
 dev_dependencies:
+  build_runner: ^2.10.2
+  flutter_lints: ^5.0.0
   flutter_test:
     sdk: flutter
-  retrofit_generator: ^10.0.1
-  build_runner: ^2.6.0
+  injectable_generator: null
   json_serializable: ^6.10.0
-  injectable_generator:
-  flutter_lints: ^5.0.0
+  retrofit_generator: ^10.0.1
 flutter:
-
   uses-material-design: true
-
 
   # assets:
   #   - images/a_dot_burr.jpeg
-
-
   fonts:
     - family: Inter
       fonts:
@@ -50,6 +48,5 @@ flutter:
           weight: 600
         - asset: assets/fonts/Inter-Bold.otf
           weight: 700
-
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/to/font-from-package
