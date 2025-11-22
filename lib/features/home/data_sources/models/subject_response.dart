@@ -1,19 +1,20 @@
 import 'package:json_annotation/json_annotation.dart';
-import 'package:online_exam/features/home/domain/models/subject_model.dart';
+import 'package:online_exam/features/home/data_sources/models/subject_dto.dart';
+
 part 'subject_response.g.dart';
 @JsonSerializable()
 class SubjectResponse {
     @JsonKey(name: "message")
-    String? message;
-    @JsonKey(name: "subjectmetadata")
-    Subjectmetadata? subjectmetadata;
-    @JsonKey(name: "subjectModel")
-    List<SubjectModel>? subjectModel;
+     String? message;
+    @JsonKey(name: "SubjectMetadata")
+     SubjectMetadata? subjectMetadata;
+    @JsonKey(name: "subjectDto")
+     List<SubjectDto>? subjectDto;
 
     SubjectResponse({
         this.message,
-        this.subjectmetadata,
-        this.subjectModel,
+        this.subjectMetadata,
+        this.subjectDto,
     });
 
     factory SubjectResponse.fromJson(Map<String, dynamic> json) => _$SubjectResponseFromJson(json);
@@ -22,21 +23,21 @@ class SubjectResponse {
 }
 
 @JsonSerializable()
-class Subjectmetadata {
+class SubjectMetadata {
     @JsonKey(name: "currentPage")
-    int? currentPage;
+     int? currentPage;
     @JsonKey(name: "numberOfPages")
-    int? numberOfPages;
+     int? numberOfPages;
     @JsonKey(name: "limit")
-    int? limit;
+     int? limit;
 
-    Subjectmetadata({
+    SubjectMetadata({
         this.currentPage,
         this.numberOfPages,
         this.limit,
     });
 
-    factory Subjectmetadata.fromJson(Map<String, dynamic> json) => _$SubjectmetadataFromJson(json);
+    factory SubjectMetadata.fromJson(Map<String, dynamic> json) => _$SubjectMetadataFromJson(json);
 
-    Map<String, dynamic> toJson() => _$SubjectmetadataToJson(this);
+    Map<String, dynamic> toJson() => _$SubjectMetadataToJson(this);
 }

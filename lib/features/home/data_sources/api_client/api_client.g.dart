@@ -42,7 +42,7 @@ class _HomeApiClient implements HomeApiClient {
     try {
       _value = SubjectResponse.fromJson(_result.data!);
     } on Object catch (e, s) {
-      errorLogger?.logError(e, s, _options);
+      errorLogger?.logError(e, s, _options, _result);
       rethrow;
     }
     return _value;
@@ -73,7 +73,7 @@ class _HomeApiClient implements HomeApiClient {
           )
           .toList();
     } on Object catch (e, s) {
-      errorLogger?.logError(e, s, _options);
+      errorLogger?.logError(e, s, _options, _result);
       rethrow;
     }
     return _value;
@@ -102,7 +102,7 @@ class _HomeApiClient implements HomeApiClient {
           .map((dynamic i) => ExamResponse.fromJson(i as Map<String, dynamic>))
           .toList();
     } on Object catch (e, s) {
-      errorLogger?.logError(e, s, _options);
+      errorLogger?.logError(e, s, _options, _result);
       rethrow;
     }
     return _value;
@@ -129,7 +129,7 @@ class _HomeApiClient implements HomeApiClient {
     try {
       _value = ExamResponse.fromJson(_result.data!);
     } on Object catch (e, s) {
-      errorLogger?.logError(e, s, _options);
+      errorLogger?.logError(e, s, _options, _result);
       rethrow;
     }
     return _value;

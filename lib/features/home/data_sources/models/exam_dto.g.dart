@@ -1,12 +1,12 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'exam_model.dart';
+part of 'exam_dto.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
 
-ExamModel _$ExamModelFromJson(Map<String, dynamic> json) => ExamModel(
+ExamDto _$ExamDtoFromJson(Map<String, dynamic> json) => ExamDto(
   id: json['_id'] as String?,
   title: json['title'] as String?,
   duration: (json['duration'] as num?)?.toInt(),
@@ -18,7 +18,7 @@ ExamModel _$ExamModelFromJson(Map<String, dynamic> json) => ExamModel(
       : DateTime.parse(json['createdAt'] as String),
 );
 
-Map<String, dynamic> _$ExamModelToJson(ExamModel instance) => <String, dynamic>{
+Map<String, dynamic> _$ExamDtoToJson(ExamDto instance) => <String, dynamic>{
   '_id': instance.id,
   'title': instance.title,
   'duration': instance.duration,

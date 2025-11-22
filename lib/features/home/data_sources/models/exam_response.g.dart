@@ -8,19 +8,19 @@ part of 'exam_response.dart';
 
 ExamResponse _$ExamResponseFromJson(Map<String, dynamic> json) => ExamResponse(
   message: json['message'] as String?,
-  examMetadata: json['ExamMetadata '] == null
+  examMetadata: json['examMetadata'] == null
       ? null
-      : ExamMetadata.fromJson(json['ExamMetadata '] as Map<String, dynamic>),
-  examModel: (json['examModel'] as List<dynamic>?)
-      ?.map((e) => ExamModel.fromJson(e as Map<String, dynamic>))
+      : ExamMetadata.fromJson(json['examMetadata'] as Map<String, dynamic>),
+  exams: (json['exams'] as List<dynamic>?)
+      ?.map((e) => ExamDto.fromJson(e as Map<String, dynamic>))
       .toList(),
 );
 
 Map<String, dynamic> _$ExamResponseToJson(ExamResponse instance) =>
     <String, dynamic>{
       'message': instance.message,
-      'ExamMetadata ': instance.examMetadata,
-      'examModel': instance.examModel,
+      'examMetadata': instance.examMetadata,
+      'exams': instance.exams,
     };
 
 ExamMetadata _$ExamMetadataFromJson(Map<String, dynamic> json) => ExamMetadata(

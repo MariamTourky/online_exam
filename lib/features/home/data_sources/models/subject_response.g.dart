@@ -9,31 +9,31 @@ part of 'subject_response.dart';
 SubjectResponse _$SubjectResponseFromJson(Map<String, dynamic> json) =>
     SubjectResponse(
       message: json['message'] as String?,
-      subjectmetadata: json['subjectmetadata'] == null
+      subjectMetadata: json['SubjectMetadata'] == null
           ? null
-          : Subjectmetadata.fromJson(
-              json['subjectmetadata'] as Map<String, dynamic>,
+          : SubjectMetadata.fromJson(
+              json['SubjectMetadata'] as Map<String, dynamic>,
             ),
-      subjectModel: (json['subjectModel'] as List<dynamic>?)
-          ?.map((e) => SubjectModel.fromJson(e as Map<String, dynamic>))
+      subjectDto: (json['subjectDto'] as List<dynamic>?)
+          ?.map((e) => SubjectDto.fromJson(e as Map<String, dynamic>))
           .toList(),
     );
 
 Map<String, dynamic> _$SubjectResponseToJson(SubjectResponse instance) =>
     <String, dynamic>{
       'message': instance.message,
-      'subjectmetadata': instance.subjectmetadata,
-      'subjectModel': instance.subjectModel,
+      'SubjectMetadata': instance.subjectMetadata,
+      'subjectDto': instance.subjectDto,
     };
 
-Subjectmetadata _$SubjectmetadataFromJson(Map<String, dynamic> json) =>
-    Subjectmetadata(
+SubjectMetadata _$SubjectMetadataFromJson(Map<String, dynamic> json) =>
+    SubjectMetadata(
       currentPage: (json['currentPage'] as num?)?.toInt(),
       numberOfPages: (json['numberOfPages'] as num?)?.toInt(),
       limit: (json['limit'] as num?)?.toInt(),
     );
 
-Map<String, dynamic> _$SubjectmetadataToJson(Subjectmetadata instance) =>
+Map<String, dynamic> _$SubjectMetadataToJson(SubjectMetadata instance) =>
     <String, dynamic>{
       'currentPage': instance.currentPage,
       'numberOfPages': instance.numberOfPages,

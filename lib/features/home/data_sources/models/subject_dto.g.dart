@@ -1,12 +1,12 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'subject_model.dart';
+part of 'subject_dto.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
 
-SubjectModel _$SubjectModelFromJson(Map<String, dynamic> json) => SubjectModel(
+SubjectDto _$SubjectDtoFromJson(Map<String, dynamic> json) => SubjectDto(
   id: json['_id'] as String?,
   name: json['name'] as String?,
   icon: json['icon'] as String?,
@@ -15,7 +15,7 @@ SubjectModel _$SubjectModelFromJson(Map<String, dynamic> json) => SubjectModel(
       : DateTime.parse(json['createdAt'] as String),
 );
 
-Map<String, dynamic> _$SubjectModelToJson(SubjectModel instance) =>
+Map<String, dynamic> _$SubjectDtoToJson(SubjectDto instance) =>
     <String, dynamic>{
       '_id': instance.id,
       'name': instance.name,
