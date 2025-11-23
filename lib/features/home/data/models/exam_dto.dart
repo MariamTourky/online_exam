@@ -1,5 +1,6 @@
 
 import 'package:json_annotation/json_annotation.dart';
+import 'package:online_exam/features/home/domain/models/exam_model.dart';
 part 'exam_dto.g.dart';
 @JsonSerializable()
 class ExamDto {
@@ -31,4 +32,13 @@ class ExamDto {
     factory ExamDto.fromJson(Map<String, dynamic> json) => _$ExamDtoFromJson(json);
 
     Map<String, dynamic> toJson() => _$ExamDtoToJson(this);
+     
+ ExamModel toDomain(){
+       return ExamModel(
+          title: title,
+          duration: duration,
+          subject: subject,
+          numberOfQuestions: numberOfQuestions,
+       );
+     }
 }

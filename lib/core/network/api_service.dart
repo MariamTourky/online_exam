@@ -11,7 +11,4 @@ part 'api_service.g.dart'; // Generated file
 abstract class ApiService {
   @factoryMethod
   factory ApiService(Dio dio) = _ApiService;
-
-
-
 }
