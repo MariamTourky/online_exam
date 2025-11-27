@@ -43,7 +43,7 @@ class _LoginService implements LoginService {
     try {
       _value = UserloginResponse.fromJson(_result.data!);
     } on Object catch (e, s) {
-      errorLogger?.logError(e, s, _options);
+      errorLogger?.logError(e, s, _options,_result);
       rethrow;
     }
     return _value;

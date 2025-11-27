@@ -1,11 +1,14 @@
-import 'package:online_exam/features/home/domain/repositories/user_data_repo.dart';
-import 'package:online_exam/features/login/data_sources/remote/response_model/user_login_response.dart';
+import 'package:online_exam/features/home/data/models/response_models/user_data_response.dart';
+
+import '../repositories/user_data_repo.dart';
 
 class GetUserDataUseCase {
-  final UserDataRepo repository;
-  GetUserDataUseCase(this.repository);
+  final UserDataRepo repo;
 
-Future<User> call() async {
-    return await repository.getUserData();
+  GetUserDataUseCase(this.repo);
+
+  Future<UserDataResponse> call() async {
+    final result = await repo.getUserData();
+    return result;
   }
 }
