@@ -49,7 +49,7 @@ class SignupCubit extends Cubit<SignupState> {
                 null &&
             Validators.validatePhone(phoneController.text) == null;
 
-    emit(state.copyWith(isFormValid: isValid));
+    emit(state.copyWith(isFormValid: isValid) );
   }
 
   void _togglePasswordVisibility() {

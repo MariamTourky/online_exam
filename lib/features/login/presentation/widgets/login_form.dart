@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:online_exam/config/constants/app_constants.dart';
+import 'package:online_exam/core/utils/show_snak_bar.dart';
 import 'package:online_exam/core/widgets/custom_text_form_field.dart';
 import 'package:online_exam/core/widgets/password_text_form_field.dart';
 
@@ -13,19 +14,35 @@ import '../../../../core/widgets/custom_navigation_text.dart';
 import '../manager/login_cubit.dart';
 import '../manager/login_intents.dart';
 
-
 class LoginForm extends StatelessWidget {
   const LoginForm({super.key});
 
   @override
   Widget build(BuildContext context) {
-    final cubit = context.read<LoginCubit>();
+    
+    final cubit = context.read()<LoginCubit>();
 
-    return Form(
+    listenWhen:
+    (p, c) =>
+        p.signupSuccess != c.signupSuccess || p.errorMessage != c.errorMessage;
+    return BlocListener<LoginCubit, LoginState>(
+      listenWhen: (p, c) =>
+          p.success != c.success || p.errorMessage != c.errorMessage,
+      listener: (context, state) {
+        if (state.success) {
+          context.pushReplacementNamed(RouteNames.home);
+        }
+        if (state.errorMessage != null && state.errorMessage!.isNotEmpty) {
+          showAppSnackbar(context, state.errorMessage!, isError: true);
+        }
+      },
+    
+    child:
+    Form(
       key: cubit.formKey,
       onChanged: () => cubit.doIntent(LoginIntent.formChanged),
       child: Padding(
-        padding: const EdgeInsets.only(top: 24.0,right: 16,left: 16),
+        padding: const EdgeInsets.only(top: 24.0, right: 16, left: 16),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
@@ -40,7 +57,7 @@ class LoginForm extends StatelessWidget {
 
             BlocBuilder<LoginCubit, LoginState>(
               buildWhen: (p, c) =>
-              p.togglePasswordVisibility != c.togglePasswordVisibility,
+                  p.togglePasswordVisibility != c.togglePasswordVisibility,
               builder: (context, state) {
                 return PasswordTextFormField(
                   controller: cubit.passwordController,
@@ -67,8 +84,7 @@ class LoginForm extends StatelessWidget {
 
             BlocBuilder<LoginCubit, LoginState>(
               buildWhen: (p, c) =>
-              p.isFormValid != c.isFormValid ||
-                  p.isLoading != c.isLoading,
+                  p.isFormValid != c.isFormValid || p.isLoading != c.isLoading,
               builder: (context, state) {
                 return CustomButton(
                   text: AppConstants.login,
@@ -83,7 +99,10 @@ class LoginForm extends StatelessWidget {
               padding: const EdgeInsets.symmetric(horizontal: 40.0),
               child: Row(
                 children: [
-                  Text(AppConstants.dontHaveAccount,style: AppTextStyles.baseRegularBlack,),
+                  Text(
+                    AppConstants.dontHaveAccount,
+                    style: AppTextStyles.baseRegularBlack,
+                  ),
                   const SizedBox(width: 8),
                   CustomNavigationText(
                     text: AppConstants.signup,
@@ -95,6 +114,6 @@ class LoginForm extends StatelessWidget {
           ],
         ),
       ),
-    );
+    ));
   }
 }

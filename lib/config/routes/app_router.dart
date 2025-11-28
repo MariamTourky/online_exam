@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:injectable/injectable.dart';
-import 'package:online_exam/features/home/presentation/manager/App_cubit.dart';
+import 'package:online_exam/features/home/presentation/manager/home_cubit.dart';
 import 'package:online_exam/features/login/presentation/manager/login_cubit.dart';
 import 'package:online_exam/features/sign_up/presentation/manager/signup_cubit.dart';
 import '../../core/di/config/di.dart';
@@ -30,9 +30,17 @@ class AppRouter {
       GoRoute(
         path: RouteNames.signup,
         pageBuilder: (context, state) => MaterialPage(
-          child: BlocProvider(
-            create: (_) => getIt<SignupCubit>(),
-            child: const SignUpView(),
+          child: Builder(
+            builder: (context) {
+              return Builder(
+                builder: (context) {
+                  return BlocProvider(
+                    create: (_) => getIt<SignupCubit>(),
+                    child: const SignUpView(),
+                  );
+                }
+              );
+            }
           ),
         ),
       ),
@@ -44,9 +52,13 @@ class AppRouter {
       GoRoute(
         path: RouteNames.home,
         pageBuilder: (context, state) => MaterialPage(
-          child: BlocProvider(
-            create: (_) => getIt<AppCubit>(),
-            child: const HomeView(),
+          child: Builder(
+            builder: (context) {
+              return BlocProvider(
+                create: (_) => getIt<HomeCubit>(),
+                child: const HomeView(),
+              );
+            }
           ),
         ),
       ),

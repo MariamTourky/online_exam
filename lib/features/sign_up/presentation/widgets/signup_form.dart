@@ -22,9 +22,12 @@ class SignupForm extends StatelessWidget {
     (p, c) =>
         p.signupSuccess != c.signupSuccess || p.errorMessage != c.errorMessage;
     return BlocListener<SignupCubit, SignupState>(
+      listenWhen: (p, c) =>
+          p.success != c.success ||
+          p.errorMessage != c.errorMessage,
       listener: (context, state) {
-                if (state.success) {
-          context.go(RouteNames.home);
+        if (state.success) {
+          context.pushReplacementNamed(RouteNames.home);
         }
       },
       child: Form(
