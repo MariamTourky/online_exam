@@ -1,15 +1,15 @@
 import 'package:online_exam/core/base_state/base_state.dart';
 import 'package:online_exam/features/home/presentation/manager/home_tab.dart';
 
-class HomeState<T> {
+class ExploreState<T> {
   BaseState<List<T>>? subjectState;
   List<T> subjects = [];
   List<T> exams = [];
   BaseState<List<T>>? examState;
-    bool isLoading = false;
+  bool isLoading = false;
   String? errorMessage;
   HomeTab currentTab = HomeTab.explore;
-  HomeState({
+  ExploreState({
     this.subjectState,
     this.subjects = const [],
     this.examState,
@@ -19,17 +19,17 @@ class HomeState<T> {
     this.currentTab = HomeTab.explore,
   });
 
-  HomeState copyWith({
-        List<T>? subjects,
+  ExploreState copyWith({
+    List<T>? subjects,
     BaseState<List<T>>? subjectState,
     BaseState<List<T>>? examState,
     List<T>? exams,
-        bool? isLoading,
+    bool? isLoading,
 
     String? errorMessage,
     HomeTab? currentTab,
   }) {
-    return HomeState(
+    return ExploreState(
       subjectState: subjectState ?? this.subjectState,
       isLoading: isLoading ?? this.isLoading,
       subjects: subjects ?? this.subjects,

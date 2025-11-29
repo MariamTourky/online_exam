@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:injectable/injectable.dart';
-import 'package:online_exam/features/home/presentation/manager/home_cubit.dart';
+import 'package:online_exam/features/home/presentation/manager/explore/cubit/explore_cubit.dart';
 import 'package:online_exam/features/login/presentation/manager/login_cubit.dart';
 import 'package:online_exam/features/sign_up/presentation/manager/signup_cubit.dart';
 import '../../core/di/config/di.dart';
@@ -38,9 +38,9 @@ class AppRouter {
                     create: (_) => getIt<SignupCubit>(),
                     child: const SignUpView(),
                   );
-                }
+                },
               );
-            }
+            },
           ),
         ),
       ),
@@ -55,10 +55,10 @@ class AppRouter {
           child: Builder(
             builder: (context) {
               return BlocProvider(
-                create: (_) => getIt<HomeCubit>(),
+                create: (_) => getIt<ExploreCubit>(),
                 child: const HomeView(),
               );
-            }
+            },
           ),
         ),
       ),

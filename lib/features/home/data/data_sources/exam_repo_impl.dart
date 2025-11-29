@@ -1,12 +1,13 @@
 import 'package:online_exam/core/base_response/base_response.dart';
 import 'package:online_exam/features/home/api/data_sources/exam/exam_local_data_source.dart';
+import 'package:online_exam/features/home/api/data_sources/exam/exam_remote_data_source.dart';
 import 'package:online_exam/features/home/domain/models/exam_entity.dart';
 import 'package:online_exam/features/home/domain/repositories/exam_repo.dart';
 
 class ExamRepoImpl implements ExamRepo {
   final ExamRemoteDataSource remote;
-
-  ExamRepoImpl(this.remote);
+final ExamLocalDataSource local;
+  ExamRepoImpl(this.remote, this.local);
 
   @override
   Future<BaseResponse<List<ExamEntity>>> getExams() async {

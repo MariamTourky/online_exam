@@ -7,23 +7,23 @@ import 'package:online_exam/features/home/domain/models/subject_entity.dart';
 import 'package:online_exam/features/home/domain/usecases/get_exam_use_case.dart';
 import 'package:online_exam/features/home/domain/usecases/get_subject_use_case.dart';
 import 'package:online_exam/features/home/domain/usecases/get_user_data_use_case.dart';
-import 'package:online_exam/features/home/presentation/manager/app_event.dart';
-import 'package:online_exam/features/home/presentation/manager/home_state.dart';
+import 'package:online_exam/features/home/presentation/manager/explore/cubit/explore_event.dart';
+import 'package:online_exam/features/home/presentation/manager/explore/cubit/explore_state.dart';
 import 'package:online_exam/features/home/presentation/manager/home_tab.dart';
 
 @injectable
-class HomeCubit extends Cubit<HomeState> {
-  HomeCubit(
+class ExploreCubit extends Cubit<ExploreState> {
+  ExploreCubit(
     this._getSubjectsUseCase,
     this._getExamsUseCase,
     this._getUserDataUseCase,
-  ) : super(HomeState());
+  ) : super(ExploreState());
 
   final GetSubjectUseCase _getSubjectsUseCase;
   final GetExamUseCase _getExamsUseCase;
   final GetUserDataUseCase _getUserDataUseCase;
 
-  void doIntent(AppEvent event) {
+  void doIntent(ExploreEvent event) {
     switch (event) {
       case GetSubjectEvent():
         _getSubjectEvent();
@@ -84,25 +84,24 @@ class HomeCubit extends Cubit<HomeState> {
     }
   }
 
-Future<void> _selectExamEvent(int examId) async {
-  ExamEntity? exam;
+  Future<void> _selectExamEvent(int examId) async {
+    ExamEntity? exam;
 
-  try {
-    exam = state.exams
-        .cast<ExamEntity>()
-        .firstWhere((e) => e.subject.toString() == examId.toString());
-  } catch (_) {
-    exam = null; // exam not found
+    try {
+      exam = state.exams.cast<ExamEntity>().firstWhere(
+        (e) => e.subject.toString() == examId.toString(),
+      );
+    } catch (_) {
+      exam = null; // exam not found
+    }
+
+    emit(
+      state.copyWith(
+        exams: state.exams,
+        examState: BaseState(data: exam == null ? [] : [exam]),
+      ),
+    );
   }
-
-  emit(
-    state.copyWith(
-      exams: state.exams,
-      examState: BaseState(data: exam == null ? [] : [exam]),
-    ),
-  );
-}
-
 
   Future<void> _getExamEvent() async {
     emit(

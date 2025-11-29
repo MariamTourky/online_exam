@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import '../manager/home_cubit.dart';
-import '../manager/home_state.dart';
+import '../manager/explore/cubit/explore_cubit.dart';
+import '../manager/explore/cubit/explore_state.dart';
 import '../manager/home_tab.dart';
 import '../views/explore_view.dart';
 import '../views/profile_view.dart';
@@ -12,7 +12,7 @@ class HomeView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<HomeCubit, HomeState>(
+    return BlocBuilder<ExploreCubit, ExploreState>(
       builder: (context, state) {
         return Scaffold(
           body: IndexedStack(
@@ -22,7 +22,7 @@ class HomeView extends StatelessWidget {
           bottomNavigationBar: BottomNavigationBar(
             currentIndex: state.currentTab.index,
             onTap: (i) {
-              context.read<HomeCubit>().changeTabEvent(HomeTab.values[i]);
+              context.read<ExploreCubit>().changeTabEvent(HomeTab.values[i]);
             },
             items: const [
               BottomNavigationBarItem(

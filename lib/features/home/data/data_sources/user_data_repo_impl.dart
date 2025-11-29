@@ -9,9 +9,7 @@ class UserDataRepoImpl implements UserDataRepo {
 
   @override
   Future<UserDataResponse> getUserData() async {
-    print("🟣 Repo: calling remote.getUserData()");
     final result = await remote.getUserData();
-    print("🟢 Repo received: $result");
     return result;
   }
 }

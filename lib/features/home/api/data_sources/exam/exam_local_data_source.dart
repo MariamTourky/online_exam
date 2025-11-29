@@ -1,15 +1,15 @@
 import 'package:online_exam/features/home/api/api_client/api_client.dart';
 import 'package:online_exam/features/home/data/models/response_models/exam_response.dart';
 
-abstract class ExamRemoteDataSource {
+abstract class ExamLocalDataSource {
   Future<List<ExamResponse>> getExams();
   Future<ExamResponse> getExam(int id);
 }
 
-class ExamRemoteDataSourceImpl implements ExamRemoteDataSource {
+class ExamLocalDataSourceImpl implements ExamLocalDataSource {
   final HomeApiClient apiClient;
 
-  ExamRemoteDataSourceImpl(this.apiClient);
+  ExamLocalDataSourceImpl(this.apiClient);
 
   @override
   Future<List<ExamResponse>> getExams() async {
