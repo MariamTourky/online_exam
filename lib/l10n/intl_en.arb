@@ -1,0 +1,36 @@
+ { 
+  "@@locale" : "en",
+  "login": "Login",
+  "signup": "Sign Up",
+  "email": "Email",
+  "password": "Password",
+  "confirmPassword": "Confirm Password",
+  "newPassword": "New Password",
+  "rememberMe": "Remember me",
+  "forgetPassword": "Forget Password?",
+  "dontHaveAccount": "Don't have an account?",
+  "alreadyHaveAccount": "Already have an account?",
+  "continueText": "Continue",
+
+  "userName": "User name",
+  "firstName": "First name",
+  "lastName": "Last name",
+  "phoneNumber": "Phone number",
+
+  "enterYourEmail": "Enter your email",
+  "enterYourFirstName": "Enter First Name",
+  "enterYourLastName": "Enter Last Name",
+  "enterYourPassword": "Enter Password",
+  "enterRePassword": "Re-enter password",
+  "enterYourPhoneNumber": "Enter Your Phone Number",
+
+  "associatedEmailMessage": "Please enter your email associated with your account",
+
+  "emailVerification": "Email verification",
+  "verificationInstruction": "Please enter the code that was sent to your email address",
+  "didNotReceiveCode": "Didn't receive code?",
+  "resend": "Resend",
+  "resetPassword": "Reset password",
+
+  "passwordValidationMessage": "Password must not be empty and must contain at least 6 characters, including one uppercase letter and one number."
+}

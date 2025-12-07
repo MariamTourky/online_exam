@@ -12,7 +12,6 @@ class AppConstants {
   static const String dontHaveAccount = "Don't have an account?";
   static const String alreadyHaveAccount = 'Already have an account?';
   static const String continueText = 'Continue';
-  static const String loginsuccess= "Login Successfully";
 
   // ====================== User Info Fields
 
@@ -30,12 +29,12 @@ class AppConstants {
   static const String enterRePassword= "Re-enter password";
   static const String enterYourPhoneNumber = 'Enter Your Phone Number';
 
-  static const String pleaseEnterAssociatedEmail ='Please enter your email associated with your account';
+  static const String pleaseEnterAssociatedEmail ='Please enter your email associated \n with your account';
 
   // ===================== Verification & Reset
 
   static const String emailVerification = 'Email verification';
-  static const String verificationInstruction = 'Please enter the code that was sent to your email address';
+  static const String verificationInstruction = 'Please enter the code that was sent to\n your email address';
   static const String didNotReceiveCode = "Didn't receive code?";
   static const String resend = 'Resend';
   static const String resetPassword = 'Reset password';
