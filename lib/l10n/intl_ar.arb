@@ -1,0 +1,36 @@
+{
+  "@@locale": "ar",
+  "login": "تسجيل الدخول",
+  "signup": "إنشاء حساب",
+  "email": "البريد الإلكتروني",
+  "password": "كلمة المرور",
+  "confirmPassword": "تأكيد كلمة المرور",
+  "newPassword": "كلمة مرور جديدة",
+  "rememberMe": "تذكرني",
+  "forgetPassword": "هل نسيت كلمة المرور؟",
+  "dontHaveAccount": "ليس لديك حساب؟",
+  "alreadyHaveAccount": "هل لديك حساب بالفعل؟",
+  "continueText": "متابعة",
+
+  "userName": "اسم المستخدم",
+  "firstName": "الاسم الأول",
+  "lastName": "الاسم الأخير",
+  "phoneNumber": "رقم الهاتف",
+
+  "enterYourEmail": "أدخل بريدك الإلكتروني",
+  "enterYourFirstName": "أدخل الاسم الأول",
+  "enterYourLastName": "أدخل الاسم الأخير",
+  "enterYourPassword": "أدخل كلمة المرور",
+  "enterRePassword": "أعد إدخال كلمة المرور",
+  "enterYourPhoneNumber": "أدخل رقم هاتفك",
+
+  "associatedEmailMessage": "يرجى إدخال البريد الإلكتروني المرتبط بحسابك",
+
+  "emailVerification": "التحقق من البريد الإلكتروني",
+  "verificationInstruction": "يرجى إدخال الرمز الذي تم إرساله إلى بريدك الإلكتروني",
+  "didNotReceiveCode": "لم تستلم الرمز؟",
+  "resend": "إعادة الإرسال",
+  "resetPassword": "إعادة تعيين كلمة المرور",
+
+  "passwordValidationMessage": "يجب ألا تكون كلمة المرور فارغة ويجب أن تحتوي على 6 أحرف على الأقل، بما في ذلك حرف كبير ورقم."
+}
