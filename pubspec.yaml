@@ -26,6 +26,8 @@ dependencies:
   retrofit: ^4.8.0
   shared_preferences: ^2.2.2
   intl: ^0.20.2
+ 
+  flutter_otp_text_field:
 
 dev_dependencies:
   flutter_test:
