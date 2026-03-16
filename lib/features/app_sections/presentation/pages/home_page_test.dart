@@ -6,6 +6,6 @@ class HomePageTest extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(backgroundColor: AppTheme.primaryBlue);
+    return Scaffold(backgroundColor: AppTheme.white);
   }
 }
