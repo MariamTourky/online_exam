@@ -1,4 +1,5 @@
 import 'package:json_annotation/json_annotation.dart';
+import 'package:online_exam/features/subjects/domain/models/subject_model.dart';
 
 part 'subject_response.g.dart';
 
@@ -98,4 +99,11 @@ class Subject {
     factory Subject.fromJson(Map<String, dynamic> json) => _$SubjectFromJson(json);
 
     Map<String, dynamic> toJson() => _$SubjectToJson(this);
+
+    SubjectModel toDomain() => SubjectModel(
+          id: id ?? "",
+          name: name ?? "",
+          icon: icon,
+          createdAt: createdAt,
+        );
 }

@@ -16,7 +16,7 @@ abstract class ApiService {
   factory ApiService(Dio dio) = _ApiService;
   @GET(AppEndpoints.allSubjects)
   
-  Future<HttpResponse<List<SubjectResponse>>> getAllSubjects(@Header("token") String token);
+  Future<HttpResponse<SubjectResponse>> getAllSubjects(@Header("token") String token);
 
 
 
