@@ -1,23 +1,40 @@
 part of 'subject_cubit.dart';
 
 sealed class SubjectState extends Equatable {
-  const SubjectState();
+  const SubjectState({
+    required this.subjects,
+    required this.isLoading,
+    this.error,
+  });
+  final List<SubjectModel> subjects;
+  final bool isLoading;
+  final String? error;
+  @override
+  List<Object?> get props => [subjects, isLoading, error];
+  SubjectState copyWith({
+    List<SubjectModel>? subjects,
+    bool? isLoading,
+    String? error,
+  });
+}
+
+final class SubjectInitial extends SubjectState {
+  const SubjectInitial({
+    required super.subjects,
+    required super.isLoading,
+    super.error,
+  });
 
   @override
-  List<Object> get props => [];
+  SubjectState copyWith({
+    List<SubjectModel>? subjects,
+    bool? isLoading,
+    String? error,
+  }) {
+    return SubjectInitial(
+      subjects: subjects ?? this.subjects,
+      isLoading: isLoading ?? this.isLoading,
+      error: error ?? this.error,
+    );
+  }
 }
-
-final class SubjectInitial extends SubjectState {}
-
-final class SubjectLoading extends SubjectState {}
-
-final class SubjectLoaded extends SubjectState {
-  final List<SubjectModel> subjects;
-  SubjectLoaded(this.subjects);
-}
-
-final class SubjectError extends SubjectState {
-  final String error;
-  SubjectError(this.error);
-}
-

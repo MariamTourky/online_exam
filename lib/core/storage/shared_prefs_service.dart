@@ -4,16 +4,16 @@ import 'package:shared_preferences/shared_preferences.dart';
 @lazySingleton
 class SharedPrefsService {
   final SharedPreferences _prefs;
+  static const String _tokenKey = "token";
 
   SharedPrefsService(this._prefs);
-
 
   Future<void> saveString(String key, String value) async {
     await _prefs.setString(key, value);
   }
 
-  String? getString(String key) {
-    return _prefs.getString(key);
+  Future<String?> getToken() async {
+    return _prefs.getString(_tokenKey);
   }
 
   Future<void> saveBool(String key, bool value) async {

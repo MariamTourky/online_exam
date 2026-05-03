@@ -1,4 +1,3 @@
-
 import 'package:dartz/dartz.dart';
 
 import 'package:online_exam/core/error/failure.dart';
@@ -18,6 +17,7 @@ import '../../../../core/error/app_error_messages.dart';
 import '../../data/repositories/recovery_password_data_source_contract/recovery_password_data_scource_contract.dart';
 import '../../data/request_models/forgot_password/forgot_password_dto.dart';
 import '../../data/request_models/verify_reset_code/verify_reset_code_dto.dart';
+
 @LazySingleton(as: RecoverPasswordDataScourcContract)
 class RecoverPasswordDataImpl implements RecoverPasswordDataScourcContract {
   final RecoveryPasswordService _recoveryPasswordService;
@@ -25,7 +25,9 @@ class RecoverPasswordDataImpl implements RecoverPasswordDataScourcContract {
   RecoverPasswordDataImpl(this._recoveryPasswordService);
 
   @override
-  Future<Either<Failure, ForgotPasswordResponse>> forgetPassword(String email) async {
+  Future<Either<Failure, ForgotPasswordResponse>> forgetPassword(
+    String email,
+  ) async {
     try {
       final dto = ForgotPasswordDto(email: email);
       final response = await _recoveryPasswordService.forgetPassword(dto);
@@ -48,7 +50,8 @@ class RecoverPasswordDataImpl implements RecoverPasswordDataScourcContract {
 
   @override
   Future<Either<Failure, VerifyResetCodeResponse>> verifyResetCode(
-      String resetCode) async {
+    String resetCode,
+  ) async {
     try {
       final dto = VerifyResetCodeDto(resetCode: resetCode);
       final response = await _recoveryPasswordService.verifyResetCode(dto);
@@ -71,7 +74,8 @@ class RecoverPasswordDataImpl implements RecoverPasswordDataScourcContract {
 
   @override
   Future<Either<Failure, ResetPasswordResponse>> resetPassword(
-      ResetPasswordDto request) async {
+    ResetPasswordDto request,
+  ) async {
     try {
       final response = await _recoveryPasswordService.resetPassword(request);
       return Right(response);

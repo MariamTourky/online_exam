@@ -132,7 +132,10 @@ class SignupForm extends StatelessWidget {
               padding: const EdgeInsets.symmetric(horizontal: 40.0),
               child: Row(
                 children: [
-                  Text(AppConstants.alreadyHaveAccount,style: AppTextStyles.baseRegularBlack,),
+                  Text(
+                    AppConstants.alreadyHaveAccount,
+                    style: AppTextStyles.baseRegularBlack,
+                  ),
                   const SizedBox(width: 8),
                   CustomNavigationText(
                     text: AppConstants.login,

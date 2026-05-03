@@ -7,10 +7,7 @@ class VerifyResetCodeResponse {
   final String message;
   final int? code;
 
-  VerifyResetCodeResponse({
-    required this.message,
-    this.code,
-  });
+  VerifyResetCodeResponse({required this.message, this.code});
 
   factory VerifyResetCodeResponse.fromJson(Map<String, dynamic> json) =>
       _$VerifyResetCodeResponseFromJson(json);

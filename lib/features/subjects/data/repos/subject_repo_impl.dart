@@ -10,8 +10,8 @@ class SubjectRepoImpl implements SubjectRepo {
   final SubjectRemoteDatasources _subjectRemoteDatasources;
   SubjectRepoImpl(this._subjectRemoteDatasources);
   @override
-  Future<BaseResponse<List<SubjectModel>>> getAllSubjects() async {
-    final response = await _subjectRemoteDatasources.getAllSubjects("token");
+  Future<BaseResponse<List<SubjectModel>>> getAllSubjects(String token) async {
+    final response = await _subjectRemoteDatasources.getAllSubjects(token);
     switch (response) {
       case SuccessResponse<SubjectResponse>():
         return SuccessResponse(
@@ -22,4 +22,3 @@ class SubjectRepoImpl implements SubjectRepo {
     }
   }
 }
-

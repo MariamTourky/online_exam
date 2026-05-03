@@ -8,10 +8,7 @@ class ResetPasswordResponse {
   final String message;
   final int? code;
 
-  ResetPasswordResponse({
-    required this.message,
-    this.code,
-  });
+  ResetPasswordResponse({required this.message, this.code});
 
   factory ResetPasswordResponse.fromJson(Map<String, dynamic> json) =>
       _$ResetPasswordResponseFromJson(json);
@@ -20,5 +17,4 @@ class ResetPasswordResponse {
 
   ResetPasswordEntity toEntity() =>
       ResetPasswordEntity(message: message, code: code);
-
 }

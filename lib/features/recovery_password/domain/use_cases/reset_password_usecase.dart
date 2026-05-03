@@ -4,8 +4,8 @@ import '../../../../core/error/failure.dart';
 import '../../data/request_models/reset_password/reset_password_dto.dart';
 import '../entities/reset_password_entity.dart';
 import '../repositories_contract/recovery_password_data_contract.dart';
-@lazySingleton
 
+@lazySingleton
 class ResetPasswordUseCase {
   final RecoveryPasswordDataContract _repository;
 

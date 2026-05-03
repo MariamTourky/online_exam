@@ -1,6 +1,5 @@
 part of 'signup_cubit.dart';
 
-
 class SignupState {
   final bool isLoading;
   final bool isFormValid;
@@ -40,9 +39,9 @@ class SignupState {
       isFormValid: isFormValid ?? this.isFormValid,
       success: success ?? this.success,
       togglePasswordVisibility:
-      togglePasswordVisibility ?? this.togglePasswordVisibility,
+          togglePasswordVisibility ?? this.togglePasswordVisibility,
       toggleRePasswordVisibility:
-      toggleRePasswordVisibility ?? this.toggleRePasswordVisibility,
+          toggleRePasswordVisibility ?? this.toggleRePasswordVisibility,
       errorMessage: errorMessage,
     );
   }

@@ -1,25 +1,39 @@
+import 'dart:core';
+
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:injectable/injectable.dart';
 import 'package:online_exam/core/base_response/base_response.dart';
+import 'package:online_exam/core/storage/shared_prefs_service.dart';
 import 'package:online_exam/features/subjects/domain/models/subject_model.dart';
-import 'package:online_exam/features/subjects/domain/repos/subject_repo.dart';
+import 'package:online_exam/features/subjects/domain/usecases/get_all_subjects_usecase.dart';
+import 'package:online_exam/features/subjects/presentation/cubit/cubit/subject_intent.dart';
 
 part 'subject_state.dart';
 
 @injectable
 class SubjectCubit extends Cubit<SubjectState> {
-  final SubjectRepo _subjectRepo;
-  SubjectCubit(this._subjectRepo) : super(SubjectInitial());
+  final GetAllSubjectsUseCase getAllSubjectsUseCase;
+  final SharedPrefsService sharedPrefsService;
+  SubjectCubit(this.getAllSubjectsUseCase, this.sharedPrefsService)
+    : super(const SubjectInitial(subjects: [], isLoading: false));
 
-  getAllSubjects()async{
-    emit(SubjectLoading());
-    final response = await _subjectRepo.getAllSubjects();
-    switch(response){
+  doIntent(SubjectIntent intent) {
+    switch (intent) {
+      case GetAllSubjectsIntent():
+        _getAllSubjects(intent);
+    }
+  }
+
+  _getAllSubjects(GetAllSubjectsIntent intent) async {
+    final token = await sharedPrefsService.getToken();
+    emit(state.copyWith(isLoading: true));
+    final response = await getAllSubjectsUseCase(token!);
+    switch (response) {
       case SuccessResponse(data: final subjects):
-        emit(SubjectLoaded(subjects));
+        emit(state.copyWith(subjects: subjects, isLoading: false));
       case ErrorResponse(error: final error):
-        emit(SubjectError(error.toString()));
+        emit(state.copyWith(error: error.toString()));
     }
   }
 }

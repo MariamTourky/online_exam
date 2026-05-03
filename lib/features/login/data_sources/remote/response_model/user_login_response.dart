@@ -4,9 +4,11 @@ import 'package:online_exam/features/login/domain/entities/user_login_entity.dar
 
 part 'user_login_response.g.dart';
 
-UserloginResponse userloginResponseFromJson(String str) => UserloginResponse.fromJson(json.decode(str));
+UserloginResponse userloginResponseFromJson(String str) =>
+    UserloginResponse.fromJson(json.decode(str));
 
-String userloginResponseToJson(UserloginResponse data) => json.encode(data.toJson());
+String userloginResponseToJson(UserloginResponse data) =>
+    json.encode(data.toJson());
 
 @JsonSerializable()
 class UserloginResponse {
@@ -17,13 +19,10 @@ class UserloginResponse {
   @JsonKey(name: "user")
   final User? user;
 
-  UserloginResponse({
-    this.message,
-    this.token,
-    this.user,
-  });
+  UserloginResponse({this.message, this.token, this.user});
 
-  factory UserloginResponse.fromJson(Map<String, dynamic> json) => _$UserloginResponseFromJson(json);
+  factory UserloginResponse.fromJson(Map<String, dynamic> json) =>
+      _$UserloginResponseFromJson(json);
 
   Map<String, dynamic> toJson() => _$UserloginResponseToJson(this);
 

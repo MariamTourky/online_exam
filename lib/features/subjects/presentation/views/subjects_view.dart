@@ -11,31 +11,7 @@ class SubjectsView extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (context) => getIt<SubjectCubit>(),
-      child: BlocBuilder<SubjectCubit, SubjectState>(
-        builder: (context, state) {
-          if(state is SubjectLoading){
-            return const Center(
-              child: CircularProgressIndicator(),
-            );
-          }
-          else if(state is SubjectError){
-            return Center(
-              child: Text(state.error),
-            );
-          }
-          else if(state is SubjectLoaded){
-            return subject_screen();
-          }
-          return const Scaffold(
-         
-      body: const Center(
-        
-        child: Text('Subjects'),
-      ),
-    );
-        }
-      )
+      child: const Scaffold(body: SubjectScreen()),
     );
   }
 }
-

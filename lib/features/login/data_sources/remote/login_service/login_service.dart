@@ -15,5 +15,4 @@ abstract class LoginService {
   factory LoginService(Dio dio) = _LoginService;
   @POST(ApiEndpoints.login)
   Future<UserloginResponse> login(@Body() UserloginDto body);
-
 }

@@ -15,7 +15,6 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
     final appRouter = getIt<AppRouter>().router;
 
     return MaterialApp.router(
@@ -26,4 +25,3 @@ class MyApp extends StatelessWidget {
     );
   }
 }
-

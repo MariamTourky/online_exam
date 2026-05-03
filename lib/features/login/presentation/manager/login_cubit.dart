@@ -38,9 +38,9 @@ class LoginCubit extends Cubit<LoginState> {
   }
 
   void _togglePasswordVisibility() {
-    emit(state.copyWith(
-      togglePasswordVisibility: !state.togglePasswordVisibility,
-    ));
+    emit(
+      state.copyWith(togglePasswordVisibility: !state.togglePasswordVisibility),
+    );
   }
 
   Future<void> _submitLogin() async {
@@ -54,18 +54,14 @@ class LoginCubit extends Cubit<LoginState> {
       password: passwordController.text.trim(),
     );
 
-    final Either<Failure, UserLoginEntity> result =
-    await _loginUseCase(userEntity);
+    final Either<Failure, UserLoginEntity> result = await _loginUseCase(
+      userEntity,
+    );
 
     result.fold(
-          (failure) => emit(state.copyWith(
-        isLoading: false,
-        errorMessage: failure.message,
-      )),
-          (_) => emit(state.copyWith(
-        isLoading: false,
-        success: true,
-      )),
+      (failure) =>
+          emit(state.copyWith(isLoading: false, errorMessage: failure.message)),
+      (_) => emit(state.copyWith(isLoading: false, success: true)),
     );
   }
 

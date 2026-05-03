@@ -11,13 +11,10 @@ part 'api_service.g.dart'; // Generated file
 @lazySingleton
 @RestApi(baseUrl: ApiEndpoints.baseUrl)
 abstract class ApiService {
-
   @factoryMethod
   factory ApiService(Dio dio) = _ApiService;
   @GET(AppEndpoints.allSubjects)
-  
-  Future<HttpResponse<SubjectResponse>> getAllSubjects(@Header("token") String token);
-
-
-
+  Future<HttpResponse<SubjectResponse>> getAllSubjects(
+    @Header("token") String token,
+  );
 }

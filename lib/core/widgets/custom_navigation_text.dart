@@ -10,9 +10,8 @@ class CustomNavigationText extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-        onTap: navigateTo,
-        child:  Text(
-            text,
-            style:AppTextStyles.medium16BlueLined),);
+      onTap: navigateTo,
+      child: Text(text, style: AppTextStyles.medium16BlueLined),
+    );
   }
 }

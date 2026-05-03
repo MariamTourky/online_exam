@@ -19,7 +19,7 @@ class SignUpView extends StatelessWidget {
           showAppSnackbar(context, state.errorMessage!, isError: true);
         }
         if (state.success) {
-          showAppSnackbar(context,SchaffoldMessages.signUpSuccessfully );
+          showAppSnackbar(context, SchaffoldMessages.signUpSuccessfully);
         }
       },
       builder: (context, state) {
@@ -29,14 +29,15 @@ class SignUpView extends StatelessWidget {
             surfaceTintColor: Colors.transparent,
             titleSpacing: 0,
             title: const Text(
-                  AppConstants.signup,
-                  style: AppTextStyles.medium20Black),
+              AppConstants.signup,
+              style: AppTextStyles.medium20Black,
+            ),
             leading: IconButton(
               icon: Icon(Icons.arrow_back_ios_new), // choose any icon you like
               onPressed: () => context.pop(),
             ),
           ),
-          body:  SignupForm(),
+          body: SignupForm(),
         );
       },
     );

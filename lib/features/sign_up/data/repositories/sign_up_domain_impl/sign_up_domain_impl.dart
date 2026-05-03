@@ -16,18 +16,16 @@ class SignUpDomainImpl implements SignUpDataContract {
 
   @override
   Future<Either<Failure, UserSignUpEntity>> signUp(
-      UserSignUpEntity entity) async {
+    UserSignUpEntity entity,
+  ) async {
     final dto = entity.toDto();
     final result = await _remoteDataSource.signUp(dto);
 
-    return result.fold(
-          (failure) => Left(failure),
-          (response) async {
-        if (response.token != null && response.token!.isNotEmpty) {
-          await _prefs.saveString(StorageKeys.token, response.token!);
-        }
-        return Right(response.toEntity());
-      },
-    );
+    return result.fold((failure) => Left(failure), (response) async {
+      if (response.token != null && response.token!.isNotEmpty) {
+        await _prefs.saveString(StorageKeys.token, response.token!);
+      }
+      return Right(response.toEntity());
+    });
   }
 }

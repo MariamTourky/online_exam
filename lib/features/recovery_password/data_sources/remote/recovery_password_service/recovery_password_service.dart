@@ -16,19 +16,19 @@ part 'recovery_password_service.g.dart';
 @lazySingleton
 @RestApi(baseUrl: ApiEndpoints.baseUrl)
 abstract class RecoveryPasswordService {
-
   @factoryMethod
   factory RecoveryPasswordService(Dio dio) = _RecoveryPasswordService;
 
   @POST(ApiEndpoints.forgetPassword)
   Future<ForgotPasswordResponse> forgetPassword(
-      @Body() ForgotPasswordDto request);
+    @Body() ForgotPasswordDto request,
+  );
 
   @POST(ApiEndpoints.verifyResetCode)
   Future<VerifyResetCodeResponse> verifyResetCode(
-      @Body() VerifyResetCodeDto resetCode);
+    @Body() VerifyResetCodeDto resetCode,
+  );
 
   @PUT(ApiEndpoints.resetPassword)
-  Future<ResetPasswordResponse> resetPassword(
-      @Body() ResetPasswordDto request);
+  Future<ResetPasswordResponse> resetPassword(@Body() ResetPasswordDto request);
 }

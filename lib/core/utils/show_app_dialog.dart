@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 
 Future<void> showAppDialog(
-    BuildContext context, {
-      required String title,
-      required String message,
-      bool isError = true,
-    }) {
+  BuildContext context, {
+  required String title,
+  required String message,
+  bool isError = true,
+}) {
   return showDialog(
     context: context,
     builder: (context) => AlertDialog(

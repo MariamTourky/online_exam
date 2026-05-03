@@ -76,6 +76,10 @@ import 'package:online_exam/features/subjects/data/repos/subject_repo_impl.dart'
     as _i97;
 import 'package:online_exam/features/subjects/domain/repos/subject_repo.dart'
     as _i736;
+import 'package:online_exam/features/subjects/domain/usecases/get_all_subjects_usecase.dart'
+    as _i713;
+import 'package:online_exam/features/subjects/presentation/cubit/cubit/subject_cubit.dart'
+    as _i585;
 import 'package:shared_preferences/shared_preferences.dart' as _i460;
 
 extension GetItInjectableX on _i174.GetIt {
@@ -139,8 +143,17 @@ extension GetItInjectableX on _i174.GetIt {
         gh<_i1016.SharedPrefsService>(),
       ),
     );
+    gh.factory<_i713.GetAllSubjectsUseCase>(
+      () => _i713.GetAllSubjectsUseCase(gh<_i736.SubjectRepo>()),
+    );
     gh.lazySingleton<_i821.LoginUseCase>(
       () => _i821.LoginUseCase(gh<_i346.LoginDataContract>()),
+    );
+    gh.factory<_i585.SubjectCubit>(
+      () => _i585.SubjectCubit(
+        gh<_i713.GetAllSubjectsUseCase>(),
+        gh<_i1016.SharedPrefsService>(),
+      ),
     );
     gh.lazySingleton<_i983.SignUpUseCase>(
       () => _i983.SignUpUseCase(gh<_i964.SignUpDataContract>()),
