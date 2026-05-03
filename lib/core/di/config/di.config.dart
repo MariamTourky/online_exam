@@ -68,6 +68,14 @@ import 'package:online_exam/features/sign_up/domain/use_cases/sign_up_usecase.da
     as _i983;
 import 'package:online_exam/features/sign_up/presentation/manager/signup_cubit.dart'
     as _i926;
+import 'package:online_exam/features/subjects/api/subject_remote_datasources_impl.dart'
+    as _i394;
+import 'package:online_exam/features/subjects/data/data_source/subject_remote_datasources.dart'
+    as _i714;
+import 'package:online_exam/features/subjects/data/repos/subject_repo_impl.dart'
+    as _i97;
+import 'package:online_exam/features/subjects/domain/repos/subject_repo.dart'
+    as _i736;
 import 'package:shared_preferences/shared_preferences.dart' as _i460;
 
 extension GetItInjectableX on _i174.GetIt {
@@ -106,6 +114,12 @@ extension GetItInjectableX on _i174.GetIt {
     );
     gh.lazySingleton<_i1036.LoginDataSourceContract>(
       () => _i648.LoginRemoteDataSourceImpl(gh<_i121.LoginService>()),
+    );
+    gh.factory<_i714.SubjectRemoteDatasources>(
+      () => _i394.SubjectRemoteDatasourcesImpl(gh<_i1063.ApiService>()),
+    );
+    gh.factory<_i736.SubjectRepo>(
+      () => _i97.SubjectRepoImpl(gh<_i714.SubjectRemoteDatasources>()),
     );
     gh.lazySingleton<_i1020.SignUpDataSourceContract>(
       () => _i664.SignUpRemoteDataSourceImpl(gh<_i81.SignUpService>()),

@@ -6,7 +6,7 @@ import 'package:online_exam/features/subjects/data/data_source/subject_remote_da
 
 @Injectable(as: SubjectRemoteDatasources)
 class SubjectRemoteDatasourcesImpl implements SubjectRemoteDatasources {
-  ApiService _apiService;
+  final ApiService _apiService;
   SubjectRemoteDatasourcesImpl(this._apiService);
   @override
   Future<BaseResponse<SubjectResponse>> getAllSubjects(String token) async {

@@ -7,7 +7,7 @@ import 'package:online_exam/features/subjects/domain/repos/subject_repo.dart';
 
 @Injectable(as: SubjectRepo)
 class SubjectRepoImpl implements SubjectRepo {
-  SubjectRemoteDatasources _subjectRemoteDatasources;
+  final SubjectRemoteDatasources _subjectRemoteDatasources;
   SubjectRepoImpl(this._subjectRemoteDatasources);
   @override
   Future<BaseResponse<List<SubjectModel>>> getAllSubjects() async {

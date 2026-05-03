@@ -7,7 +7,7 @@ import 'package:online_exam/features/recovery_password/presentation/manager/forg
 import 'package:online_exam/features/recovery_password/presentation/views/verify_reset_code_view.dart';
 import 'package:online_exam/features/sign_up/presentation/manager/signup_cubit.dart';
 import '../../core/di/config/di.dart';
-import '../../features/subjects/presentation/views/home_view.dart';
+import '../../features/subjects/presentation/views/subjects_view.dart';
 import '../../features/login/presentation/views/login_view.dart';
 import '../../features/recovery_password/presentation/views/forget_password_view.dart';
 import '../../features/recovery_password/presentation/views/reset_password_view.dart';
@@ -61,7 +61,7 @@ class AppRouter {
       ),
       GoRoute(
         path: RouteNames.home,
-        builder: (context, state) => const HomeView(),
+        builder: (context, state) => const SubjectsView(),
       ),
       GoRoute(
         path: RouteNames.appStart,

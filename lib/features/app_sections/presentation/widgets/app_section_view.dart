@@ -6,6 +6,7 @@ import 'package:online_exam/features/app_sections/presentation/manager/app_secti
 import 'package:online_exam/features/app_sections/presentation/pages/exam_page_test.dart';
 import 'package:online_exam/features/app_sections/presentation/pages/home_page_test.dart';
 import 'package:online_exam/features/app_sections/presentation/pages/profile_page_test.dart';
+import 'package:online_exam/features/subjects/presentation/views/subjects_view.dart';
 
 class AppSectionsView extends StatelessWidget {
   const AppSectionsView({super.key});
@@ -16,7 +17,7 @@ class AppSectionsView extends StatelessWidget {
     Widget bodyWidget;
     switch (navCubit.state.selectedIndex) {
       case 0:
-        bodyWidget = HomePageTest();
+        bodyWidget = const SubjectsView();
         break;
       case 1:
         bodyWidget = ExamPageTest();

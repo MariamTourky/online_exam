@@ -21,6 +21,7 @@ dependencies:
   shared_preferences:
   equatable:
   dartz:
+  dio: ^5.9.2
 
 dev_dependencies:
   flutter_test:
