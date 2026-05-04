@@ -52,4 +52,10 @@ class AppConstants {
 
   static const String subjects = 'Subjects';
   static const String mySubjects = 'My subjects';
+
+  static const String noSubjectsFound = 'No subjects found';
+  static const String noExamsFound = 'No exams found';
+  static const String noResultsFound = 'No results found';
+  static const String survey = 'Survey';
+  static const String browseBySubjects = 'Browse by subjects';
 }
