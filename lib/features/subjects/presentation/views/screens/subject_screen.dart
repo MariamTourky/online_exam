@@ -53,7 +53,9 @@ class _SubjectScreenState extends State<SubjectScreen> {
                 SearchBar(
                   hintText: "Search",
                   onChanged: (value) {},
-                  padding: const WidgetStatePropertyAll(EdgeInsets.symmetric(horizontal: 16)),
+                  padding: const WidgetStatePropertyAll(
+                    EdgeInsets.symmetric(horizontal: 16),
+                  ),
                   elevation: const WidgetStatePropertyAll(0),
                   backgroundColor: WidgetStatePropertyAll(Colors.grey[100]),
                 ),
@@ -92,8 +94,12 @@ class _SubjectScreenState extends State<SubjectScreen> {
                                     child: Image.network(
                                       subject.icon!,
                                       fit: BoxFit.cover,
-                                      errorBuilder: (context, error, stackTrace) =>
-                                          const Icon(Icons.book, color: Colors.blue),
+                                      errorBuilder:
+                                          (context, error, stackTrace) =>
+                                              const Icon(
+                                                Icons.book,
+                                                color: Colors.blue,
+                                              ),
                                     ),
                                   )
                                 : const Icon(Icons.book, color: Colors.blue),
@@ -106,7 +112,10 @@ class _SubjectScreenState extends State<SubjectScreen> {
                             "ID: ${subject.id}",
                             style: AppTextStyles.baseRegular14,
                           ),
-                          trailing: const Icon(Icons.arrow_forward_ios, size: 16),
+                          trailing: const Icon(
+                            Icons.arrow_forward_ios,
+                            size: 16,
+                          ),
                         ),
                       );
                     },
