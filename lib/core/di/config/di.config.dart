@@ -40,7 +40,6 @@ extension GetItInjectableX on _i174.GetIt {
     gh.lazySingleton<_i1063.ApiService>(
       () => _i1063.ApiService(gh<_i361.Dio>()),
     );
-
     return this;
   }
 }
