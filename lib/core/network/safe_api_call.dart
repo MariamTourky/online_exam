@@ -14,7 +14,9 @@ Future<BaseResponse<T>> safeApiCall<T>({
       return SuccessResponse(data: response.data);
     } else {
       return ErrorResponse(
-        error: Exception("Failed with status code: ${response.response.statusCode}"),
+        error: Exception(
+          "Failed with status code: ${response.response.statusCode}",
+        ),
       );
     }
   } on DioException catch (dioError) {

@@ -1,4 +1,4 @@
-class ExamModel{
+class ExamModel {
   final String? id;
   final String? title;
   final int? duration;

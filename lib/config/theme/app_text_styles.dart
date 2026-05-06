@@ -26,6 +26,14 @@ class AppTextStyles {
     color: AppTheme.primaryBlue,
   );
 
+  static const TextStyle medium16BlueLined = TextStyle(
+    decoration: TextDecoration.underline,
+    fontFamily: _fontFamily,
+    fontWeight: FontWeight.w500,
+    fontSize: 16,
+    color: AppTheme.primaryBlue,
+  );
+
   static const TextStyle baseRegular14 = TextStyle(
     fontFamily: _fontFamily,
     fontWeight: FontWeight.w400,

@@ -10,9 +10,6 @@ class GetAllExamUseCase {
     required String token,
     required String subjectId,
   }) async {
-    return _repo.getAllExamsOnSubject(
-      token: token,
-      subjectId: subjectId,
-    );
+    return _repo.getAllExamsOnSubject(token: token, subjectId: subjectId);
   }
 }
