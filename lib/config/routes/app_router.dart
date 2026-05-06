@@ -19,7 +19,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 class AppRouter {
   GoRouter get router => GoRouter(
     debugLogDiagnostics: true,
-    initialLocation: RouteNames.resetPassword,
+    initialLocation: RouteNames.login,
     routes: [
       GoRoute(
         path: RouteNames.login,

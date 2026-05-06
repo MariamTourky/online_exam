@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:online_exam/config/routes/route_names.dart';
 import 'package:online_exam/features/recovery_password/presentation/widgets/forget_password_form.dart';
 
 import '../../../../config/constants/app_constants.dart';
@@ -21,7 +22,8 @@ class ForgetPasswordView extends StatelessWidget {
         ),
         leading: IconButton(
           icon: Icon(Icons.arrow_back_ios_new), // choose any icon you like
-          onPressed: () => context.pop(),
+          onPressed: () =>
+              context.go(RouteNames.login), // navigate to the login screen
         ),
       ),
       body: ForgetPasswordForm(),
