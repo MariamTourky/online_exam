@@ -54,6 +54,10 @@ import 'package:online_exam/features/recovery_password/domain/use_cases/verify_r
     as _i170;
 import 'package:online_exam/features/recovery_password/presentation/manager/forget_password/forget_password_cubit.dart'
     as _i330;
+import 'package:online_exam/features/recovery_password/presentation/manager/reset_password/reset_password_cubit.dart'
+    as _i280;
+import 'package:online_exam/features/recovery_password/presentation/manager/verify_reset_code/verify_reset_code_cubit.dart'
+    as _i1012;
 import 'package:online_exam/features/sign_up/data/repositories/sign_up_data_source_contract/sign_up_data_source_contract.dart'
     as _i1020;
 import 'package:online_exam/features/sign_up/data/repositories/sign_up_domain_impl/sign_up_domain_impl.dart'
@@ -164,6 +168,7 @@ extension GetItInjectableX on _i174.GetIt {
     gh.lazySingleton<_i512.RecoveryPasswordDataContract>(
       () => _i339.RercoveryPasswordDomainImpl(
         gh<_i377.RecoverPasswordDataScourcContract>(),
+        gh<_i1016.SharedPrefsService>(),
       ),
     );
     gh.lazySingleton<_i341.ForgetPasswordUseCase>(
@@ -181,6 +186,16 @@ extension GetItInjectableX on _i174.GetIt {
     );
     gh.factory<_i926.SignupCubit>(
       () => _i926.SignupCubit(gh<_i983.SignUpUseCase>()),
+    );
+    gh.factoryParam<_i1012.VerifyResetCodeCubit, String, dynamic>(
+      (email, _) => _i1012.VerifyResetCodeCubit(
+        gh<_i170.VerifyResetCodeUseCase>(),
+        gh<_i341.ForgetPasswordUseCase>(),
+        email,
+      ),
+    );
+    gh.factory<_i280.ResetPasswordCubit>(
+      () => _i280.ResetPasswordCubit(gh<_i503.ResetPasswordUseCase>()),
     );
     gh.factory<_i330.ForgetPasswordCubit>(
       () => _i330.ForgetPasswordCubit(gh<_i341.ForgetPasswordUseCase>()),

@@ -4,16 +4,22 @@ part 'verify_reset_code_response.g.dart';
 
 @JsonSerializable()
 class VerifyResetCodeResponse {
-  final String message;
+  final String? message;
   final int? code;
+  final String? status;
 
-  VerifyResetCodeResponse({required this.message, this.code});
+  VerifyResetCodeResponse({this.message, this.code, this.status});
 
   factory VerifyResetCodeResponse.fromJson(Map<String, dynamic> json) =>
       _$VerifyResetCodeResponseFromJson(json);
 
   Map<String, dynamic> toJson() => _$VerifyResetCodeResponseToJson(this);
 
-  VerifyResetCodeEntity toEntity() =>
-      VerifyResetCodeEntity(message: message, code: code);
+  VerifyResetCodeEntity toEntity() {
+    if (status == "Success") {
+      return VerifyResetCodeEntity(message: "Success", code: 200);
+    } else {
+      return VerifyResetCodeEntity(message: message!, code: code);
+    }
+  }
 }

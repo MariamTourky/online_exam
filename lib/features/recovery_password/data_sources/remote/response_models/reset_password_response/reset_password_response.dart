@@ -6,9 +6,10 @@ part 'reset_password_response.g.dart';
 @JsonSerializable()
 class ResetPasswordResponse {
   final String message;
+  final String? token;
   final int? code;
 
-  ResetPasswordResponse({required this.message, this.code});
+  ResetPasswordResponse({required this.message, this.token, this.code});
 
   factory ResetPasswordResponse.fromJson(Map<String, dynamic> json) =>
       _$ResetPasswordResponseFromJson(json);
@@ -16,5 +17,5 @@ class ResetPasswordResponse {
   Map<String, dynamic> toJson() => _$ResetPasswordResponseToJson(this);
 
   ResetPasswordEntity toEntity() =>
-      ResetPasswordEntity(message: message, code: code);
+      ResetPasswordEntity(message: message, token: token, code: code);
 }

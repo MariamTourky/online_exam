@@ -178,7 +178,7 @@ packages:
     source: hosted
     version: "0.10.1"
   dio:
-    dependency: "direct main"
+    dependency: transitive
     description:
       name: dio
       sha256: aff32c08f92787a557dd5c0145ac91536481831a01b4648136373cddb0e64f8c
@@ -254,6 +254,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "5.0.0"
+  flutter_otp_text_field:
+    dependency: "direct main"
+    description:
+      name: flutter_otp_text_field
+      sha256: e7e589dc51cde120d63da6db55f3cef618f5d013d12adba76137ca1a51ce1390
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.5.1+1"
   flutter_test:
     dependency: "direct dev"
     description: flutter
