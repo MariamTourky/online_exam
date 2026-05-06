@@ -11,17 +11,16 @@ import 'verify_reset_code_intents.dart';
 part 'verify_reset_code_state.dart';
 
 @injectable
-
 class VerifyResetCodeCubit extends Cubit<VerifyResetCodeState> {
   final VerifyResetCodeUseCase _verifyUseCase;
   final ForgetPasswordUseCase _resendUseCase;
   final String email;
 
   VerifyResetCodeCubit(
-      this._verifyUseCase,
-      this._resendUseCase,
-      @factoryParam this.email,
-      ) : super(VerifyResetCodeState.initial());
+    this._verifyUseCase,
+    this._resendUseCase,
+    @factoryParam this.email,
+  ) : super(VerifyResetCodeState.initial());
 
   void doIntent(VerifyResetCodeIntent intent) {
     switch (intent) {
@@ -35,10 +34,7 @@ class VerifyResetCodeCubit extends Cubit<VerifyResetCodeState> {
   }
 
   void _validateForm(String code) {
-    emit(state.copyWith(
-      code: code,
-      isFormValid: code.length == 6,
-    ));
+    emit(state.copyWith(code: code, isFormValid: code.length == 6));
   }
 
   Future<void> _submitCode() async {
@@ -46,24 +42,28 @@ class VerifyResetCodeCubit extends Cubit<VerifyResetCodeState> {
 
     emit(state.copyWith(isLoading: true, errorMessage: null, success: false));
 
-    final Either<Failure, VerifyResetCodeEntity> result =
-    await _verifyUseCase(state.code);
+    final Either<Failure, VerifyResetCodeEntity> result = await _verifyUseCase(
+      state.code,
+    );
 
     result.fold(
-          (failure) => emit(state.copyWith(isLoading: false, errorMessage: failure.message)),
-          (_) => emit(state.copyWith(isLoading: false, success: true)),
+      (failure) =>
+          emit(state.copyWith(isLoading: false, errorMessage: failure.message)),
+      (_) => emit(state.copyWith(isLoading: false, success: true)),
     );
   }
 
   Future<void> _resendCode() async {
     emit(state.copyWith(isLoading: true, errorMessage: null));
 
-    final Either<Failure, ForgotPasswordEntity> result =
-    await _resendUseCase(email);
+    final Either<Failure, ForgotPasswordEntity> result = await _resendUseCase(
+      email,
+    );
 
     result.fold(
-          (failure) => emit(state.copyWith(isLoading: false, errorMessage: failure.message)),
-          (_) => emit(state.copyWith(isLoading: false)),
+      (failure) =>
+          emit(state.copyWith(isLoading: false, errorMessage: failure.message)),
+      (_) => emit(state.copyWith(isLoading: false)),
     );
   }
 }

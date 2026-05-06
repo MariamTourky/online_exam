@@ -1,6 +1,7 @@
 import 'package:json_annotation/json_annotation.dart';
 import '../../../../domain/entities/verify_reset_code_entity.dart';
 part 'verify_reset_code_response.g.dart';
+
 @JsonSerializable()
 class VerifyResetCodeResponse {
   final String? message;
@@ -18,8 +19,7 @@ class VerifyResetCodeResponse {
     if (status == "Success") {
       return VerifyResetCodeEntity(message: "Success", code: 200);
     } else {
-      return VerifyResetCodeEntity(
-          message: message!, code: code );
+      return VerifyResetCodeEntity(message: message!, code: code);
     }
   }
 }

@@ -1,4 +1,3 @@
-
 import 'package:injectable/injectable.dart';
 import 'package:retrofit/error_logger.dart';
 import 'package:retrofit/http.dart';
@@ -16,7 +15,4 @@ abstract class SignUpService {
   factory SignUpService(Dio dio) = _SignUpService;
   @POST(ApiEndpoints.signup)
   Future<UserSignUpResponse> signUp(@Body() UserSignUpDto body);
-
 }
-
-

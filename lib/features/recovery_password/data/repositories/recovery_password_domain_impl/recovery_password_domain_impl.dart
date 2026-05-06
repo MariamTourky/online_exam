@@ -16,40 +16,52 @@ class RercoveryPasswordDomainImpl implements RecoveryPasswordDataContract {
   final RecoverPasswordDataScourcContract _recoverPasswordDataScourcContract;
   final SharedPrefsService _prefs;
 
-  RercoveryPasswordDomainImpl(this._recoverPasswordDataScourcContract, this._prefs);
+  RercoveryPasswordDomainImpl(
+    this._recoverPasswordDataScourcContract,
+    this._prefs,
+  );
 
   @override
-  Future<Either<Failure, ForgotPasswordEntity>> forgetPassword(String email) async {
-    final result = await _recoverPasswordDataScourcContract.forgetPassword(email);
+  Future<Either<Failure, ForgotPasswordEntity>> forgetPassword(
+    String email,
+  ) async {
+    final result = await _recoverPasswordDataScourcContract.forgetPassword(
+      email,
+    );
 
     return result.fold(
-          (failure) => Left(failure),
-          (response) => Right(response.toEntity()),
+      (failure) => Left(failure),
+      (response) => Right(response.toEntity()),
     );
   }
 
   @override
-  Future<Either<Failure, VerifyResetCodeEntity>> verifyResetCode(String resetCode) async {
-    final result = await _recoverPasswordDataScourcContract.verifyResetCode(resetCode);
+  Future<Either<Failure, VerifyResetCodeEntity>> verifyResetCode(
+    String resetCode,
+  ) async {
+    final result = await _recoverPasswordDataScourcContract.verifyResetCode(
+      resetCode,
+    );
 
     return result.fold(
-          (failure) => Left(failure),
-          (response) => Right(response.toEntity()),
+      (failure) => Left(failure),
+      (response) => Right(response.toEntity()),
     );
   }
 
   @override
-  Future<Either<Failure, ResetPasswordEntity>> resetPassword(ResetPasswordDto request) async {
-    final result = await _recoverPasswordDataScourcContract.resetPassword(request);
-
-    return result.fold(
-          (failure) async  => Left(failure),
-          (response) async {
-        if (response.token != null && response.token!.isNotEmpty) {
-          await _prefs.saveString(StorageKeys.token, response.token!);
-        }
-        return Right(response.toEntity());
-      },
+  Future<Either<Failure, ResetPasswordEntity>> resetPassword(
+    ResetPasswordDto request,
+  ) async {
+    final result = await _recoverPasswordDataScourcContract.resetPassword(
+      request,
     );
+
+    return result.fold((failure) async => Left(failure), (response) async {
+      if (response.token != null && response.token!.isNotEmpty) {
+        await _prefs.saveString(StorageKeys.token, response.token!);
+      }
+      return Right(response.toEntity());
+    });
   }
 }

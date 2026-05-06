@@ -1,21 +1,26 @@
-
 import '../../error/app_error_messages.dart';
 
 class Validators {
   static String? validateEmail(String? value) {
     if (value == null || value.isEmpty) return AppErrorMessages.emailRequired;
-    final emailRegex =
-    RegExp(r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$');
+    final emailRegex = RegExp(
+      r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$',
+    );
     if (!emailRegex.hasMatch(value)) return AppErrorMessages.invalidEmail;
     return null;
   }
 
   static String? validatePassword(String? value) {
-    if (value == null || value.isEmpty) return AppErrorMessages.passwordRequired;
+    if (value == null || value.isEmpty) {
+      return AppErrorMessages.passwordRequired;
+    }
     if (value.length < 6) return AppErrorMessages.least6Charachters;
-    if (!RegExp(r'[A-Z]').hasMatch(value))
+    if (!RegExp(r'[A-Z]').hasMatch(value)) {
       return AppErrorMessages.passwordWithCapital;
-    if (!RegExp(r'[0-9]').hasMatch(value)) return AppErrorMessages.passwordWithNumber;
+    }
+    if (!RegExp(r'[0-9]').hasMatch(value)) {
+      return AppErrorMessages.passwordWithNumber;
+    }
     return null;
   }
 
@@ -27,8 +32,9 @@ class Validators {
 
   static String? validatePhone(String? value) {
     if (value == null || value.isEmpty) return AppErrorMessages.phoneRequired;
-    if (!RegExp(r'^01[0-9]{9}$').hasMatch(value))
+    if (!RegExp(r'^01[0-9]{9}$').hasMatch(value)) {
       return AppErrorMessages.invalidnumber;
+    }
     return null;
   }
 

@@ -3,8 +3,8 @@ import 'package:injectable/injectable.dart';
 import '../../../../core/error/failure.dart';
 import '../entities/verify_reset_code_entity.dart';
 import '../repositories_contract/recovery_password_data_contract.dart';
-@lazySingleton
 
+@lazySingleton
 class VerifyResetCodeUseCase {
   final RecoveryPasswordDataContract _repository;
 

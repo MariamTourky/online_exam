@@ -21,14 +21,14 @@ class SignUpRemoteDataSourceImpl implements SignUpDataSourceContract {
       return Right(response);
     } on DioException catch (e) {
       final statusCode = e.response?.statusCode;
-      final message = e.response?.data['message'] ?? AppErrorMessages.serverError;
+      final message =
+          e.response?.data['message'] ?? AppErrorMessages.serverError;
 
       if (e.type == DioExceptionType.connectionTimeout) {
         return Left(TimeoutFailure(AppErrorMessages.connectionTimeout));
       } else if (e.type == DioExceptionType.connectionError) {
         return Left(NetworkFailure(AppErrorMessages.noInternet));
-      }
-      else if (statusCode == 401) {
+      } else if (statusCode == 401) {
         return Left(UnauthorizedFailure(message));
       } else {
         return Left(ServerFailure(message));
@@ -38,4 +38,3 @@ class SignUpRemoteDataSourceImpl implements SignUpDataSourceContract {
     }
   }
 }
-

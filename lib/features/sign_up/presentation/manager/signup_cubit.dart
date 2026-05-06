@@ -9,6 +9,7 @@ import '../../domain/entities/user_sign_up_entity.dart';
 import '../../domain/use_cases/sign_up_usecase.dart';
 
 part 'signup_state.dart';
+
 @injectable
 class SignupCubit extends Cubit<SignupState> {
   final SignUpUseCase _signUpUseCase;
@@ -39,29 +40,33 @@ class SignupCubit extends Cubit<SignupState> {
 
   void _validateForm() {
     final isValid =
-            Validators.validateName(usernameController.text) == null &&
-            Validators.validateName(firstNameController.text) == null &&
-            Validators.validateName(lastNameController.text) == null &&
-            Validators.validateEmail(emailController.text) == null &&
-            Validators.validatePassword(passwordController.text) == null &&
-            Validators.validateRePassword(
-                rePasswordController.text, passwordController.text) ==
-                null &&
-            Validators.validatePhone(phoneController.text) == null;
+        Validators.validateName(usernameController.text) == null &&
+        Validators.validateName(firstNameController.text) == null &&
+        Validators.validateName(lastNameController.text) == null &&
+        Validators.validateEmail(emailController.text) == null &&
+        Validators.validatePassword(passwordController.text) == null &&
+        Validators.validateRePassword(
+              rePasswordController.text,
+              passwordController.text,
+            ) ==
+            null &&
+        Validators.validatePhone(phoneController.text) == null;
 
     emit(state.copyWith(isFormValid: isValid));
   }
 
   void _togglePasswordVisibility() {
-    emit(state.copyWith(
-      togglePasswordVisibility: !state.togglePasswordVisibility,
-    ));
+    emit(
+      state.copyWith(togglePasswordVisibility: !state.togglePasswordVisibility),
+    );
   }
 
   void _toggleRePasswordVisibility() {
-    emit(state.copyWith(
-      toggleRePasswordVisibility: !state.toggleRePasswordVisibility,
-    ));
+    emit(
+      state.copyWith(
+        toggleRePasswordVisibility: !state.toggleRePasswordVisibility,
+      ),
+    );
   }
 
   Future<void> _submitSignup() async {
@@ -79,18 +84,14 @@ class SignupCubit extends Cubit<SignupState> {
       phone: phoneController.text.trim(),
     );
 
-    final Either<Failure, UserSignUpEntity> result =
-    await _signUpUseCase(userEntity);
+    final Either<Failure, UserSignUpEntity> result = await _signUpUseCase(
+      userEntity,
+    );
 
     result.fold(
-          (failure) => emit(state.copyWith(
-        isLoading: false,
-        errorMessage: failure.message,
-      )),
-          (_) => emit(state.copyWith(
-        isLoading: false,
-        success: true,
-      )),
+      (failure) =>
+          emit(state.copyWith(isLoading: false, errorMessage: failure.message)),
+      (_) => emit(state.copyWith(isLoading: false, success: true)),
     );
   }
 

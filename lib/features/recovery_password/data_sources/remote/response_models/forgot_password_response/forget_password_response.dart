@@ -9,10 +9,7 @@ class ForgotPasswordResponse {
   final String message;
   final String? info;
 
-  ForgotPasswordResponse({
-    required this.message,
-    this.info,
-  });
+  ForgotPasswordResponse({required this.message, this.info});
 
   factory ForgotPasswordResponse.fromJson(Map<String, dynamic> json) =>
       _$ForgotPasswordResponseFromJson(json);

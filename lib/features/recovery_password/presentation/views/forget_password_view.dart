@@ -16,14 +16,15 @@ class ForgetPasswordView extends StatelessWidget {
         surfaceTintColor: Colors.transparent,
         titleSpacing: 0,
         title: const Text(
-            AppConstants.password,
-            style: AppTextStyles.medium20Black),
+          AppConstants.password,
+          style: AppTextStyles.medium20Black,
+        ),
         leading: IconButton(
           icon: Icon(Icons.arrow_back_ios_new), // choose any icon you like
           onPressed: () => context.pop(),
         ),
       ),
-      body:  ForgetPasswordForm(),
+      body: ForgetPasswordForm(),
     );
   }
 }

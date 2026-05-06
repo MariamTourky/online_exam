@@ -10,9 +10,8 @@ class CustomActionText extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-        onTap: onTapAction,
-        child:  Text(
-            text,
-            style:AppTextStyles.medium16BlueLined),);
+      onTap: onTapAction,
+      child: Text(text, style: AppTextStyles.medium16BlueLined),
+    );
   }
 }

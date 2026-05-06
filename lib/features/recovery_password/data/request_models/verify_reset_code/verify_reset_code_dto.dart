@@ -12,6 +12,4 @@ class VerifyResetCodeDto {
       _$VerifyResetCodeDtoFromJson(json);
 
   Map<String, dynamic> toJson() => _$VerifyResetCodeDtoToJson(this);
-
-
 }

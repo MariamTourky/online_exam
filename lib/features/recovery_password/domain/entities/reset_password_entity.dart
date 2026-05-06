@@ -3,9 +3,5 @@ class ResetPasswordEntity {
   final String? token;
   final int? code;
 
-  const ResetPasswordEntity({
-    required this.message,
-    this.token,
-    this.code,
-  });
+  const ResetPasswordEntity({required this.message, this.token, this.code});
 }

@@ -35,7 +35,7 @@ class LoginState {
       isFormValid: isFormValid ?? this.isFormValid,
       success: success ?? this.success,
       togglePasswordVisibility:
-      togglePasswordVisibility ?? this.togglePasswordVisibility,
+          togglePasswordVisibility ?? this.togglePasswordVisibility,
       errorMessage: errorMessage,
     );
   }

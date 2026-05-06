@@ -15,30 +15,34 @@ class ResetPasswordView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocListener<ResetPasswordCubit, ResetPasswordState>(
-        listener: (context, state) {
-          if (state.errorMessage != null && state.errorMessage!.isNotEmpty) {
-            showAppSnackbar(context, state.errorMessage!, isError: true);
-          }
-          if (state.success) {
-            showAppSnackbar(context, SchaffoldMessages.updatePasswordScuccessfully);
-            context.go(RouteNames.login);
-          }
-        },
-        child: Scaffold(
-          appBar: AppBar(
-            toolbarHeight: 70,
-            surfaceTintColor: Colors.transparent,
-            titleSpacing: 0,
-            title: const Text(
-                AppConstants.password,
-                style: AppTextStyles.medium20Black),
-            leading: IconButton(
-              icon: Icon(Icons.arrow_back_ios_new),
-              onPressed: () => context.pop(),
-            ),
+      listener: (context, state) {
+        if (state.errorMessage != null && state.errorMessage!.isNotEmpty) {
+          showAppSnackbar(context, state.errorMessage!, isError: true);
+        }
+        if (state.success) {
+          showAppSnackbar(
+            context,
+            SchaffoldMessages.updatePasswordScuccessfully,
+          );
+          context.go(RouteNames.login);
+        }
+      },
+      child: Scaffold(
+        appBar: AppBar(
+          toolbarHeight: 70,
+          surfaceTintColor: Colors.transparent,
+          titleSpacing: 0,
+          title: const Text(
+            AppConstants.password,
+            style: AppTextStyles.medium20Black,
           ),
-          body: ResetPasswordForm(),
+          leading: IconButton(
+            icon: Icon(Icons.arrow_back_ios_new),
+            onPressed: () => context.pop(),
+          ),
         ),
+        body: ResetPasswordForm(),
+      ),
     );
   }
 }

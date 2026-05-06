@@ -23,10 +23,18 @@ class AppRouter {
     routes: [
       GoRoute(
         path: RouteNames.login,
-        builder: (context, state) => BlocProvider( create: (_) => getIt<LoginCubit>(),child: const LoginView())),
+        builder: (context, state) => BlocProvider(
+          create: (_) => getIt<LoginCubit>(),
+          child: const LoginView(),
+        ),
+      ),
       GoRoute(
         path: RouteNames.signup,
-        builder: (context, state) => BlocProvider( create: (_) => getIt<SignupCubit>(),child:const SignUpView())),
+        builder: (context, state) => BlocProvider(
+          create: (_) => getIt<SignupCubit>(),
+          child: const SignUpView(),
+        ),
+      ),
       GoRoute(
         path: RouteNames.forgetPassword,
         builder: (context, state) => BlocProvider(
@@ -45,17 +53,17 @@ class AppRouter {
           );
         },
       ),
- GoRoute(
-   path: RouteNames.resetPassword,
-  builder: (context, state) => BlocProvider(
-    create: (_) => getIt<ResetPasswordCubit>(),
-    child: const ResetPasswordView(),
-  ),
- ),
+      GoRoute(
+        path: RouteNames.resetPassword,
+        builder: (context, state) => BlocProvider(
+          create: (_) => getIt<ResetPasswordCubit>(),
+          child: const ResetPasswordView(),
+        ),
+      ),
       GoRoute(
         path: RouteNames.home,
         builder: (context, state) => const HomeView(),
       ),
     ],
-  );}
-
+  );
+}

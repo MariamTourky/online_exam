@@ -3,7 +3,8 @@ import 'dart:convert';
 
 part 'user_sign_up_dto.g.dart';
 
-UserSignUpDto userSignUpDtoFromJson(String str) => UserSignUpDto.fromJson(json.decode(str));
+UserSignUpDto userSignUpDtoFromJson(String str) =>
+    UserSignUpDto.fromJson(json.decode(str));
 String userSignUpDtoToJson(UserSignUpDto data) => json.encode(data.toJson());
 
 @JsonSerializable()

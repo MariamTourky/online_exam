@@ -123,7 +123,10 @@ class SignupForm extends StatelessWidget {
                   isEnabled: state.isFormValid,
                   isLoading: state.isLoading,
                   text: AppConstants.signup,
-                  onPressed: () { cubit.doIntent(SignupIntent.submit);context.go(RouteNames.login);}
+                  onPressed: () {
+                    cubit.doIntent(SignupIntent.submit);
+                    context.go(RouteNames.login);
+                  },
                 );
               },
             ),
@@ -132,7 +135,10 @@ class SignupForm extends StatelessWidget {
               padding: const EdgeInsets.symmetric(horizontal: 40.0),
               child: Row(
                 children: [
-                  Text(AppConstants.alreadyHaveAccount,style: AppTextStyles.baseRegularBlack,),
+                  Text(
+                    AppConstants.alreadyHaveAccount,
+                    style: AppTextStyles.baseRegularBlack,
+                  ),
                   const SizedBox(width: 8),
                   CustomActionText(
                     text: AppConstants.login,

@@ -18,7 +18,6 @@ class CustomButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ElevatedButton(
-
       onPressed: isEnabled && !isLoading ? onPressed : null,
       child: isLoading
           ? const CircularProgressIndicator(color: AppTheme.white)

@@ -31,11 +31,11 @@ class VerifyResetCodeView extends StatelessWidget {
       ),
       body: BlocListener<VerifyResetCodeCubit, VerifyResetCodeState>(
         listenWhen: (previous, current) =>
-        previous.success != current.success ||
+            previous.success != current.success ||
             previous.errorMessage != current.errorMessage,
         listener: (context, state) {
           if (state.success) {
-            showAppSnackbar(context,SchaffoldMessages.codeVerified );
+            showAppSnackbar(context, SchaffoldMessages.codeVerified);
             Future.delayed(const Duration(seconds: 1), () {
               context.push(RouteNames.resetPassword);
             });

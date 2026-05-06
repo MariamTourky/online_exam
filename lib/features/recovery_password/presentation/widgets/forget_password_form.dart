@@ -17,13 +17,14 @@ class ForgetPasswordForm extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocListener<ForgetPasswordCubit, ForgetPasswordState>(
       listenWhen: (previous, current) =>
-      previous.success != current.success && current.success,
+          previous.success != current.success && current.success,
       listener: (context, state) {
-        final email = context.read<ForgetPasswordCubit>().emailController.text.trim();
-        context.push(
-          RouteNames.emailVerification,
-          extra: email,
-        );
+        final email = context
+            .read<ForgetPasswordCubit>()
+            .emailController
+            .text
+            .trim();
+        context.push(RouteNames.emailVerification, extra: email);
       },
       child: BlocBuilder<ForgetPasswordCubit, ForgetPasswordState>(
         builder: (context, state) {
@@ -35,7 +36,10 @@ class ForgetPasswordForm extends StatelessWidget {
               child: Column(
                 children: [
                   const SizedBox(height: 30),
-                  Text(AppConstants.forgetPassword, style: AppTextStyles.medium20Black),
+                  Text(
+                    AppConstants.forgetPassword,
+                    style: AppTextStyles.medium20Black,
+                  ),
                   const SizedBox(height: 16),
                   Text(
                     textAlign: TextAlign.center,
@@ -57,7 +61,8 @@ class ForgetPasswordForm extends StatelessWidget {
                     isEnabled: state.isFormValid,
                     isLoading: state.isLoading,
                     text: AppConstants.continueText,
-                    onPressed: () => cubit.doIntent(ForgetPasswordIntent.submit),
+                    onPressed: () =>
+                        cubit.doIntent(ForgetPasswordIntent.submit),
                   ),
                 ],
               ),

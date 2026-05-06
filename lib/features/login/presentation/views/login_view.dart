@@ -7,6 +7,7 @@ import '../../../../core/di/config/di.dart';
 import '../../../../core/utils/show_snak_bar.dart';
 import '../manager/login_cubit.dart';
 import '../widgets/login_form.dart';
+
 class LoginView extends StatelessWidget {
   const LoginView({super.key});
 
@@ -20,7 +21,7 @@ class LoginView extends StatelessWidget {
             showAppSnackbar(context, state.errorMessage!, isError: true);
           }
           if (state.success) {
-            showAppSnackbar(context,SchaffoldMessages.loginsuccess );
+            showAppSnackbar(context, SchaffoldMessages.loginsuccess);
           }
         },
         child: Scaffold(
@@ -28,8 +29,9 @@ class LoginView extends StatelessWidget {
             toolbarHeight: 70,
             surfaceTintColor: Colors.transparent,
             title: const Text(
-                AppConstants.login,
-                style: AppTextStyles.medium20Black),
+              AppConstants.login,
+              style: AppTextStyles.medium20Black,
+            ),
           ),
           body: LoginForm(),
         ),

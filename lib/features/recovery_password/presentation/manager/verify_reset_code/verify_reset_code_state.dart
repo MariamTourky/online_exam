@@ -1,6 +1,5 @@
 part of 'verify_reset_code_cubit.dart';
 
-
 class VerifyResetCodeState extends Equatable {
   final bool isLoading;
   final bool isFormValid;
@@ -41,5 +40,11 @@ class VerifyResetCodeState extends Equatable {
   }
 
   @override
-  List<Object?> get props => [isLoading, isFormValid, success, code, errorMessage];
+  List<Object?> get props => [
+    isLoading,
+    isFormValid,
+    success,
+    code,
+    errorMessage,
+  ];
 }

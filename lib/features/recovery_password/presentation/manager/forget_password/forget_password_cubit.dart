@@ -7,7 +7,6 @@ import '../../../domain/entities/forgot_password_entity.dart';
 import '../../../domain/use_cases/forget_password_usecase.dart';
 part 'forget_password_intents.dart';
 
-
 part 'forget_password_state.dart';
 
 @injectable
@@ -15,7 +14,7 @@ class ForgetPasswordCubit extends Cubit<ForgetPasswordState> {
   final ForgetPasswordUseCase _forgetPasswordUseCase;
 
   ForgetPasswordCubit(this._forgetPasswordUseCase)
-      : super(ForgetPasswordState.initial());
+    : super(ForgetPasswordState.initial());
 
   final formKey = GlobalKey<FormState>();
   final emailController = TextEditingController();
@@ -43,21 +42,12 @@ class ForgetPasswordCubit extends Cubit<ForgetPasswordState> {
     final email = emailController.text.trim();
 
     final Either<Failure, ForgotPasswordEntity> result =
-    await _forgetPasswordUseCase(email);
+        await _forgetPasswordUseCase(email);
 
     result.fold(
-          (failure) => emit(
-        state.copyWith(
-          isLoading: false,
-          errorMessage: failure.message,
-        ),
-      ),
-          (_) => emit(
-        state.copyWith(
-          isLoading: false,
-          success: true,
-        ),
-      ),
+      (failure) =>
+          emit(state.copyWith(isLoading: false, errorMessage: failure.message)),
+      (_) => emit(state.copyWith(isLoading: false, success: true)),
     );
   }
 
