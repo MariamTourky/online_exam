@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import '../../../../config/constants/app_constants.dart';
-import '../../../../config/constants/schaffold_messages.dart';
+import '../../../../config/constants/scaffold_messages.dart';
 import '../../../../config/theme/app_text_styles.dart';
 import '../../../../core/utils/show_snak_bar.dart';
 import '../manager/signup_cubit.dart';
@@ -19,7 +19,7 @@ class SignUpView extends StatelessWidget {
           showAppSnackbar(context, state.errorMessage!, isError: true);
         }
         if (state.success) {
-          showAppSnackbar(context, SchaffoldMessages.signUpSuccessfully);
+          showAppSnackbar(context, ScaffoldMessages.signUpSuccessfully);
         }
       },
       builder: (context, state) {

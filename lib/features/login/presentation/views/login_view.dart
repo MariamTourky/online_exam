@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:online_exam/config/constants/app_constants.dart';
-import 'package:online_exam/config/constants/schaffold_messages.dart';
+import 'package:online_exam/config/constants/scaffold_messages.dart';
 import 'package:online_exam/config/routes/route_names.dart';
 import '../../../../config/theme/app_text_styles.dart';
 import '../../../../core/di/config/di.dart';
@@ -24,7 +24,7 @@ class LoginView extends StatelessWidget {
           }
           if (state.success) {
             context.go(RouteNames.appStart);
-            showAppSnackbar(context, SchaffoldMessages.loginsuccess);
+            showAppSnackbar(context, ScaffoldMessages.loginsuccess);
           }
         },
         child: Scaffold(

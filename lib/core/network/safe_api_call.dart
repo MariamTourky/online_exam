@@ -1,5 +1,5 @@
 import 'package:dio/dio.dart';
-
+import 'package:flutter/foundation.dart';
 import 'package:retrofit/retrofit.dart';
 
 import 'api_result.dart';
@@ -8,7 +8,7 @@ Future<ApiResult<T>> safeApiCall<T>({
   required Future<HttpResponse<T>> Function() call,
   bool isBaseResponse = false,
 }) async {
-  print('safeApiCall: Starting API call, isBaseResponse=$isBaseResponse');
+  debugPrint('safeApiCall: Starting API call, isBaseResponse=$isBaseResponse');
   try {
     final response = await call();
     if (response.response.statusCode! >= 200 &&

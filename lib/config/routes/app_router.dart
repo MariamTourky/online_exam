@@ -80,6 +80,13 @@ class AppRouter {
         ),
       ),
       GoRoute(
+        path: RouteNames.resetPassword,
+        builder: (context, state) => BlocProvider(
+          create: (_) => getIt<ResetPasswordCubit>(),
+          child: const ResetPasswordView(),
+        ),
+      ),
+      GoRoute(
         path: RouteNames.emailVerification,
         builder: (context, state) => const VerifyResetCodeView(),
       ),
