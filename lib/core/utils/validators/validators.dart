@@ -11,14 +11,16 @@ class Validators {
   }
 
   static String? validatePassword(String? value) {
-    if (value == null || value.isEmpty)
+    if (value == null || value.isEmpty) {
       return AppErrorMessages.passwordRequired;
+    }
     if (value.length < 6) return AppErrorMessages.least6Charachters;
     if (!RegExp(r'[A-Z]').hasMatch(value)) {
       return AppErrorMessages.passwordWithCapital;
     }
-    if (!RegExp(r'[0-9]').hasMatch(value))
+    if (!RegExp(r'[0-9]').hasMatch(value)) {
       return AppErrorMessages.passwordWithNumber;
+    }
     return null;
   }
 

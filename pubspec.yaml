@@ -22,6 +22,8 @@ dependencies:
   equatable:
   dartz:
   flutter_otp_text_field:
+  dio: ^5.9.2
+  bloc: ^9.2.0
 
 dev_dependencies:
   flutter_test:
