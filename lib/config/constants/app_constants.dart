@@ -43,4 +43,19 @@ class AppConstants {
   // ====================== Validation Messages
   static const String passwordValidationMessage =
       'Password must not be empty and must contain at least 6 characters, including one uppercase letter and one number.';
+
+  // ====================== Main App
+  static const String home = 'Home';
+  static const String profile = 'Profile';
+  static const String explore = 'Explore';
+  static const String results = 'Results';
+
+  static const String subjects = 'Subjects';
+  static const String mySubjects = 'My subjects';
+
+  static const String noSubjectsFound = 'No subjects found';
+  static const String noExamsFound = 'No exams found';
+  static const String noResultsFound = 'No results found';
+  static const String survey = 'Survey';
+  static const String browseBySubjects = 'Browse by subjects';
 }

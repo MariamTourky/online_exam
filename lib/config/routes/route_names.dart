@@ -12,4 +12,6 @@ class RouteNames {
   static const String examDetails = '/exam-details';
   static const String results = '/results';
   static const String profile = '/profile';
+  static const String appStart = '/app-start';
+  static const String subjects = '/subjects';
 }

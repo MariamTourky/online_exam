@@ -10,6 +10,7 @@
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'package:dio/dio.dart' as _i361;
+import 'package:flutter/material.dart' as _i409;
 import 'package:get_it/get_it.dart' as _i174;
 import 'package:injectable/injectable.dart' as _i526;
 import 'package:online_exam/config/routes/app_router.dart' as _i960;
@@ -17,6 +18,10 @@ import 'package:online_exam/core/di/modules/dio_module.dart' as _i471;
 import 'package:online_exam/core/di/modules/shared_prefs_module.dart' as _i818;
 import 'package:online_exam/core/network/api_service.dart' as _i1063;
 import 'package:online_exam/core/storage/shared_prefs_service.dart' as _i1016;
+import 'package:online_exam/features/app_sections/presentation/manager/app_section_cubit.dart'
+    as _i193;
+import 'package:online_exam/features/app_sections/presentation/pages/app_sections.dart'
+    as _i498;
 import 'package:online_exam/features/login/data/repositories/login_data_source_contract/login_data_source_contract.dart'
     as _i1036;
 import 'package:online_exam/features/login/data/repositories/login_domain_impl/login_domain_impl.dart'
@@ -67,6 +72,18 @@ import 'package:online_exam/features/sign_up/domain/use_cases/sign_up_usecase.da
     as _i983;
 import 'package:online_exam/features/sign_up/presentation/manager/signup_cubit.dart'
     as _i926;
+import 'package:online_exam/features/subjects/api/subject_remote_datasources_impl.dart'
+    as _i394;
+import 'package:online_exam/features/subjects/data/data_source/subject_remote_datasources.dart'
+    as _i714;
+import 'package:online_exam/features/subjects/data/repos/subject_repo_impl.dart'
+    as _i97;
+import 'package:online_exam/features/subjects/domain/repos/subject_repo.dart'
+    as _i736;
+import 'package:online_exam/features/subjects/domain/usecases/get_all_subjects_usecase.dart'
+    as _i713;
+import 'package:online_exam/features/subjects/presentation/cubit/cubit/subject_cubit.dart'
+    as _i585;
 import 'package:shared_preferences/shared_preferences.dart' as _i460;
 
 extension GetItInjectableX on _i174.GetIt {
@@ -82,10 +99,14 @@ extension GetItInjectableX on _i174.GetIt {
       () => sharedPrefsModule.prefs,
       preResolve: true,
     );
+    gh.factory<_i193.AppSectionCubit>(() => _i193.AppSectionCubit());
     gh.lazySingleton<_i960.AppRouter>(() => _i960.AppRouter());
     gh.lazySingleton<_i361.Dio>(() => networkModule.dio);
     gh.lazySingleton<_i1016.SharedPrefsService>(
       () => _i1016.SharedPrefsService(gh<_i460.SharedPreferences>()),
+    );
+    gh.factory<_i498.AppSections>(
+      () => _i498.AppSections(key: gh<_i409.Key>()),
     );
     gh.lazySingleton<_i1063.ApiService>(
       () => _i1063.ApiService(gh<_i361.Dio>()),
@@ -101,6 +122,12 @@ extension GetItInjectableX on _i174.GetIt {
     );
     gh.lazySingleton<_i1036.LoginDataSourceContract>(
       () => _i648.LoginRemoteDataSourceImpl(gh<_i121.LoginService>()),
+    );
+    gh.factory<_i714.SubjectRemoteDatasources>(
+      () => _i394.SubjectRemoteDatasourcesImpl(gh<_i1063.ApiService>()),
+    );
+    gh.factory<_i736.SubjectRepo>(
+      () => _i97.SubjectRepoImpl(gh<_i714.SubjectRemoteDatasources>()),
     );
     gh.lazySingleton<_i1020.SignUpDataSourceContract>(
       () => _i664.SignUpRemoteDataSourceImpl(gh<_i81.SignUpService>()),
@@ -120,8 +147,17 @@ extension GetItInjectableX on _i174.GetIt {
         gh<_i1016.SharedPrefsService>(),
       ),
     );
+    gh.factory<_i713.GetAllSubjectsUseCase>(
+      () => _i713.GetAllSubjectsUseCase(gh<_i736.SubjectRepo>()),
+    );
     gh.lazySingleton<_i821.LoginUseCase>(
       () => _i821.LoginUseCase(gh<_i346.LoginDataContract>()),
+    );
+    gh.factory<_i585.SubjectCubit>(
+      () => _i585.SubjectCubit(
+        gh<_i713.GetAllSubjectsUseCase>(),
+        gh<_i1016.SharedPrefsService>(),
+      ),
     );
     gh.lazySingleton<_i983.SignUpUseCase>(
       () => _i983.SignUpUseCase(gh<_i964.SignUpDataContract>()),
