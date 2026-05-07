@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../../../config/constants/app_constants.dart';
-import '../../../../config/constants/schaffold_messages.dart';
+import '../../../../config/constants/scaffold_messages.dart';
 import '../../../../config/routes/route_names.dart';
 import '../../../../config/theme/app_text_styles.dart';
 import '../../../../core/utils/show_snak_bar.dart';
@@ -35,7 +35,7 @@ class VerifyResetCodeView extends StatelessWidget {
             previous.errorMessage != current.errorMessage,
         listener: (context, state) {
           if (state.success) {
-            showAppSnackbar(context, SchaffoldMessages.codeVerified);
+            showAppSnackbar(context, ScaffoldMessages.codeVerified);
             Future.delayed(const Duration(seconds: 1), () {
               // ignore: use_build_context_synchronously
               context.push(RouteNames.resetPassword);
