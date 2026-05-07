@@ -102,9 +102,6 @@ extension GetItInjectableX on _i174.GetIt {
     gh.factory<_i193.AppSectionCubit>(() => _i193.AppSectionCubit());
     gh.lazySingleton<_i960.AppRouter>(() => _i960.AppRouter());
     gh.lazySingleton<_i361.Dio>(() => networkModule.dio);
-    gh.lazySingleton<_i1063.ApiService>(
-      () => _i1063.ApiService(gh<_i361.Dio>()),
-    );
     gh.lazySingleton<_i121.LoginService>(
       () => _i121.LoginService(gh<_i361.Dio>()),
     );
@@ -114,6 +111,7 @@ extension GetItInjectableX on _i174.GetIt {
     gh.lazySingleton<_i81.SignUpService>(
       () => _i81.SignUpService(gh<_i361.Dio>()),
     );
+    gh.singleton<_i1063.ApiService>(() => _i1063.ApiService(gh<_i361.Dio>()));
     gh.factory<_i498.AppSections>(
       () => _i498.AppSections(key: gh<_i409.Key>()),
     );
