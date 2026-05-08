@@ -4,14 +4,14 @@ import 'package:online_exam/features/exams/domain/entities/exam_model.dart';
 import 'package:online_exam/features/exams/domain/repos/exam_repo.dart';
 
 @injectable
-class GetAllExamUseCase {
+class GetAllExamUseCaseUseCase {
   final ExamRepo _repo;
-  const GetAllExamUseCase(this._repo);
+  const GetAllExamUseCaseUseCase(this._repo);
 
-  Future<BaseResponse<List<ExamModel>>> getAllExamsOnSubject({
+  Future<BaseResponse<List<ExamModel>>> call({
     required String token,
     required String subjectId,
   }) async {
-    return _repo.getAllExamsOnSubject(token: token, subjectId: subjectId);
+    return await _repo.getAllExamsOnSubject(token: token, subjectId: subjectId);
   }
 }

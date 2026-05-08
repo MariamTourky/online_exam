@@ -201,23 +201,23 @@ extension GetItInjectableX on _i174.GetIt {
     gh.factory<_i330.ForgetPasswordCubit>(
       () => _i330.ForgetPasswordCubit(gh<_i341.ForgetPasswordUseCase>()),
     );
-    gh.factory<_i234.GetAllExamUseCase>(
-      () => _i234.GetAllExamUseCase(gh<_i300.ExamRepo>()),
+    gh.factory<_i234.GetAllExamUseCaseUseCase>(
+      () => _i234.GetAllExamUseCaseUseCase(gh<_i300.ExamRepo>()),
     );
     gh.factory<_i713.GetAllSubjectsUseCase>(
       () => _i713.GetAllSubjectsUseCase(gh<_i736.SubjectRepo>()),
-    );
-    gh.factory<_i48.ExamsCubit>(
-      () => _i48.ExamsCubit(
-        gh<_i1016.SharedPrefsService>(),
-        gh<_i234.GetAllExamUseCase>(),
-      ),
     );
     gh.factory<_i135.LoginCubit>(
       () => _i135.LoginCubit(gh<_i821.LoginUseCase>()),
     );
     gh.factory<_i280.ResetPasswordCubit>(
       () => _i280.ResetPasswordCubit(gh<_i503.ResetPasswordUseCase>()),
+    );
+    gh.factory<_i48.ExamsCubit>(
+      () => _i48.ExamsCubit(
+        gh<_i1016.SharedPrefsService>(),
+        gh<_i234.GetAllExamUseCaseUseCase>(),
+      ),
     );
     gh.factory<_i299.SubjectCubit>(
       () => _i299.SubjectCubit(

@@ -1,3 +1,5 @@
+import 'dart:ffi';
+
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:injectable/injectable.dart';
@@ -12,17 +14,17 @@ part 'exams_state.dart';
 
 @injectable
 class ExamsCubit extends Cubit<ExamsState> {
-  final GetAllExamUseCase getAllExamOnSSubjectUseCase;
+  final GetAllExamUseCaseUseCase getAllExamOnSubjectUseCase;
   final SharedPrefsService sharedPrefsService;
 
   ExamsCubit(
-    this.sharedPrefsService, {
-    required this.getAllExamOnSSubjectUseCase,
-  }) : super(ExamsInitial(id: ''));
+    this.sharedPrefsService, 
+     this.getAllExamOnSubjectUseCase,
+  ) : super(ExamsInitial(id: ''));
   Future<void> doIntent(ExamIntent intent) async {
     switch (intent) {
-      case GetAllExamsOnSubjectIntent(subjectId: final subjectId):
-        _getAllExamsOnSubject(subjectId);
+      case GetAllExamsOnSubjectIntent(subjectId: final subjectID):
+        _getAllExamsOnSubject(subjectID);
       case LoadExamsDataIntent():
         _loadExamDataIntent();
       case SelectExamIntent(examId: final examId):
@@ -32,10 +34,14 @@ class ExamsCubit extends Cubit<ExamsState> {
     }
   }
 
-  void _getAllExamsOnSubject(final subjectID) async {
+  Future<void> _getAllExamsOnSubject(final subjectID) async {
     final token = await sharedPrefsService.getToken();
-    final response = await getAllExamOnSSubjectUseCase;
+
     emit(state.copyWith(isLoading: true));
+    final response = await getAllExamOnSubjectUseCase.call(
+      token: token!,
+      subjectId: subjectID,
+    );
 
     switch (response) {
       case SuccessResponse(data: final exams):
