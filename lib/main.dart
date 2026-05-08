@@ -1,13 +1,26 @@
+import 'package:online_exam/config/constants/app_assets.dart';
+import 'package:online_exam/generated/locale_keys.g.dart';
 import 'package:flutter/material.dart';
+import 'package:online_exam/config/constants/app_constants.dart';
 import 'package:online_exam/config/theme/app_theme.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 
+import 'package:easy_localization/easy_localization.dart';
 import 'config/routes/app_router.dart';
 import 'core/di/config/di.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  await EasyLocalization.ensureInitialized();
+
   await configureDependencies();
-  runApp(const MyApp());
+  runApp(
+    EasyLocalization(
+      supportedLocales: const [AppConstants.enLangKey, AppConstants.arLangKey],
+      path: AppAssets.translations,
+      child: const MyApp(),
+    ),
+  );
 }
 
 class MyApp extends StatelessWidget {
@@ -20,8 +33,12 @@ class MyApp extends StatelessWidget {
     return MaterialApp.router(
       debugShowCheckedModeBanner: false,
       routerConfig: appRouter,
-      title: 'Online Exam',
+      title: AppConstants.appName,
       theme: AppTheme.lightTheme(),
+
+      locale: context.locale,
+      localizationsDelegates: context.localizationDelegates,
+      supportedLocales: context.supportedLocales,
     );
   }
 }

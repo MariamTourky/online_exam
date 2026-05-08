@@ -1,4 +1,12 @@
+import 'dart:ui';
+
 class AppConstants {
+  static const String appName = 'Online Exam';
+  static const String appVersion = '1.0.0';
+  static const Locale enLangKey = Locale('en');
+  static const Locale arLangKey = Locale('ar');
+
+  static String localizationPath(String locale) => 'assets/translations/$locale.json';
   // ====================== Authentication Texts
   static const String login = 'Login';
   static const String signup = 'Sign Up';
