@@ -7,7 +7,7 @@ import 'package:online_exam/features/recovery_password/presentation/manager/forg
 import 'package:online_exam/features/recovery_password/presentation/manager/reset_password/reset_password_cubit.dart';
 import 'package:online_exam/features/recovery_password/presentation/views/verify_reset_code_view.dart';
 import 'package:online_exam/features/sign_up/presentation/manager/signup_cubit.dart';
-import 'package:online_exam/features/subjects/presentation/cubit/cubit/subject_cubit.dart';
+import 'package:online_exam/features/subjects/presentation/view_model/cubit/subject_cubit.dart';
 import '../../core/di/config/di.dart';
 import '../../features/subjects/presentation/views/subjects_view.dart';
 import '../../features/login/presentation/views/login_view.dart';

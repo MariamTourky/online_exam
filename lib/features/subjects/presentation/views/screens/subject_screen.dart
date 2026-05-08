@@ -3,8 +3,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:online_exam/config/constants/app_constants.dart';
 import 'package:online_exam/config/theme/app_text_styles.dart';
 import 'package:online_exam/core/utils/show_snak_bar.dart';
-import 'package:online_exam/features/subjects/presentation/cubit/cubit/subject_cubit.dart';
-import 'package:online_exam/features/subjects/presentation/cubit/cubit/subject_intent.dart';
+import 'package:online_exam/features/subjects/presentation/view_model/cubit/subject_cubit.dart';
+import 'package:online_exam/features/subjects/presentation/view_model/cubit/subject_intent.dart';
 
 class SubjectScreen extends StatefulWidget {
   const SubjectScreen({super.key});

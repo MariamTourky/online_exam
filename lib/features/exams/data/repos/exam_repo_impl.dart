@@ -1,9 +1,11 @@
+import 'package:injectable/injectable.dart';
 import 'package:online_exam/core/base_response/base_response.dart';
 import 'package:online_exam/features/exams/data/datasources/exam_remote_datasource.dart';
 import 'package:online_exam/features/exams/data/models/exam_response.dart';
 import 'package:online_exam/features/exams/domain/entities/exam_model.dart';
 import 'package:online_exam/features/exams/domain/repos/exam_repo.dart';
 
+@Injectable(as: ExamRepo)
 class ExamRepoImpl implements ExamRepo {
   final ExamRemoteDataSource _remoteDataSource;
   ExamRepoImpl(this._remoteDataSource);

@@ -49,7 +49,7 @@ class _ApiService implements ApiService {
   }
 
   @override
-  Future<HttpResponse<SubjectResponse>> getAllExamsOnSubject(
+  Future<HttpResponse<ExamResponse>> getAllExamsOnSubject(
     String token,
     String subjectId,
   ) async {
@@ -58,7 +58,7 @@ class _ApiService implements ApiService {
     final _headers = <String, dynamic>{r'token': token};
     _headers.removeWhere((k, v) => v == null);
     const Map<String, dynamic>? _data = null;
-    final _options = _setStreamType<HttpResponse<SubjectResponse>>(
+    final _options = _setStreamType<HttpResponse<ExamResponse>>(
       Options(method: 'GET', headers: _headers, extra: _extra)
           .compose(
             _dio.options,
@@ -69,9 +69,9 @@ class _ApiService implements ApiService {
           .copyWith(baseUrl: _combineBaseUrls(_dio.options.baseUrl, baseUrl)),
     );
     final _result = await _dio.fetch<Map<String, dynamic>>(_options);
-    late SubjectResponse _value;
+    late ExamResponse _value;
     try {
-      _value = SubjectResponse.fromJson(_result.data!);
+      _value = ExamResponse.fromJson(_result.data!);
     } on Object catch (e, s) {
       errorLogger?.logError(e, s, _options, response: _result);
       rethrow;
