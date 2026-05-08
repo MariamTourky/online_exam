@@ -98,3 +98,55 @@ Error handling & interceptors
 
 
 Repository pattern implementation
+
+🛠️ Tech Stack & Dependencies
+Core
+Package	Purpose
+flutter_bloc	State management
+go_router	App routing
+get_it + injectable	Dependency injection
+dio + retrofit	API communication
+equatable	Value equality
+UI & UX
+Package	Purpose
+easy_localization	Localization
+shimmer / skeletonizer	Loading animations
+flutter_svg	SVG rendering
+lottie	Animations
+Data & Storage
+Package	Purpose
+shared_preferences	Local storage
+json_serializable	JSON parsing
+🚀 Getting Started
+# Clone the repository
+git clone <repository-link>
+
+# Install dependencies
+flutter pub get
+
+# Run code generation
+dart run build_runner build --delete-conflicting-outputs
+
+# Run the app
+flutter run
+🧪 Testing
+Type	Packages
+Unit & Widget Testing	flutter_test, bloc_test
+Mocking	mockito, mocktail
+flutter test
+🌐 Localization
+assets/translations/
+├── en.json
+└── ar.json
+🧭 App Routes
+Route	Screen
+/login	Login Screen
+/register	Register Screen
+/forgot-password	Forgot Password
+/verify-code	OTP Verification
+/home	Home Screen
+/exams	Exams List
+/exam-details	Exam Details
+/questions	Exam Questions
+/results	Exam Results
+/profile	User Profile
