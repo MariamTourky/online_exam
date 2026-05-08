@@ -1,7 +1,9 @@
 🎓 Online Exam App
 
 💻 Project Description
+
 🎯 Overview
+
 Online Exam App is a modern Flutter application designed to provide a smooth and secure online examination experience for students. The app allows users to browse exams, answer questions, track results, and manage authentication with a clean and responsive UI.
 Built using Clean Architecture and Bloc/Cubit state management, the project focuses on scalability, maintainability, and performance.
 
@@ -72,32 +74,26 @@ easy_localization integration
 
 ⚡ State Management
 
-
 Bloc/Cubit architecture
 
-
 Reactive UI updates
-
 
 Separation of concerns
 
 
 💉 Dependency Injection
 
-
 GetIt & Injectable integration
 
 
 🌐 Networking
 
-
 Dio & Retrofit APIs
-
 
 Error handling & interceptors
 
-
 Repository pattern implementation
+
 
 🛠️ Tech Stack & Dependencies
 Core
