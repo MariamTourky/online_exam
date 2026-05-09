@@ -15,10 +15,8 @@ class ExamsCubit extends Cubit<ExamsState> {
   final GetAllExamUseCaseUseCase getAllExamOnSubjectUseCase;
   final SharedPrefsService sharedPrefsService;
 
-  ExamsCubit(
-    this.sharedPrefsService, 
-     this.getAllExamOnSubjectUseCase,
-  ) : super(ExamsInitial(id: ''));
+  ExamsCubit(this.sharedPrefsService, this.getAllExamOnSubjectUseCase)
+    : super(ExamsInitial(id: ''));
   Future<void> doIntent(ExamIntent intent) async {
     switch (intent) {
       case GetAllExamsOnSubjectIntent(subjectId: final subjectID):
@@ -39,7 +37,12 @@ class ExamsCubit extends Cubit<ExamsState> {
       final token = await sharedPrefsService.getToken();
       if (token == null) {
         debugPrint('ExamsCubit: Token is null');
-        emit(state.copyWith(isLoading: false, errorMessage: 'Authentication token not found'));
+        emit(
+          state.copyWith(
+            isLoading: false,
+            errorMessage: 'Authentication token not found',
+          ),
+        );
         return;
       }
       final response = await getAllExamOnSubjectUseCase.call(
@@ -54,7 +57,9 @@ class ExamsCubit extends Cubit<ExamsState> {
           emit(state.copyWith(exams: exams, isLoading: false));
         case ErrorResponse(error: final error):
           debugPrint('ExamsCubit: Error: $error');
-          emit(state.copyWith(errorMessage: error.toString(), isLoading: false));
+          emit(
+            state.copyWith(errorMessage: error.toString(), isLoading: false),
+          );
       }
     } catch (e) {
       debugPrint('ExamsCubit: Exception: $e');

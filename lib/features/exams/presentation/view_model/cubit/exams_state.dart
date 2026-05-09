@@ -53,17 +53,17 @@ class ExamsState extends Equatable {
 
   @override
   List<Object?> get props => [
-        exams,
-        id,
-        title,
-        duration,
-        subject,
-        numberOfQuestions,
-        active,
-        createdAt,
-        errorMessage,
-        isLoading,
-      ];
+    exams,
+    id,
+    title,
+    duration,
+    subject,
+    numberOfQuestions,
+    active,
+    createdAt,
+    errorMessage,
+    isLoading,
+  ];
 }
 
 class ExamsInitial extends ExamsState {

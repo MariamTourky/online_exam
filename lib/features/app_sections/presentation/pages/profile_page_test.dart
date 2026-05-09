@@ -6,6 +6,6 @@ class ProfilePageTest extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return  Container(color: AppTheme.gray);
+    return Container(color: AppTheme.gray);
   }
 }
