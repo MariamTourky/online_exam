@@ -35,14 +35,6 @@ class _ExamScreenState extends State<ExamScreen> {
         return Column(
           children: [
             AppBar(
-              actions: [
-                IconButton(
-                  icon: const Icon(Icons.arrow_back_ios),
-                  onPressed: () {
-                    context.go(RouteNames.subjects);
-                  },
-                ),
-              ],
               title: Text(
                 state.title ?? "Exams",
                 style: AppTextStyles.medium20Black,
@@ -50,6 +42,12 @@ class _ExamScreenState extends State<ExamScreen> {
               toolbarHeight: 70,
               surfaceTintColor: Colors.transparent,
               automaticallyImplyLeading: false,
+              leading: IconButton(
+                icon: const Icon(Icons.arrow_back),
+                onPressed: () {
+                  context.pop();
+                },
+              ),
             ),
             Expanded(child: _buildBody(state)),
           ],
@@ -59,6 +57,8 @@ class _ExamScreenState extends State<ExamScreen> {
   }
 
   Widget _buildBody(ExamsState state) {
+    double height = MediaQuery.of(context).size.height;
+    double width = MediaQuery.of(context).size.width;
     if (state.isLoading) {
       return const Center(child: CircularProgressIndicator());
     }
@@ -94,6 +94,7 @@ class _ExamScreenState extends State<ExamScreen> {
           ),
           margin: const EdgeInsets.only(bottom: 12),
           child: ListTile(
+            minTileHeight: height * 0.1,
             title: Text(exam.title ?? '', style: AppTextStyles.baseMedium16),
             leading: Image.asset(
               AppAssets.examCard,
@@ -101,7 +102,25 @@ class _ExamScreenState extends State<ExamScreen> {
               errorBuilder: (context, error, stackTrace) =>
                   const Icon(Icons.assignment, color: Colors.blue),
             ),
-            trailing: const Icon(Icons.arrow_forward_ios, size: 16),
+
+            trailing: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text(
+                  "${exam.numberOfQuestions} Questions",
+                  style: AppTextStyles.baseRegular14,
+                ),
+              ],
+            ),
+            subtitle: Text(
+              "${exam.duration} Minutes",
+              style: AppTextStyles.baseMedium16.copyWith(
+                fontSize: 14,
+                fontWeight: FontWeight.normal,
+                color: Colors.grey[500],
+              ),
+            ),
+
             onTap: () {},
           ),
         );

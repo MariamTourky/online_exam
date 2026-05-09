@@ -1,6 +1,6 @@
 part of 'exams_cubit.dart';
 
-abstract class ExamsState extends Equatable {
+class ExamsState extends Equatable {
   final List<ExamModel> exams;
   final String? id;
   final String? title;
@@ -22,41 +22,9 @@ abstract class ExamsState extends Equatable {
     this.active,
     this.createdAt,
     this.errorMessage,
-    required this.isLoading,
+    this.isLoading = false,
   });
 
-  ExamsState copyWith({
-    List<ExamModel>? exams,
-    String? id,
-    String? title,
-    int? duration,
-    String? subject,
-    int? numberOfQuestions,
-    bool? active,
-    DateTime? createdAt,
-    String? errorMessage,
-    bool? isLoading,
-  });
-
-  @override
-  List<Object?> get props => [
-    exams,
-    id,
-    title,
-    duration,
-    subject,
-    numberOfQuestions,
-    active,
-    createdAt,
-    errorMessage,
-    isLoading,
-  ];
-}
-
-class ExamsInitial extends ExamsState {
-  const ExamsInitial({super.id}) : super(isLoading: false);
-
-  @override
   ExamsState copyWith({
     List<ExamModel>? exams,
     String? id,
@@ -69,6 +37,35 @@ class ExamsInitial extends ExamsState {
     String? errorMessage,
     bool? isLoading,
   }) {
-    return ExamsInitial(id: id ?? this.id);
+    return ExamsState(
+      exams: exams ?? this.exams,
+      id: id ?? this.id,
+      title: title ?? this.title,
+      duration: duration ?? this.duration,
+      subject: subject ?? this.subject,
+      numberOfQuestions: numberOfQuestions ?? this.numberOfQuestions,
+      active: active ?? this.active,
+      createdAt: createdAt ?? this.createdAt,
+      errorMessage: errorMessage ?? this.errorMessage,
+      isLoading: isLoading ?? this.isLoading,
+    );
   }
+
+  @override
+  List<Object?> get props => [
+        exams,
+        id,
+        title,
+        duration,
+        subject,
+        numberOfQuestions,
+        active,
+        createdAt,
+        errorMessage,
+        isLoading,
+      ];
+}
+
+class ExamsInitial extends ExamsState {
+  const ExamsInitial({super.id});
 }

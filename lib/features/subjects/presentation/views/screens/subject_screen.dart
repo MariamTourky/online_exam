@@ -42,9 +42,7 @@ class _SubjectScreenState extends State<SubjectScreen> {
               ),
               automaticallyImplyLeading: false,
             ),
-            Expanded(
-              child: _buildBody(state),
-            ),
+            Expanded(child: _buildBody(state)),
           ],
         );
       },
@@ -52,6 +50,8 @@ class _SubjectScreenState extends State<SubjectScreen> {
   }
 
   Widget _buildBody(SubjectState state) {
+    double height = MediaQuery.of(context).size.height;
+    double width = MediaQuery.of(context).size.width;
     if (state.isLoading) {
       return const Center(child: CircularProgressIndicator());
     }
@@ -95,6 +95,7 @@ class _SubjectScreenState extends State<SubjectScreen> {
                   margin: const EdgeInsets.only(bottom: 12),
                   child: ListTile(
                     contentPadding: const EdgeInsets.all(12),
+                    minTileHeight: height * 0.1,
                     leading: Container(
                       width: 50,
                       height: 50,
@@ -109,10 +110,7 @@ class _SubjectScreenState extends State<SubjectScreen> {
                                 subject.icon!,
                                 fit: BoxFit.cover,
                                 errorBuilder: (context, error, stackTrace) =>
-                                    const Icon(
-                                  Icons.book,
-                                  color: Colors.blue,
-                                ),
+                                    const Icon(Icons.book, color: Colors.blue),
                               ),
                             )
                           : const Icon(Icons.book, color: Colors.blue),
@@ -121,16 +119,9 @@ class _SubjectScreenState extends State<SubjectScreen> {
                       subject.name,
                       style: AppTextStyles.baseMedium16,
                     ),
-                    subtitle: Text(
-                      "ID: ${subject.id}",
-                      style: AppTextStyles.baseRegular14,
-                    ),
-                    trailing: const Icon(
-                      Icons.arrow_forward_ios,
-                      size: 16,
-                    ),
+                    trailing: const Icon(Icons.arrow_forward_ios, size: 16),
                     onTap: () {
-                      context.go(RouteNames.exams, extra: subject.id);
+                      context.push(RouteNames.exams, extra: subject.id);
                     },
                   ),
                 );

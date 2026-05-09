@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:injectable/injectable.dart';
 import 'package:online_exam/features/app_sections/presentation/manager/app_section_cubit.dart';
@@ -107,7 +108,7 @@ class AppRouter {
         path: RouteNames.exams,
         builder: (context, state) {
           final subjectId = state.extra as String?;
-          return ExamPage(subjectId: subjectId);
+          return Scaffold(body: ExamPage(subjectId: subjectId));
         },
       ),
       GoRoute(
