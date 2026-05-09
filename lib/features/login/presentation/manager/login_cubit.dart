@@ -59,9 +59,16 @@ class LoginCubit extends Cubit<LoginState> {
     );
 
     result.fold(
-      (failure) =>
-          emit(state.copyWith(isLoading: false, errorMessage: failure.message)),
-      (_) => emit(state.copyWith(isLoading: false, success: true)),
+      (failure) {
+        if (!isClosed) {
+          emit(state.copyWith(isLoading: false, errorMessage: failure.message));
+        }
+      },
+      (_) {
+        if (!isClosed) {
+          emit(state.copyWith(isLoading: false, success: true));
+        }
+      },
     );
   }
 

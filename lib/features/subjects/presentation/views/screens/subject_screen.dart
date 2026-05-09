@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 import 'package:online_exam/config/constants/app_constants.dart';
+import 'package:online_exam/config/routes/route_names.dart';
 import 'package:online_exam/config/theme/app_text_styles.dart';
 import 'package:online_exam/core/utils/show_snak_bar.dart';
 import 'package:online_exam/features/subjects/presentation/view_model/cubit/subject_cubit.dart';
@@ -22,109 +24,120 @@ class _SubjectScreenState extends State<SubjectScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        toolbarHeight: 70,
-        surfaceTintColor: Colors.transparent,
-        title: const Text(
-          AppConstants.survey,
-          style: AppTextStyles.medium20Black,
-        ),
-      ),
-      body: BlocConsumer<SubjectCubit, SubjectState>(
-        listener: (context, state) {
-          if (state.error != null) {
-            showAppSnackbar(context, state.error!, isError: true);
-          }
-        },
-        builder: (context, state) {
-          if (state.isLoading) {
-            return const Center(child: CircularProgressIndicator());
-          }
-          if (state.subjects.isEmpty) {
-            return const Center(child: Text(AppConstants.noSubjectsFound));
-          }
-          return Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 16.0),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                const SizedBox(height: 16),
-                SearchBar(
-                  hintText: "Search",
-                  onChanged: (value) {},
-                  padding: const WidgetStatePropertyAll(
-                    EdgeInsets.symmetric(horizontal: 16),
+    return BlocConsumer<SubjectCubit, SubjectState>(
+      listener: (context, state) {
+        // if (state.error != null) {
+        //   // showAppSnackbar(context, state.error!, isError: true);
+        // }
+      },
+      builder: (context, state) {
+        return Column(
+          children: [
+            AppBar(
+              toolbarHeight: 70,
+              surfaceTintColor: Colors.transparent,
+              title: const Text(
+                AppConstants.survey,
+                style: AppTextStyles.medium20Black,
+              ),
+              automaticallyImplyLeading: false,
+            ),
+            Expanded(
+              child: _buildBody(state),
+            ),
+          ],
+        );
+      },
+    );
+  }
+
+  Widget _buildBody(SubjectState state) {
+    if (state.isLoading) {
+      return const Center(child: CircularProgressIndicator());
+    }
+    if (state.subjects.isEmpty) {
+      return const Center(child: Text(AppConstants.noSubjectsFound));
+    }
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 16.0),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          const SizedBox(height: 16),
+          SearchBar(
+            hintText: AppConstants.search,
+            onChanged: (value) {},
+            padding: const WidgetStatePropertyAll(
+              EdgeInsets.symmetric(horizontal: 16),
+            ),
+            elevation: const WidgetStatePropertyAll(0),
+            backgroundColor: WidgetStatePropertyAll(Colors.grey[100]),
+          ),
+          const SizedBox(height: 24),
+          const Text(
+            AppConstants.browseBySubjects,
+            style: AppTextStyles.medium20Black,
+          ),
+          const SizedBox(height: 16),
+          Expanded(
+            child: ListView.builder(
+              itemCount: state.subjects.length,
+              padding: const EdgeInsets.only(bottom: 16),
+              itemBuilder: (context, index) {
+                final subject = state.subjects[index];
+                return Card(
+                  elevation: 0,
+                  color: Colors.white,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(12),
+                    side: BorderSide(color: Colors.grey[200]!),
                   ),
-                  elevation: const WidgetStatePropertyAll(0),
-                  backgroundColor: WidgetStatePropertyAll(Colors.grey[100]),
-                ),
-                const SizedBox(height: 24),
-                const Text(
-                  AppConstants.browseBySubjects,
-                  style: AppTextStyles.medium20Black,
-                ),
-                const SizedBox(height: 16),
-                Expanded(
-                  child: ListView.builder(
-                    itemCount: state.subjects.length,
-                    padding: const EdgeInsets.only(bottom: 16),
-                    itemBuilder: (context, index) {
-                      final subject = state.subjects[index];
-                      return Card(
-                        elevation: 0,
-                        color: Colors.white,
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(12),
-                          side: BorderSide(color: Colors.grey[200]!),
-                        ),
-                        margin: const EdgeInsets.only(bottom: 12),
-                        child: ListTile(
-                          contentPadding: const EdgeInsets.all(12),
-                          leading: Container(
-                            width: 50,
-                            height: 50,
-                            decoration: BoxDecoration(
-                              color: Colors.blue[50],
+                  margin: const EdgeInsets.only(bottom: 12),
+                  child: ListTile(
+                    contentPadding: const EdgeInsets.all(12),
+                    leading: Container(
+                      width: 50,
+                      height: 50,
+                      decoration: BoxDecoration(
+                        color: Colors.blue[50],
+                        borderRadius: BorderRadius.circular(8),
+                      ),
+                      child: subject.icon != null
+                          ? ClipRRect(
                               borderRadius: BorderRadius.circular(8),
-                            ),
-                            child: subject.icon != null
-                                ? ClipRRect(
-                                    borderRadius: BorderRadius.circular(8),
-                                    child: Image.network(
-                                      subject.icon!,
-                                      fit: BoxFit.cover,
-                                      errorBuilder:
-                                          (context, error, stackTrace) =>
-                                              const Icon(
-                                                Icons.book,
-                                                color: Colors.blue,
-                                              ),
-                                    ),
-                                  )
-                                : const Icon(Icons.book, color: Colors.blue),
-                          ),
-                          title: Text(
-                            subject.name,
-                            style: AppTextStyles.baseMedium16,
-                          ),
-                          subtitle: Text(
-                            "ID: ${subject.id}",
-                            style: AppTextStyles.baseRegular14,
-                          ),
-                          trailing: const Icon(
-                            Icons.arrow_forward_ios,
-                            size: 16,
-                          ),
-                        ),
-                      );
+                              child: Image.network(
+                                subject.icon!,
+                                fit: BoxFit.cover,
+                                errorBuilder: (context, error, stackTrace) =>
+                                    const Icon(
+                                  Icons.book,
+                                  color: Colors.blue,
+                                ),
+                              ),
+                            )
+                          : const Icon(Icons.book, color: Colors.blue),
+                    ),
+                    title: Text(
+                      subject.name,
+                      style: AppTextStyles.baseMedium16,
+                    ),
+                    subtitle: Text(
+                      "ID: ${subject.id}",
+                      style: AppTextStyles.baseRegular14,
+                    ),
+                    trailing: const Icon(
+                      Icons.arrow_forward_ios,
+                      size: 16,
+                    ),
+                    onTap: () {
+                      context.go(RouteNames.exams, extra: subject.id);
                     },
                   ),
-                ),
-              ],
+                );
+              },
             ),
-          );
-        },
+          ),
+        ],
       ),
     );
   }

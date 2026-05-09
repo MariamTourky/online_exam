@@ -1,5 +1,5 @@
 import 'dart:core';
-
+import 'package:flutter/material.dart';
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:injectable/injectable.dart';
@@ -16,9 +16,9 @@ class SubjectCubit extends Cubit<SubjectState> {
   final GetAllSubjectsUseCase getAllSubjectsUseCase;
   final SharedPrefsService sharedPrefsService;
   SubjectCubit(this.getAllSubjectsUseCase, this.sharedPrefsService)
-    : super(const SubjectInitial(subjects: [], isLoading: false));
+    : super(SubjectInitial(isLoading: false, subjects: []));
 
-  doIntent(SubjectIntent intent) {
+  void doIntent(SubjectIntent intent) {
     switch (intent) {
       case GetAllSubjectsIntent():
         _getAllSubjects(intent);
@@ -26,14 +26,38 @@ class SubjectCubit extends Cubit<SubjectState> {
   }
 
   _getAllSubjects(GetAllSubjectsIntent intent) async {
-    final token = await sharedPrefsService.getToken();
-    emit(state.copyWith(isLoading: true));
-    final response = await getAllSubjectsUseCase(token!);
-    switch (response) {
-      case SuccessResponse(data: final subjects):
-        emit(state.copyWith(subjects: subjects, isLoading: false));
-      case ErrorResponse(error: final error):
-        emit(state.copyWith(error: error.toString()));
+    try {
+      debugPrint('SubjectCubit: Fetching subjects...');
+      emit(state.copyWith(isLoading: true, error: null));
+      final token = await sharedPrefsService.getToken();
+      debugPrint('SubjectCubit: Token: ${token?.substring(0, 10)}...');
+      if (token == null) {
+        debugPrint('SubjectCubit: Token is null');
+        emit(
+          state.copyWith(
+            isLoading: false,
+            error: 'Authentication token not found',
+          ),
+        );
+        return;
+      }
+      final response = await getAllSubjectsUseCase(token);
+      if (isClosed) return;
+      switch (response) {
+        case SuccessResponse(data: final subjects):
+          debugPrint(
+            'SubjectCubit: Success, subjects count: ${subjects.length}',
+          );
+          emit(state.copyWith(subjects: subjects, isLoading: false));
+        case ErrorResponse(error: final error):
+          debugPrint('SubjectCubit: Error: $error');
+          emit(state.copyWith(error: error.toString(), isLoading: false));
+      }
+    } catch (e) {
+      debugPrint('SubjectCubit: Exception: $e');
+      if (!isClosed) {
+        emit(state.copyWith(isLoading: false, error: e.toString()));
+      }
     }
   }
 }

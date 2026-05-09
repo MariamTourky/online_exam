@@ -235,7 +235,6 @@
   "savedAddress": "Saved Address",
   "savedAddresses": "Saved Addresses",
   "schedule": "Schedule",
-  "search": "Search",
   "secondLegalName": "Second legal name",
   "serverError": "Server error occurred",
   "sessionExpiredMessage": "Session expired. Please login again.",
@@ -271,5 +270,8 @@
   "welcomeApply": "Welcome!!",
   "welcomeMessage": "Welcome to Flowery Shop",
   "wrongEmailOrPassword": "Wrong email or password",
-  "yourEmailVerified": "Your email verified"
+  "yourEmailVerified": "Your email verified",
+   "survey":"Survey",
+  "browseBySubjects":"Browse by subjects",
+  "search":"Search"
 }

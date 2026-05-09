@@ -233,7 +233,6 @@
   "savedAddress": "تم حفظ العنوان",
   "savedAddresses": "العناوين المحفوظة",
   "schedule": "جدولة",
-  "search": "بحث",
   "secondLegalName": "الاسم القانوني الثاني",
   "serverError": "حدث خطأ في الخادم",
   "sessionExpiredMessage": "انتهت الجلسة، يرجى تسجيل الدخول مرة أخرى",
@@ -268,5 +267,9 @@
   "welcomeApply": "مرحباً!!",
   "welcomeMessage": "مرحبًا بك في متجر Flowery",
   "wrongEmailOrPassword": "البريد الإلكتروني أو كلمة المرور غير صحيحة",
-  "yourEmailVerified": "تم تأكيد بريدك الإلكتروني"
+  "yourEmailVerified": "تم تأكيد بريدك الإلكتروني",
+  "survey":"Survey",
+  "browseBySubjects":"Browse by subjects",
+  "search":"Search"
+ 
 }

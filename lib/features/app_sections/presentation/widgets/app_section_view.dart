@@ -3,10 +3,10 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:online_exam/config/theme/app_theme.dart';
 import 'package:online_exam/features/app_sections/presentation/manager/app_section_cubit.dart';
 import 'package:online_exam/features/app_sections/presentation/manager/app_section_states.dart';
-import 'package:online_exam/features/app_sections/presentation/pages/exam_page_test.dart';
 import 'package:online_exam/features/app_sections/presentation/pages/home_page_test.dart';
 import 'package:online_exam/features/app_sections/presentation/pages/profile_page_test.dart';
-import 'package:online_exam/features/subjects/presentation/views/subjects_view.dart';
+import 'package:online_exam/features/exams/presentation/view/pages/exam_page.dart';
+import 'package:online_exam/features/subjects/presentation/views/pages/subjects_page.dart';
 
 class AppSectionsView extends StatelessWidget {
   const AppSectionsView({super.key});
@@ -17,10 +17,10 @@ class AppSectionsView extends StatelessWidget {
     Widget bodyWidget;
     switch (navCubit.state.selectedIndex) {
       case 0:
-        bodyWidget = const SubjectsView();
+        bodyWidget = const SubjectsPage();
         break;
       case 1:
-        bodyWidget = ExamPageTest();
+        bodyWidget = ExamPage();
         break;
       case 2:
         bodyWidget = ProfilePageTest();
@@ -33,7 +33,7 @@ class AppSectionsView extends StatelessWidget {
     }
 
     return Scaffold(
-      body: bodyWidget,
+      body: SafeArea(child: bodyWidget),
       bottomNavigationBar: BlocBuilder<AppSectionCubit, AppSectionStates>(
         builder: (context, state) {
           return NavigationBar(

@@ -1,10 +1,8 @@
-import 'dart:ffi';
-
+import 'package:flutter/foundation.dart';
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:injectable/injectable.dart';
 import 'package:online_exam/core/base_response/base_response.dart';
-import 'package:online_exam/core/base_state/base_state.dart';
 import 'package:online_exam/core/storage/shared_prefs_service.dart';
 import 'package:online_exam/features/exams/domain/entities/exam_model.dart';
 import 'package:online_exam/features/exams/domain/usecases/get_all_exam_usecase.dart';
@@ -35,25 +33,46 @@ class ExamsCubit extends Cubit<ExamsState> {
   }
 
   Future<void> _getAllExamsOnSubject(final subjectID) async {
-    final token = await sharedPrefsService.getToken();
+    try {
+      debugPrint('ExamsCubit: Fetching exams for subject: $subjectID');
+      emit(state.copyWith(isLoading: true, errorMessage: null));
+      final token = await sharedPrefsService.getToken();
+      if (token == null) {
+        debugPrint('ExamsCubit: Token is null');
+        emit(state.copyWith(isLoading: false, errorMessage: 'Authentication token not found'));
+        return;
+      }
+      final response = await getAllExamOnSubjectUseCase.call(
+        token: token,
+        subjectId: subjectID,
+      );
 
-    emit(state.copyWith(isLoading: true));
-    final response = await getAllExamOnSubjectUseCase.call(
-      token: token!,
-      subjectId: subjectID,
-    );
-
-    switch (response) {
-      case SuccessResponse(data: final exams):
-        emit(state.copyWith(exams: exams, isLoading: false));
-      case ErrorResponse(error: final error):
-        emit(state.copyWith(errorMessage: error.toString(), isLoading: false));
+      if (isClosed) return;
+      switch (response) {
+        case SuccessResponse(data: final exams):
+          debugPrint('ExamsCubit: Success, exams count: ${exams.length}');
+          emit(state.copyWith(exams: exams, isLoading: false));
+        case ErrorResponse(error: final error):
+          debugPrint('ExamsCubit: Error: $error');
+          emit(state.copyWith(errorMessage: error.toString(), isLoading: false));
+      }
+    } catch (e) {
+      debugPrint('ExamsCubit: Exception: $e');
+      if (!isClosed) {
+        emit(state.copyWith(isLoading: false, errorMessage: e.toString()));
+      }
     }
   }
 
-  void _selectExam(String examId) {}
+  void _selectExam(String examId) {
+    debugPrint('ExamsCubit: Selected exam: $examId');
+  }
 
-  void _loadExamDataIntent() {}
+  void _loadExamDataIntent() {
+    debugPrint('ExamsCubit: Loading exam data intent');
+  }
 
-  void _refreshExamsIntent() {}
+  void _refreshExamsIntent() {
+    debugPrint('ExamsCubit: Refreshing exams intent');
+  }
 }

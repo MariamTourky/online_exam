@@ -39,8 +39,11 @@ flutter:
 
   uses-material-design: true
 
-  # assets:
-  #   - images/a_dot_burr.jpeg
+  assets:
+    - assets/images/
+    - assets/translations/
+    - assets/fonts/
+
   fonts:
     - family: Inter
       fonts:

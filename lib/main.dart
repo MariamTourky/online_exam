@@ -1,9 +1,7 @@
 import 'package:online_exam/config/constants/app_assets.dart';
-import 'package:online_exam/generated/locale_keys.g.dart';
 import 'package:flutter/material.dart';
 import 'package:online_exam/config/constants/app_constants.dart';
 import 'package:online_exam/config/theme/app_theme.dart';
-import 'package:flutter_localizations/flutter_localizations.dart';
 
 import 'package:easy_localization/easy_localization.dart';
 import 'config/routes/app_router.dart';

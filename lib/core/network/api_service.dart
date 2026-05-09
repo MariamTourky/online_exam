@@ -5,8 +5,6 @@ import 'package:online_exam/features/subjects/data/models/subject_response.dart'
 import 'package:retrofit/retrofit.dart';
 import 'package:injectable/injectable.dart';
 
-import '../../config/constants/api_endpoints.dart';
-
 part 'api_service.g.dart'; // Generated file
 
 @singleton

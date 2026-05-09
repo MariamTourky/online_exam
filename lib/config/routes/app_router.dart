@@ -2,6 +2,8 @@ import 'package:go_router/go_router.dart';
 import 'package:injectable/injectable.dart';
 import 'package:online_exam/features/app_sections/presentation/manager/app_section_cubit.dart';
 import 'package:online_exam/features/app_sections/presentation/pages/app_sections.dart';
+import 'package:online_exam/features/exams/presentation/view/pages/exam_page.dart';
+import 'package:online_exam/features/exams/presentation/view_model/cubit/exams_cubit.dart';
 import 'package:online_exam/features/login/presentation/manager/login_cubit.dart';
 import 'package:online_exam/features/recovery_password/presentation/manager/forget_password/forget_password_cubit.dart';
 import 'package:online_exam/features/recovery_password/presentation/manager/reset_password/reset_password_cubit.dart';
@@ -9,7 +11,7 @@ import 'package:online_exam/features/recovery_password/presentation/views/verify
 import 'package:online_exam/features/sign_up/presentation/manager/signup_cubit.dart';
 import 'package:online_exam/features/subjects/presentation/view_model/cubit/subject_cubit.dart';
 import '../../core/di/config/di.dart';
-import '../../features/subjects/presentation/views/subjects_view.dart';
+import '../../features/subjects/presentation/views/pages/subjects_page.dart';
 import '../../features/login/presentation/views/login_view.dart';
 import '../../features/recovery_password/presentation/manager/verify_reset_code/verify_reset_code_cubit.dart';
 import '../../features/recovery_password/presentation/views/forget_password_view.dart';
@@ -98,8 +100,15 @@ class AppRouter {
         path: RouteNames.subjects,
         builder: (context, state) => BlocProvider(
           create: (_) => getIt<SubjectCubit>(),
-          child: const SubjectsView(),
+          child: const SubjectsPage(),
         ),
+      ),
+      GoRoute(
+        path: RouteNames.exams,
+        builder: (context, state) {
+          final subjectId = state.extra as String?;
+          return ExamPage(subjectId: subjectId);
+        },
       ),
       GoRoute(
         path: RouteNames.appStart,

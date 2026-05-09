@@ -4,14 +4,14 @@ import 'package:online_exam/core/di/config/di.dart';
 import 'package:online_exam/features/subjects/presentation/view_model/cubit/subject_cubit.dart';
 import 'package:online_exam/features/subjects/presentation/views/screens/subject_screen.dart';
 
-class SubjectsView extends StatelessWidget {
-  const SubjectsView({super.key});
+class SubjectsPage extends StatelessWidget {
+  const SubjectsPage({super.key});
 
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (context) => getIt<SubjectCubit>(),
-      child: const Scaffold(body: SubjectScreen()),
+      child: const SubjectScreen(),
     );
   }
 }

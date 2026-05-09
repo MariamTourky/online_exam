@@ -6,7 +6,8 @@ class AppConstants {
   static const Locale enLangKey = Locale('en');
   static const Locale arLangKey = Locale('ar');
 
-  static String localizationPath(String locale) => 'assets/translations/$locale.json';
+  static String localizationPath(String locale) =>
+      'assets/translations/$locale.json';
   // ====================== Authentication Texts
   static const String login = 'Login';
   static const String signup = 'Sign Up';
@@ -66,4 +67,5 @@ class AppConstants {
   static const String noResultsFound = 'No results found';
   static const String survey = 'Survey';
   static const String browseBySubjects = 'Browse by subjects';
+  static const String search = 'Search';
 }
