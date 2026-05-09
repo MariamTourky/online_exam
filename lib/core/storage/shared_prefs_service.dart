@@ -16,6 +16,10 @@ class SharedPrefsService {
     return _prefs.getString(_tokenKey);
   }
 
+  Future<void> saveToken(String token) async {
+    await _prefs.setString(_tokenKey, token);
+  }
+
   Future<void> saveBool(String key, bool value) async {
     await _prefs.setBool(key, value);
   }

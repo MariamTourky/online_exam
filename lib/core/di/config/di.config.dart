@@ -115,7 +115,6 @@ extension GetItInjectableX on _i174.GetIt {
       () => sharedPrefsModule.prefs,
       preResolve: true,
     );
-    gh.factory<_i193.AppSectionCubit>(() => _i193.AppSectionCubit());
     gh.lazySingleton<_i960.AppRouter>(() => _i960.AppRouter());
     gh.lazySingleton<_i361.Dio>(() => networkModule.dio);
     gh.lazySingleton<_i121.LoginService>(
@@ -160,6 +159,9 @@ extension GetItInjectableX on _i174.GetIt {
     );
     gh.factory<_i332.ExamRemoteDataSource>(
       () => _i811.ExamRemoteDataSourceImpl(gh<_i1063.ApiService>()),
+    );
+    gh.factory<_i193.AppSectionCubit>(
+      () => _i193.AppSectionCubit(gh<_i1016.SharedPrefsService>()),
     );
     gh.lazySingleton<_i346.LoginDataContract>(
       () => _i536.LoginDomainImpl(
@@ -223,11 +225,14 @@ extension GetItInjectableX on _i174.GetIt {
         gh<_i1016.SharedPrefsService>(),
       ),
     );
-    gh.factory<_i135.LoginCubit>(
-      () => _i135.LoginCubit(gh<_i821.LoginUseCase>()),
-    );
     gh.factory<_i280.ResetPasswordCubit>(
       () => _i280.ResetPasswordCubit(gh<_i503.ResetPasswordUseCase>()),
+    );
+    gh.factory<_i135.LoginCubit>(
+      () => _i135.LoginCubit(
+        gh<_i821.LoginUseCase>(),
+        gh<_i1016.SharedPrefsService>(),
+      ),
     );
     gh.factory<_i955.ExamsCubit>(
       () => _i955.ExamsCubit(
