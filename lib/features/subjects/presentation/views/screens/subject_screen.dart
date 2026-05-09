@@ -4,6 +4,7 @@ import 'package:go_router/go_router.dart';
 import 'package:online_exam/config/constants/app_constants.dart';
 import 'package:online_exam/config/routes/route_names.dart';
 import 'package:online_exam/config/theme/app_text_styles.dart';
+import 'package:online_exam/config/theme/app_theme.dart';
 import 'package:online_exam/features/subjects/presentation/view_model/cubit/subject_cubit.dart';
 import 'package:online_exam/features/subjects/presentation/view_model/cubit/subject_intent.dart';
 
@@ -70,7 +71,7 @@ class _SubjectScreenState extends State<SubjectScreen> {
               EdgeInsets.symmetric(horizontal: 16),
             ),
             elevation: const WidgetStatePropertyAll(0),
-            backgroundColor: WidgetStatePropertyAll(Colors.grey[100]),
+            backgroundColor: WidgetStatePropertyAll(AppTheme.gray.withAlpha(50)),
           ),
           const SizedBox(height: 24),
           const Text(
