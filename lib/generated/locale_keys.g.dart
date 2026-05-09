@@ -2,7 +2,7 @@
 
 // ignore_for_file: constant_identifier_names
 
-abstract class  LocaleKeys {
+abstract class LocaleKeys {
   static const aboutUs = 'aboutUs';
   static const accept = 'accept';
   static const accepted = 'accepted';
@@ -18,7 +18,8 @@ abstract class  LocaleKeys {
   static const alreadyHaveAccount = 'alreadyHaveAccount';
   static const an_error_occurred = 'an_error_occurred';
   static const applicationSubmitted = 'applicationSubmitted';
-  static const applicationSubmittedSuccessfully = 'applicationSubmittedSuccessfully';
+  static const applicationSubmittedSuccessfully =
+      'applicationSubmittedSuccessfully';
   static const apply = 'apply';
   static const applyNow = 'applyNow';
   static const arabic = 'arabic';
@@ -43,7 +44,8 @@ abstract class  LocaleKeys {
   static const changePassword = 'changePassword';
   static const change_language = 'change_language';
   static const checkEmailMessage = 'checkEmailMessage';
-  static const check_email_for_verification_code = 'check_email_for_verification_code';
+  static const check_email_for_verification_code =
+      'check_email_for_verification_code';
   static const checkout = 'checkout';
   static const city = 'city';
   static const clear_all = 'clear_all';
@@ -141,8 +143,10 @@ abstract class  LocaleKeys {
   static const licensePhotoRequired = 'licensePhotoRequired';
   static const loading = 'loading';
   static const location_permission = 'location_permission';
-  static const location_permission_denied_forever_message = 'location_permission_denied_forever_message';
-  static const location_permission_denied_message = 'location_permission_denied_message';
+  static const location_permission_denied_forever_message =
+      'location_permission_denied_forever_message';
+  static const location_permission_denied_message =
+      'location_permission_denied_message';
   static const location_service_off_message = 'location_service_off_message';
   static const login = 'login';
   static const logout = 'logout';
@@ -169,7 +173,8 @@ abstract class  LocaleKeys {
   static const no_notifications_yet = 'no_notifications_yet';
   static const no_orders_found = 'no_orders_found';
   static const no_products_found = 'no_products_found';
-  static const notification_deleted_successfully = 'notification_deleted_successfully';
+  static const notification_deleted_successfully =
+      'notification_deleted_successfully';
   static const notifications = 'notifications';
   static const notificationsKey = 'notificationsKey';
   static const occasions = 'occasions';
@@ -271,5 +276,4 @@ abstract class  LocaleKeys {
   static const welcomeMessage = 'welcomeMessage';
   static const wrongEmailOrPassword = 'wrongEmailOrPassword';
   static const yourEmailVerified = 'yourEmailVerified';
-
 }
