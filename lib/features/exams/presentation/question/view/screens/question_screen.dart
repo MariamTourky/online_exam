@@ -92,7 +92,7 @@ class QuestionScreen extends StatelessWidget {
                         "Question ${index + 1}",
                         style: const TextStyle(
                           fontWeight: FontWeight.bold,
-                          color: Colors.blue,
+                          color: AppTheme.blue,
                         ),
                       ),
                       const SizedBox(height: 8),
