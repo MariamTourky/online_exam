@@ -20,6 +20,9 @@ class _SubjectScreenState extends State<SubjectScreen> {
   void initState() {
     super.initState();
     context.read<SubjectCubit>().doIntent(GetAllSubjectsIntent());
+    // Future.delayed(const Duration(seconds: 3), () {
+    //   cubit.doIntent(GetAllSubjectsIntent());
+    // });
   }
 
   @override
@@ -48,8 +51,9 @@ class _SubjectScreenState extends State<SubjectScreen> {
   Widget _buildBody(SubjectState state) {
     double height = MediaQuery.of(context).size.height;
     if (state.isLoading) {
-      return const Center(child: CircularProgressIndicator());
-    } else if (state.subjects.isEmpty) {
+      return Center(child: CircularProgressIndicator());
+    }
+    if (state.subjects.isEmpty) {
       return const Center(child: Text(AppConstants.noSubjectsFound));
     }
     return Padding(

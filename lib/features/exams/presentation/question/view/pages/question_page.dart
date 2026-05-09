@@ -4,7 +4,8 @@ import 'package:online_exam/features/exams/presentation/exam/view/screens/exam_s
 import 'package:online_exam/features/exams/presentation/question/view_model/cubit/question_cubit.dart';
 
 class QuestionPage extends StatelessWidget {
-  const QuestionPage({super.key});
+  final String examId;
+  const QuestionPage({super.key,required this.examId});
 
   @override
   Widget build(BuildContext context) {

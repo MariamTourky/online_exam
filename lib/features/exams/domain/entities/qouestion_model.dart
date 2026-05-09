@@ -6,7 +6,7 @@ class QuestionModel {
     this.answer,
     this.type,
     this.correct,
-    this.Subject,
+    this.subject,
     this.exam,
     this.createdAt,
   );
@@ -15,7 +15,7 @@ class QuestionModel {
   List? answer;
   String? type;
   String? correct;
-  dynamic Subject;
+  dynamic subject;
   dynamic exam;
   DateTime? createdAt;
 }

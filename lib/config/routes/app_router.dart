@@ -114,13 +114,14 @@ class AppRouter {
       ),
 
       GoRoute(
-        path: RouteNames.appStart,
-        builder: (context, state) => BlocProvider(
-          create: (_) => getIt<QuestionCubit>(),
-          child: QuestionPage(),
-        ),
-
-        // return getIt<QuestionPage>();
+        path: RouteNames.question,
+        builder: (context, state) {
+          final examId = state.extra as String;
+          return BlocProvider(
+            create: (_) => getIt<QuestionCubit>(param1: examId),
+            child: QuestionPage(examId: examId),
+          );
+        },
       ),
       GoRoute(
         path: RouteNames.appStart,

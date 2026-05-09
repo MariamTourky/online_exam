@@ -14,4 +14,5 @@ class RouteNames {
   static const String profile = '/profile';
   static const String appStart = '/app-start';
   static const String subjects = '/subjects';
+  static const String question = '/question';
 }
