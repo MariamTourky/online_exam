@@ -1,6 +1,5 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
-import 'package:flutter/foundation.dart';
 import 'package:injectable/injectable.dart';
 import 'package:online_exam/core/base_response/base_response.dart';
 import 'package:online_exam/core/storage/shared_prefs_service.dart';
@@ -28,8 +27,11 @@ class QuestionCubit extends Cubit<QuestionState> {
       case LoadExamIntent(examId: final id):
         _getAllQuestion(examId: id);
       case SubmitAnswerIntent(questionId: final qId, answer: final ans):
-        // TODO: Implement submit answer logic
-        break;
+        _submitAnswer(questionId: qId, answer: ans);
+      case SelectAnswerStateIntent(questionId: final qId, answer: final ans):
+        _selectAnswer(questionId: qId, selectedAnswer: ans);
+      case AnswerCheckStateIntent(questionId: final qId, answer: final ans):
+        _answerCheckState(questionId: qId, answer: ans);
       case SkipQuestionIntent():
         break;
       case NextQuestionIntent():
@@ -63,4 +65,25 @@ class QuestionCubit extends Cubit<QuestionState> {
       emit(state.copyWith(errorMessage: e.toString(), isLoading: false));
     }
   }
+
+  void _selectAnswer({
+    required String questionId,
+    required String selectedAnswer,
+  }) {
+    final updatedQuestions = state.questions.map((question) {
+      if (question.id == questionId) {
+        return question.copyWith(selectedAnswer: selectedAnswer);
+      }
+      return question;
+    }).toList();
+
+    emit(state.copyWith(questions: updatedQuestions));
+  }
+
+  void _submitAnswer({required String questionId, required String answer}) {}
+
+  void _answerCheckState({
+    required String questionId,
+    required String answer,
+  }) {}
 }

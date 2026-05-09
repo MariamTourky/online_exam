@@ -1,4 +1,3 @@
-import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -7,7 +6,6 @@ import 'package:online_exam/config/theme/app_text_styles.dart';
 import 'package:online_exam/config/theme/app_theme.dart';
 import 'package:online_exam/features/exams/presentation/question/view_model/cubit/question_cubit.dart';
 import 'package:online_exam/features/exams/presentation/question/view_model/cubit/question_intent.dart';
-import 'package:percent_indicator/percent_indicator.dart';
 import 'package:timer_builder/timer_builder.dart';
 
 class QuestionScreen extends StatelessWidget {
@@ -15,7 +13,7 @@ class QuestionScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // final mediaQuery = MediaQuery.of(context);
+    final mediaQuery = MediaQuery.of(context);
     return Scaffold(
       appBar: AppBar(
         leading: IconButton(
@@ -109,10 +107,13 @@ class QuestionScreen extends StatelessWidget {
                             return RadioListTile(
                               title: Text(answerText),
                               value: answerText,
-                              groupValue: null,
+                              selectedTileColor: AppTheme.blue.withAlpha(20),
+                              minLeadingWidth: mediaQuery.size.width * 0.1,
+                              selected: answerText == question.selectedAnswer,
+                              groupValue: question.selectedAnswer,
                               onChanged: (value) {
                                 context.read<QuestionCubit>().doIntent(
-                                  SubmitAnswerIntent(
+                                  SelectAnswerStateIntent(
                                     questionId: question.id.toString(),
                                     answer: value.toString(),
                                   ),

@@ -8,6 +8,7 @@ class QuestionModel {
     this.subject,
     this.exam,
     this.createdAt,
+    this.selectedAnswer,
   );
   String? id;
   String? question;
@@ -17,16 +18,18 @@ class QuestionModel {
   dynamic subject;
   dynamic exam;
   DateTime? createdAt;
+  String? selectedAnswer;
 
   QuestionModel copyWith({
     String? id,
     String? question,
-    List? answer,
+    List<dynamic>? answer,
     String? type,
     String? correct,
     dynamic subject,
     dynamic exam,
     DateTime? createdAt,
+    String? selectedAnswer,
   }) {
     return QuestionModel(
       id ?? this.id,
@@ -37,6 +40,7 @@ class QuestionModel {
       subject ?? this.subject,
       exam ?? this.exam,
       createdAt ?? this.createdAt,
+      selectedAnswer ?? this.selectedAnswer,
     );
   }
 }

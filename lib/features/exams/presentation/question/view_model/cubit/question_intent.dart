@@ -28,3 +28,15 @@ class LoadExamIntent extends QuestionIntent {
   final String examId;
   LoadExamIntent({required this.examId});
 }
+
+class SelectAnswerStateIntent extends QuestionIntent {
+  final String questionId;
+  final String answer;
+  SelectAnswerStateIntent({required this.questionId, required this.answer});
+}
+
+class AnswerCheckStateIntent extends QuestionIntent {
+  final String questionId;
+  final String answer;
+  AnswerCheckStateIntent({required this.questionId, required this.answer});
+}
