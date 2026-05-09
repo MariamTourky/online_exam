@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
-import 'package:online_exam/features/exams/presentation/exam/view_model/cubit/exam_intent.dart';
-import 'package:online_exam/features/exams/presentation/exam/view_model/cubit/exams_cubit.dart';
 import 'package:online_exam/features/exams/presentation/question/view_model/cubit/question_cubit.dart';
+import 'package:online_exam/features/exams/presentation/question/view_model/cubit/question_intent.dart';
 import 'package:percent_indicator/percent_indicator.dart';
 
 class QuestionScreen extends StatelessWidget {
@@ -11,80 +10,79 @@ class QuestionScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final mediaQuery = MediaQuery.of(context);
+    // final mediaQuery = MediaQuery.of(context);
     return Scaffold(
       appBar: AppBar(
         leading: IconButton(
-          icon: Icon(Icons.arrow_back),
-          onPressed: () {
-            context.read<ExamsCubit>().doIntent(
-              SelectExamIntent(
-                context.watch<QuestionCubit>().state.exam?.subject ?? "",
-              ),
-            );
-            context.pop();
-          },
+          icon: const Icon(Icons.arrow_back),
+          onPressed: () => context.pop(),
         ),
       ),
-    );
+      body: BlocBuilder<QuestionCubit, QuestionState>(
+        builder: (context, state) {
+          if (state.isLoading) {
+            return const Center(child: CircularProgressIndicator());
+          }
+          if (state.errorMessage != null) {
+            return Center(child: Text(state.errorMessage!));
+          }
+          if (state.questions.isEmpty) {
+            return const Center(child: Text('No questions found'));
+          }
 
-    // bottom: PreferredSize(
-    //   preferredSize: Size.fromHeight(mediaQuery.size.height * 0.1),
-    //   child: MultiSegmentLinearIndicator(
-    //     segments: const [
-    //       {'title': 'Segment 1', 'subtitle': 'subtitle 1', 'progress': 0.8},
-    //       {'title': 'Segment 2', 'subtitle': 'subtitle 2', 'progress': 1.0},
-    //       {'title': 'Segment 3', 'subtitle': 'subtitle 3', 'progress': 0.2},
-    //     ],
-    //     completedIndicatorColor: Colors.green,
-    //     activeIndicatorColor: Colors.yellow,
-    //     incompletedIndicatorColor: Colors.grey,
-    //     gap: 8,
-    //     height: 8,
-    //   ),
-    // ),
-    //   title: Text(context.watch<QuestionCubit>().state.exam?.title ?? ""),
-    //   : PreferredSize(
-    //     preferredSize: Size.fromHeight(mediaQuery.size.height * 0.1),
-    //     child: Row(
-    //       children: [
-    //         Text(context.watch<QuestionCubit>().state.exam?.id ?? ""),
-    //         Text(
-    //           context
-    //                   .watch<QuestionCubit>()
-    //                   .state
-    //                   .exam
-    //                   ?.duration
-    //                   .toString() ??
-    //               "",
-    //         ),
-    //         Text(
-    //           context
-    //                   .watch<QuestionCubit>()
-    //                   .state
-    //                   .exam
-    //                   ?.numberOfQuestions
-    //                   .toString() ??
-    //               "",
-    //         ),
-    //       ],
-    //     ),
-    //   ),
-    // ),
-    //   body: context.watch<QuestionCubit>().state.exam != null
-    //       ? ListView.builder(
-    //           itemCount: context.watch<QuestionCubit>().state.questions!.exam,
-    //           itemBuilder: (context, index) {
-    //             final question = context
-    //                 .watch<QuestionCubit>()
-    //                 .state
-    //                 .questions!;
-    //             return ListTile(
-    //               title: Text(question.question.toString() ?? ""),
-    //             );
-    //           },
-    //         )
-    //       : const Center(child: Text('No questions found')),
-    // );
+          return ListView.builder(
+            itemCount: state.questions.length,
+            padding: const EdgeInsets.all(16),
+            itemBuilder: (context, index) {
+              final question = state.questions[index];
+              return Card(
+                margin: const EdgeInsets.only(bottom: 16),
+                child: Padding(
+                  padding: const EdgeInsets.all(16),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        "Question ${index + 1}",
+                        style: const TextStyle(
+                          fontWeight: FontWeight.bold,
+                          color: Colors.blue,
+                        ),
+                      ),
+                      const SizedBox(height: 8),
+                      Text(
+                        question.question ?? "",
+                        style: const TextStyle(fontSize: 16),
+                      ),
+                      const SizedBox(height: 16),
+                      // Assuming answer is a list of objects with an 'answer' field
+                      ...(question.answer?.map((ans) {
+                            final answerText = (ans is Map)
+                                ? ans['answer']
+                                : ans.toString();
+                            return RadioListTile(
+                              title: Text(answerText),
+                              value: answerText,
+                              groupValue: null,
+                              onChanged: (value) {
+                                context.read<QuestionCubit>().doIntent(
+                                  SubmitAnswerIntent(
+                                    questionId: question.id.toString(),
+                                    answer: value.toString(),
+                                  ),
+                                );
+                              },
+                            );
+                          }).toList() ??
+                          []),
+                    ],
+                  ),
+                ),
+              );
+            },
+          );
+        },
+      ),
+    );
   }
 }

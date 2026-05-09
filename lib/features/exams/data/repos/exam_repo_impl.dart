@@ -36,17 +36,19 @@ class ExamRepoImpl implements ExamRepo {
   }
 
   @override
-  Future<BaseResponse<QuestionModel>> getAllquestionsOnExam({
+  Future<BaseResponse<List<QuestionModel>>> getAllQuestionsOnExam({
     required String token,
     required String examId,
   }) async {
     final response = await safeApiCall<QuestionResponse>(
-      call: () => _apiService.getAllQuestionOnExam(token, examId),
+      call: () => _apiService.getAllQuestionsOnExam(token, examId),
     );
 
     switch (response) {
       case SuccessResponse<QuestionResponse>():
-        return SuccessResponse(data: response.data.questions!.first.toEntity());
+        return SuccessResponse(
+          data: response.data.questions?.map((e) => e.toEntity()).toList() ?? [],
+        );
       case ErrorResponse<QuestionResponse>():
         return ErrorResponse(error: response.error);
     }

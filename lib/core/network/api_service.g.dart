@@ -54,7 +54,7 @@ class _ApiService implements ApiService {
     String subjectId,
   ) async {
     final _extra = <String, dynamic>{};
-    final queryParameters = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{r'subject': subjectId};
     final _headers = <String, dynamic>{r'token': token};
     _headers.removeWhere((k, v) => v == null);
     const Map<String, dynamic>? _data = null;
@@ -81,12 +81,12 @@ class _ApiService implements ApiService {
   }
 
   @override
-  Future<HttpResponse<QuestionResponse>> getAllQuestionOnExam(
+  Future<HttpResponse<QuestionResponse>> getAllQuestionsOnExam(
     String token,
     String examId,
   ) async {
     final _extra = <String, dynamic>{};
-    final queryParameters = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{r'exam': examId};
     final _headers = <String, dynamic>{r'token': token};
     _headers.removeWhere((k, v) => v == null);
     const Map<String, dynamic>? _data = null;
@@ -94,7 +94,7 @@ class _ApiService implements ApiService {
       Options(method: 'GET', headers: _headers, extra: _extra)
           .compose(
             _dio.options,
-            'exam',
+            '/questions',
             queryParameters: queryParameters,
             data: _data,
           )

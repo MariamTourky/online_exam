@@ -9,7 +9,7 @@ abstract class ExamRemoteDataSource {
     required String token,
     required String subjectId,
   });
-  Future<BaseResponse<QuestionResponse>> getAllQuestionOnExam({
+  Future<BaseResponse<QuestionResponse>> getAllQuestionsOnExam({
     required String token,
     required String examId,
   });

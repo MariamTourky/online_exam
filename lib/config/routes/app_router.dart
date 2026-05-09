@@ -5,6 +5,7 @@ import 'package:online_exam/features/app_sections/presentation/pages/app_section
 import 'package:online_exam/features/exams/presentation/exam/view/pages/exam_page.dart';
 import 'package:online_exam/features/exams/presentation/question/view/pages/question_page.dart';
 import 'package:online_exam/features/exams/presentation/question/view_model/cubit/question_cubit.dart';
+import 'package:online_exam/features/exams/presentation/question/view_model/cubit/question_intent.dart';
 import 'package:online_exam/features/login/presentation/manager/login_cubit.dart';
 import 'package:online_exam/features/recovery_password/presentation/manager/forget_password/forget_password_cubit.dart';
 import 'package:online_exam/features/recovery_password/presentation/manager/reset_password/reset_password_cubit.dart';
@@ -118,7 +119,8 @@ class AppRouter {
         builder: (context, state) {
           final examId = state.extra as String;
           return BlocProvider(
-            create: (_) => getIt<QuestionCubit>(param1: examId),
+            create: (_) => getIt<QuestionCubit>()
+              ..doIntent(GetQuestionIntent(examId: examId)),
             child: QuestionPage(examId: examId),
           );
         },

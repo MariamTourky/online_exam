@@ -6,6 +6,7 @@ import 'package:online_exam/config/constants/app_constants.dart';
 import 'package:online_exam/config/routes/route_names.dart';
 import 'package:online_exam/config/theme/app_text_styles.dart';
 import 'package:online_exam/core/utils/show_snak_bar.dart';
+import 'package:online_exam/features/exams/presentation/exam/view_model/cubit/exam_intent.dart';
 import 'package:online_exam/features/exams/presentation/exam/view_model/cubit/exams_cubit.dart';
 
 class ExamScreen extends StatefulWidget {
@@ -19,8 +20,8 @@ class _ExamScreenState extends State<ExamScreen> {
   @override
   void initState() {
     super.initState();
-    // Note: Exams usually require a subjectId. If no subjectId is provided (like in the bottom nav tab),
-    // we might need a default or a general exams fetch.
+    final cubit = context.read<ExamsCubit>();
+    cubit.doIntent(GetAllExamsOnSubjectIntent(cubit.state.id.toString()));
   }
 
   @override

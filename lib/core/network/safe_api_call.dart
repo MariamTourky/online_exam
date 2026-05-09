@@ -3,7 +3,6 @@ import 'package:flutter/foundation.dart';
 import 'package:online_exam/core/base_response/base_response.dart';
 import 'package:retrofit/retrofit.dart';
 
-
 Future<BaseResponse<T>> safeApiCall<T>({
   required Future<HttpResponse<T>> Function() call,
   bool isBaseResponse = false,

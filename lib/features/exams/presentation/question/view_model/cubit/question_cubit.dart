@@ -20,11 +20,12 @@ class QuestionCubit extends Cubit<QuestionState> {
 
   void doIntent(QuestionIntent intent) {
     switch (intent) {
-      case GetQuestionIntent():
-        break;
+      case GetQuestionIntent(examId: final id):
+        _getAllQuestion(examId: id);
       case LoadExamIntent(examId: final id):
         _getAllQuestion(examId: id);
-      case SubmitAnswerIntent():
+      case SubmitAnswerIntent(questionId: final qId, answer: final ans):
+        // TODO: Implement submit answer logic
         break;
       case SkipQuestionIntent():
         break;
@@ -49,8 +50,7 @@ class QuestionCubit extends Cubit<QuestionState> {
       );
       switch (response) {
         case SuccessResponse(data: final questions):
-          debugPrint(questions.toString());
-          emit(state.copyWith(questions: [], isLoading: false));
+          emit(state.copyWith(questions: questions, isLoading: false));
         case ErrorResponse(error: final error):
           emit(
             state.copyWith(errorMessage: error.toString(), isLoading: false),

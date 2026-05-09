@@ -32,7 +32,13 @@ class QuestionState extends Equatable {
   }
 
   @override
-  List<Object?> get props => [questions, currentIndex, isLoading, errorMessage, exam];
+  List<Object?> get props => [
+    questions,
+    currentIndex,
+    isLoading,
+    errorMessage,
+    exam,
+  ];
 }
 
 class QuestionInitial extends QuestionState {

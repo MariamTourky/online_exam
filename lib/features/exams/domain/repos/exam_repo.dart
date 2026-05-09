@@ -10,7 +10,7 @@ abstract class ExamRepo {
     required String subjectId,
   });
 
-  Future<BaseResponse<QuestionModel>> getAllquestionsOnExam({
+  Future<BaseResponse<List<QuestionModel>>> getAllQuestionsOnExam({
     required String token,
     required String examId,
   });

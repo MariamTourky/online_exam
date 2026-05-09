@@ -1,8 +1,15 @@
 sealed class QuestionIntent {}
 
-class GetQuestionIntent extends QuestionIntent {}
+class GetQuestionIntent extends QuestionIntent {
+  final String examId;
+  GetQuestionIntent({required this.examId});
+}
 
-class SubmitAnswerIntent extends QuestionIntent {}
+class SubmitAnswerIntent extends QuestionIntent {
+  final String questionId;
+  final String answer;
+  SubmitAnswerIntent({required this.questionId, required this.answer});
+}
 
 class SkipQuestionIntent extends QuestionIntent {}
 

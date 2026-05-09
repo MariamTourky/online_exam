@@ -22,12 +22,12 @@ abstract class ApiService {
   @GET(AppEndpoints.allExamsOnSubject)
   Future<HttpResponse<ExamResponse>> getAllExamsOnSubject(
     @Header("token") String token,
-    @Path("subjectId") String subjectId,
+    @Query("subject") String subjectId,
   );
 
   @GET(AppEndpoints.allQuestionsOnExam)
-  Future<HttpResponse<QuestionResponse>> getAllQuestionOnExam(
+  Future<HttpResponse<QuestionResponse>> getAllQuestionsOnExam(
     @Header("token") String token,
-    @Path("examId") String examId,
+    @Query("exam") String examId,
   );
 }

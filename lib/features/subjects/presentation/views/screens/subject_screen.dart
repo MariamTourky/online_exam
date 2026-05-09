@@ -19,10 +19,8 @@ class _SubjectScreenState extends State<SubjectScreen> {
   @override
   void initState() {
     super.initState();
-    context.read<SubjectCubit>().doIntent(GetAllSubjectsIntent());
-    // Future.delayed(const Duration(seconds: 3), () {
-    //   cubit.doIntent(GetAllSubjectsIntent());
-    // });
+    final cubit = context.read<SubjectCubit>();
+    cubit.doIntent(GetAllSubjectsIntent());
   }
 
   @override

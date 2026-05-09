@@ -149,12 +149,6 @@ extension GetItInjectableX on _i174.GetIt {
     gh.lazySingleton<_i377.RecoverPasswordDataScourcContract>(
       () => _i826.RecoverPasswordDataImpl(gh<_i917.RecoveryPasswordService>()),
     );
-    gh.factory<_i532.QuestionCubit>(
-      () => _i532.QuestionCubit(
-        gh<_i278.GetAllQuestionUsecase>(),
-        gh<_i1016.SharedPrefsService>(),
-      ),
-    );
     gh.lazySingleton<_i1036.LoginDataSourceContract>(
       () => _i648.LoginRemoteDataSourceImpl(gh<_i121.LoginService>()),
     );
@@ -201,6 +195,9 @@ extension GetItInjectableX on _i174.GetIt {
     gh.factory<_i736.SubjectRepo>(
       () => _i97.SubjectRepoImpl(gh<_i714.SubjectRemoteDatasources>()),
     );
+    gh.factory<_i278.GetAllQuestionUsecase>(
+      () => _i278.GetAllQuestionUsecase(gh<_i300.ExamRepo>()),
+    );
     gh.factoryParam<_i1012.VerifyResetCodeCubit, String, dynamic>(
       (email, _) => _i1012.VerifyResetCodeCubit(
         gh<_i170.VerifyResetCodeUseCase>(),
@@ -219,6 +216,12 @@ extension GetItInjectableX on _i174.GetIt {
     );
     gh.factory<_i713.GetAllSubjectsUseCase>(
       () => _i713.GetAllSubjectsUseCase(gh<_i736.SubjectRepo>()),
+    );
+    gh.factory<_i532.QuestionCubit>(
+      () => _i532.QuestionCubit(
+        gh<_i278.GetAllQuestionUsecase>(),
+        gh<_i1016.SharedPrefsService>(),
+      ),
     );
     gh.factory<_i135.LoginCubit>(
       () => _i135.LoginCubit(gh<_i821.LoginUseCase>()),

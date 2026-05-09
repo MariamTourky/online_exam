@@ -15,9 +15,6 @@ class ExamPage extends StatelessWidget {
     return BlocProvider(
       create: (context) {
         final cubit = getIt<ExamsCubit>();
-        if (subjectId != null) {
-          cubit.doIntent(GetAllExamsOnSubjectIntent(subjectId!));
-        }
         return cubit;
       },
       child: const ExamScreen(),

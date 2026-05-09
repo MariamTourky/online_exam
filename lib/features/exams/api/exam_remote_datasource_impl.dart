@@ -24,12 +24,12 @@ class ExamRemoteDataSourceImpl implements ExamRemoteDataSource {
   }
 
   @override
-  Future<BaseResponse<QuestionResponse>> getAllQuestionOnExam({
+  Future<BaseResponse<QuestionResponse>> getAllQuestionsOnExam({
     required String token,
     required String examId,
   }) async {
     try {
-      final resonse = await _apiService.getAllQuestionOnExam(token, examId);
+      final resonse = await _apiService.getAllQuestionsOnExam(token, examId);
       return SuccessResponse(data: resonse.data);
     } catch (e) {
       return ErrorResponse(error: e as Exception);
