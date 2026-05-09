@@ -89,7 +89,7 @@ class Question {
       subject,
       exam,
       createdAt,
-      null
+      null,
     );
   }
 }

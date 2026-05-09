@@ -1,12 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:online_exam/config/constants/app_assets.dart';
 import 'package:online_exam/config/routes/route_names.dart';
 import 'package:online_exam/config/theme/app_text_styles.dart';
 import 'package:online_exam/config/theme/app_theme.dart';
 import 'package:online_exam/features/exams/domain/entities/exam_model.dart';
-import 'package:online_exam/features/exams/presentation/exam/view_model/cubit/exams_cubit.dart';
 
 class ExamDescription extends StatelessWidget {
   final String subjectId;
@@ -23,6 +21,7 @@ class ExamDescription extends StatelessWidget {
     return Padding(
       padding: EdgeInsets.all(mediaQuery.size.width * 0.02),
       child: Scaffold(
+        backgroundColor: Colors.white,
         appBar: AppBar(
           toolbarHeight: 70,
           leading: IconButton(
@@ -91,9 +90,11 @@ class ExamDescription extends StatelessWidget {
             children: [
               Text('Instuctions', style: AppTextStyles.baseRegularBlack),
               SizedBox(height: mediaQuery.size.height * 0.05),
-              Text(
-                'Lorem ipsum dolor sit amet consectetur. Vestibulum sed est sed magna egestas gravida. Aliquam in tortor eu sem rhoncus pretium sit amet sed dolor.',
-                style: AppTextStyles.baseRegularBlack,
+              ..._getInstructions().map(
+                (instruction) => Padding(
+                  padding: const EdgeInsets.only(bottom: 16),
+                  child: _buildBulletPoint(instruction),
+                ),
               ),
               SizedBox(height: mediaQuery.size.height * 0.05),
               Center(
@@ -111,6 +112,31 @@ class ExamDescription extends StatelessWidget {
           ),
         ),
       ),
+    );
+  }
+
+  List<String> _getInstructions() {
+    final List<String> instructions = [
+      'Read all questions carefully before answering.',
+      'Each question has only one correct answer.',
+      'Do not leave the exam screen during the test.',
+      'Make sure to submit your answers before time ends.',
+    ];
+
+    return instructions.where((i) => i.isNotEmpty).toList();
+  }
+
+  Widget _buildBulletPoint(String text) {
+    return Row(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        const Padding(
+          padding: EdgeInsets.only(top: 6),
+          child: CircleAvatar(radius: 3, backgroundColor: AppTheme.primaryBlue),
+        ),
+        const SizedBox(width: 10),
+        Expanded(child: Text(text, style: AppTextStyles.baseRegularBlack)),
+      ],
     );
   }
 }

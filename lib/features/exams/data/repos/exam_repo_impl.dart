@@ -47,7 +47,8 @@ class ExamRepoImpl implements ExamRepo {
     switch (response) {
       case SuccessResponse<QuestionResponse>():
         return SuccessResponse(
-          data: response.data.questions?.map((e) => e.toEntity()).toList() ?? [],
+          data:
+              response.data.questions?.map((e) => e.toEntity()).toList() ?? [],
         );
       case ErrorResponse<QuestionResponse>():
         return ErrorResponse(error: response.error);
