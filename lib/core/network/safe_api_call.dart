@@ -3,7 +3,6 @@ import 'package:flutter/foundation.dart';
 import 'package:online_exam/core/base_response/base_response.dart';
 import 'package:retrofit/retrofit.dart';
 
-import 'api_result.dart';
 
 Future<BaseResponse<T>> safeApiCall<T>({
   required Future<HttpResponse<T>> Function() call,
@@ -17,7 +16,9 @@ Future<BaseResponse<T>> safeApiCall<T>({
       return SuccessResponse(data: response.data);
     } else {
       return ErrorResponse(
-        error: Exception("Failed with status code: ${response.response.statusCode}"),
+        error: Exception(
+          "Failed with status code: ${response.response.statusCode}",
+        ),
       );
     }
   } on DioException catch (dioError) {

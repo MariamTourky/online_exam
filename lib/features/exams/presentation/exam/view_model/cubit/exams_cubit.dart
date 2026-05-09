@@ -6,7 +6,7 @@ import 'package:online_exam/core/base_response/base_response.dart';
 import 'package:online_exam/core/storage/shared_prefs_service.dart';
 import 'package:online_exam/features/exams/domain/entities/exam_model.dart';
 import 'package:online_exam/features/exams/domain/usecases/get_all_exam_usecase.dart';
-import 'package:online_exam/features/exams/presentation/view_model/cubit/exam_intent.dart';
+import 'package:online_exam/features/exams/presentation/exam/view_model/cubit/exam_intent.dart';
 
 part 'exams_state.dart';
 

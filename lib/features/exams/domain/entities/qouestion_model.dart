@@ -1,4 +1,3 @@
-import 'package:online_exam/features/subjects/data/models/subject_response.dart';
 
 class QuestionModel {
   QuestionModel(

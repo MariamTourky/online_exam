@@ -31,25 +31,27 @@ class _ExamScreenState extends State<ExamScreen> {
         }
       },
       builder: (context, state) {
-        return Column(
-          children: [
-            AppBar(
-              title: Text(
-                state.title ?? "Exams",
-                style: AppTextStyles.medium20Black,
+        return Scaffold(
+          body: Column(
+            children: [
+              AppBar(
+                title: Text(
+                  state.title ?? "Exams",
+                  style: AppTextStyles.medium20Black,
+                ),
+                toolbarHeight: 70,
+                surfaceTintColor: Colors.transparent,
+                automaticallyImplyLeading: false,
+                leading: IconButton(
+                  icon: const Icon(Icons.arrow_back),
+                  onPressed: () {
+                    context.pop();
+                  },
+                ),
               ),
-              toolbarHeight: 70,
-              surfaceTintColor: Colors.transparent,
-              automaticallyImplyLeading: false,
-              leading: IconButton(
-                icon: const Icon(Icons.arrow_back),
-                onPressed: () {
-                  context.pop();
-                },
-              ),
-            ),
-            Expanded(child: _buildBody(state)),
-          ],
+              Expanded(child: _buildBody(state)),
+            ],
+          ),
         );
       },
     );

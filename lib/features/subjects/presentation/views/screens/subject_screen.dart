@@ -25,11 +25,7 @@ class _SubjectScreenState extends State<SubjectScreen> {
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<SubjectCubit, SubjectState>(
-      listener: (context, state) {
-        // if (state.error != null) {
-        //   // showAppSnackbar(context, state.error!, isError: true);
-        // }
-      },
+      listener: (context, state) {},
       builder: (context, state) {
         return Column(
           children: [
@@ -51,11 +47,9 @@ class _SubjectScreenState extends State<SubjectScreen> {
 
   Widget _buildBody(SubjectState state) {
     double height = MediaQuery.of(context).size.height;
-    // double width = MediaQuery.of(context).size.width;
     if (state.isLoading) {
       return const Center(child: CircularProgressIndicator());
-    }
-    if (state.subjects.isEmpty) {
+    } else if (state.subjects.isEmpty) {
       return const Center(child: Text(AppConstants.noSubjectsFound));
     }
     return Padding(

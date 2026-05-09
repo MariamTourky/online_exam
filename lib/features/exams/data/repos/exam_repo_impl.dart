@@ -12,7 +12,7 @@ import 'package:online_exam/features/exams/domain/repos/exam_repo.dart';
 @Injectable(as: ExamRepo)
 class ExamRepoImpl implements ExamRepo {
   final ExamRemoteDataSource _remoteDataSource;
-  ApiService _apiService;
+  final ApiService _apiService;
   ExamRepoImpl(this._remoteDataSource, this._apiService);
 
   @override

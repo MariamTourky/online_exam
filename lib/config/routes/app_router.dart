@@ -1,9 +1,10 @@
-import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:injectable/injectable.dart';
 import 'package:online_exam/features/app_sections/presentation/manager/app_section_cubit.dart';
 import 'package:online_exam/features/app_sections/presentation/pages/app_sections.dart';
-import 'package:online_exam/features/exams/presentation/view/pages/exam_page.dart';
+import 'package:online_exam/features/exams/presentation/exam/view/pages/exam_page.dart';
+import 'package:online_exam/features/exams/presentation/question/view/pages/question_page.dart';
+import 'package:online_exam/features/exams/presentation/question/view_model/cubit/question_cubit.dart';
 import 'package:online_exam/features/login/presentation/manager/login_cubit.dart';
 import 'package:online_exam/features/recovery_password/presentation/manager/forget_password/forget_password_cubit.dart';
 import 'package:online_exam/features/recovery_password/presentation/manager/reset_password/reset_password_cubit.dart';
@@ -103,12 +104,23 @@ class AppRouter {
           child: const SubjectsPage(),
         ),
       ),
+
       GoRoute(
         path: RouteNames.exams,
         builder: (context, state) {
           final subjectId = state.extra as String?;
-          return Scaffold(body: ExamPage(subjectId: subjectId));
+          return ExamPage(subjectId: subjectId);
         },
+      ),
+
+      GoRoute(
+        path: RouteNames.appStart,
+        builder: (context, state) => BlocProvider(
+          create: (_) => getIt<QuestionCubit>(),
+          child: QuestionPage(),
+        ),
+
+        // return getIt<QuestionPage>();
       ),
       GoRoute(
         path: RouteNames.appStart,
