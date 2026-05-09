@@ -4,6 +4,7 @@ import 'package:online_exam/features/app_sections/presentation/manager/app_secti
 import 'package:online_exam/features/app_sections/presentation/pages/app_sections.dart';
 import 'package:online_exam/features/exams/domain/entities/exam_model.dart';
 import 'package:online_exam/features/exams/presentation/exam/view/pages/exam_page.dart';
+import 'package:online_exam/features/exams/presentation/exam/view/screens/exam_description.dart';
 import 'package:online_exam/features/exams/presentation/question/view/pages/question_page.dart';
 import 'package:online_exam/features/exams/presentation/question/view_model/cubit/question_cubit.dart';
 import 'package:online_exam/features/exams/presentation/question/view_model/cubit/question_intent.dart';
@@ -124,6 +125,13 @@ class AppRouter {
               ..doIntent(GetQuestionIntent(examId: exam.id ?? "", exam: exam)),
             child: QuestionPage(exam: exam),
           );
+        },
+      ),
+      GoRoute(
+        path: RouteNames.examDescription,
+        builder: (context, state) {
+          final exam = state.extra as ExamModel;
+          return ExamDescription(exam: exam, subjectId: "");
         },
       ),
       GoRoute(

@@ -123,7 +123,7 @@ class _ExamScreenState extends State<ExamScreen> {
               ),
             ),
             onTap: () {
-              context.push(RouteNames.question, extra: exam);
+              context.push(RouteNames.examDescription, extra: exam);
             },
           ),
         );

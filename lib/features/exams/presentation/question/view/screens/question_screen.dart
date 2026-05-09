@@ -22,7 +22,6 @@ class QuestionScreen extends StatelessWidget {
         ),
         title: Text("Exam", style: AppTextStyles.medium20Black),
 
-        // lib/features/exams/presentation/question/view/screens/question_screen.dart
         actions: [
           BlocBuilder<QuestionCubit, QuestionState>(
             builder: (context, state) {
