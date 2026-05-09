@@ -50,7 +50,7 @@ class _SubjectScreenState extends State<SubjectScreen> {
 
   Widget _buildBody(SubjectState state) {
     double height = MediaQuery.of(context).size.height;
-    double width = MediaQuery.of(context).size.width;
+    // double width = MediaQuery.of(context).size.width;
     if (state.isLoading) {
       return const Center(child: CircularProgressIndicator());
     }

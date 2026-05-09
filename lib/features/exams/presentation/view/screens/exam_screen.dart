@@ -57,7 +57,7 @@ class _ExamScreenState extends State<ExamScreen> {
 
   Widget _buildBody(ExamsState state) {
     double height = MediaQuery.of(context).size.height;
-    double width = MediaQuery.of(context).size.width;
+    // double width = MediaQuery.of(context).size.width;
     if (state.isLoading) {
       return const Center(child: CircularProgressIndicator());
     }
