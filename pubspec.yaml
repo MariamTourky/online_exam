@@ -36,6 +36,7 @@ dev_dependencies:
   json_serializable: ^6.10.0
   percent_indicator: ^4.2.5
   retrofit_generator: ^10.0.1
+  timer_builder: ^2.0.0
 flutter:
 
   uses-material-design: true

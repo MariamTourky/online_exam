@@ -1,9 +1,14 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
+import 'package:online_exam/config/theme/app_text_styles.dart';
+import 'package:online_exam/config/theme/app_theme.dart';
 import 'package:online_exam/features/exams/presentation/question/view_model/cubit/question_cubit.dart';
 import 'package:online_exam/features/exams/presentation/question/view_model/cubit/question_intent.dart';
 import 'package:percent_indicator/percent_indicator.dart';
+import 'package:timer_builder/timer_builder.dart';
 
 class QuestionScreen extends StatelessWidget {
   const QuestionScreen({super.key});
@@ -17,6 +22,47 @@ class QuestionScreen extends StatelessWidget {
           icon: const Icon(Icons.arrow_back),
           onPressed: () => context.pop(),
         ),
+        title: Text("Exam", style: AppTextStyles.medium20Black),
+
+        // lib/features/exams/presentation/question/view/screens/question_screen.dart
+        actions: [
+          BlocBuilder<QuestionCubit, QuestionState>(
+            builder: (context, state) {
+              return TimerBuilder.periodic(
+                const Duration(seconds: 1),
+                builder: (context) {
+                  final duration = state.exam?.duration ?? 0;
+                  return Padding(
+                    padding: const EdgeInsets.only(right: 16.0),
+                    child: Center(
+                      child: Row(
+                        children: [
+                          const Icon(
+                            Icons.timer_outlined,
+                            color: AppTheme.green,
+                            size: 20,
+                          ),
+                          const SizedBox(width: 4),
+                          Text(
+                            "$duration:00",
+                            style: AppTextStyles.medium20Black.copyWith(
+                              color: AppTheme.green,
+                              fontSize: 16,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  );
+                },
+              );
+            },
+          ),
+        ],
+
+        toolbarHeight: 70,
+        surfaceTintColor: Colors.transparent,
+        automaticallyImplyLeading: false,
       ),
       body: BlocBuilder<QuestionCubit, QuestionState>(
         builder: (context, state) {

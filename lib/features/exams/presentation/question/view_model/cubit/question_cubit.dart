@@ -20,7 +20,10 @@ class QuestionCubit extends Cubit<QuestionState> {
 
   void doIntent(QuestionIntent intent) {
     switch (intent) {
-      case GetQuestionIntent(examId: final id):
+      case GetQuestionIntent(examId: final id, exam: final exam):
+        if (exam != null) {
+          emit(state.copyWith(exam: exam));
+        }
         _getAllQuestion(examId: id);
       case LoadExamIntent(examId: final id):
         _getAllQuestion(examId: id);

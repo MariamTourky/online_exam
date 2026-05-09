@@ -1,8 +1,11 @@
+import 'package:online_exam/features/exams/domain/entities/exam_model.dart';
+
 sealed class QuestionIntent {}
 
 class GetQuestionIntent extends QuestionIntent {
   final String examId;
-  GetQuestionIntent({required this.examId});
+  final ExamModel? exam;
+  GetQuestionIntent({required this.examId, this.exam});
 }
 
 class SubmitAnswerIntent extends QuestionIntent {
