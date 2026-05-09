@@ -49,7 +49,6 @@ class ExamsCubit extends Cubit<ExamsState> {
         token: token,
         subjectId: subjectID,
       );
-
       if (isClosed) return;
       switch (response) {
         case SuccessResponse(data: final exams):

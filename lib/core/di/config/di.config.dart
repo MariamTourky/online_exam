@@ -32,6 +32,8 @@ import 'package:online_exam/features/exams/domain/repos/exam_repo.dart'
     as _i300;
 import 'package:online_exam/features/exams/domain/usecases/get_all_exam_usecase.dart'
     as _i234;
+import 'package:online_exam/features/exams/domain/usecases/get_all_question_usecase.dart'
+    as _i278;
 import 'package:online_exam/features/exams/presentation/exam/view_model/cubit/exams_cubit.dart'
     as _i955;
 import 'package:online_exam/features/exams/presentation/question/view_model/cubit/question_cubit.dart'
@@ -114,7 +116,6 @@ extension GetItInjectableX on _i174.GetIt {
       preResolve: true,
     );
     gh.factory<_i193.AppSectionCubit>(() => _i193.AppSectionCubit());
-    gh.factory<_i532.QuestionCubit>(() => _i532.QuestionCubit());
     gh.lazySingleton<_i960.AppRouter>(() => _i960.AppRouter());
     gh.lazySingleton<_i361.Dio>(() => networkModule.dio);
     gh.lazySingleton<_i121.LoginService>(
@@ -147,6 +148,12 @@ extension GetItInjectableX on _i174.GetIt {
     );
     gh.lazySingleton<_i377.RecoverPasswordDataScourcContract>(
       () => _i826.RecoverPasswordDataImpl(gh<_i917.RecoveryPasswordService>()),
+    );
+    gh.factory<_i532.QuestionCubit>(
+      () => _i532.QuestionCubit(
+        gh<_i278.GetAllQuestionUsecase>(),
+        gh<_i1016.SharedPrefsService>(),
+      ),
     );
     gh.lazySingleton<_i1036.LoginDataSourceContract>(
       () => _i648.LoginRemoteDataSourceImpl(gh<_i121.LoginService>()),
