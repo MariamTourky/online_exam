@@ -71,7 +71,9 @@ class _SubjectScreenState extends State<SubjectScreen> {
               EdgeInsets.symmetric(horizontal: 16),
             ),
             elevation: const WidgetStatePropertyAll(0),
-            backgroundColor: WidgetStatePropertyAll(AppTheme.gray.withAlpha(50)),
+            backgroundColor: WidgetStatePropertyAll(
+              AppTheme.gray.withAlpha(50),
+            ),
           ),
           const SizedBox(height: 24),
           const Text(

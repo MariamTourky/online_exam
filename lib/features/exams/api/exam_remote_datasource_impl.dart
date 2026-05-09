@@ -3,6 +3,7 @@ import 'package:online_exam/core/base_response/base_response.dart';
 import 'package:online_exam/core/network/api_service.dart';
 import 'package:online_exam/features/exams/data/datasources/exam_remote_datasource.dart';
 import 'package:online_exam/features/exams/data/models/exam_response.dart';
+import 'package:online_exam/features/exams/data/models/question_response.dart';
 
 @Injectable(as: ExamRemoteDataSource)
 class ExamRemoteDataSourceImpl implements ExamRemoteDataSource {
@@ -17,6 +18,19 @@ class ExamRemoteDataSourceImpl implements ExamRemoteDataSource {
     try {
       final response = await _apiService.getAllExamsOnSubject(token, subjectId);
       return SuccessResponse(data: response.data);
+    } catch (e) {
+      return ErrorResponse(error: e as Exception);
+    }
+  }
+
+  @override
+  Future<BaseResponse<QuestionResponse>> getAllQuestionOnExam({
+    required String token,
+    required String examId,
+  }) async {
+    try {
+      final resonse = await _apiService.getAllQuestionOnExam(token, examId);
+      return SuccessResponse(data: resonse.data);
     } catch (e) {
       return ErrorResponse(error: e as Exception);
     }
