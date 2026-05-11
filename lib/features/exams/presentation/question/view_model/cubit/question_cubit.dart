@@ -3,6 +3,7 @@ import 'package:equatable/equatable.dart';
 import 'package:injectable/injectable.dart';
 import 'package:online_exam/core/base_response/base_response.dart';
 import 'package:online_exam/core/storage/shared_prefs_service.dart';
+import 'package:online_exam/features/exams/domain/entities/answer_model.dart';
 import 'package:online_exam/features/exams/domain/entities/exam_model.dart';
 import 'package:online_exam/features/exams/domain/entities/qouestion_model.dart';
 import 'package:online_exam/features/exams/domain/usecases/get_all_question_usecase.dart';
@@ -85,5 +86,16 @@ class QuestionCubit extends Cubit<QuestionState> {
   void _answerCheckState({
     required String questionId,
     required String answer,
-  }) {}
+  }) {
+    final updatedQuestions = state.questions.map((question) {
+      if (question.id == questionId) {
+        return question.copyWith(
+          answer: [AnswerModel(answer: answer, key: question.correct)],
+        );
+      }
+      return question;
+    }).toList();
+
+    emit(state.copyWith(questions: updatedQuestions));
+  }
 }

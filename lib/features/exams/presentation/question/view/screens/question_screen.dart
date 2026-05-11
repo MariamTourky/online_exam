@@ -121,6 +121,27 @@ class QuestionScreen extends StatelessWidget {
                             );
                           }).toList() ??
                           []),
+                      //add button for next question
+                      Row(
+                        children: [
+                          Expanded(
+                            child: ElevatedButton(
+                              onPressed: () {
+                                context.read<QuestionCubit>().doIntent(
+                                  SubmitAnswerIntent(
+                                    questionId: question.id.toString(),
+                                    answer: question.selectedAnswer ?? "",
+                                  ),
+                                );
+                              },
+                              child: const Text(
+                                "Submit",
+                                style: TextStyle(color: AppTheme.white),
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
                     ],
                   ),
                 ),
