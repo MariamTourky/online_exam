@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:online_exam/config/theme/app_text_styles.dart';
 import 'package:online_exam/config/theme/app_theme.dart';
+import 'package:online_exam/features/exams/domain/entities/answer_model.dart';
 import 'package:online_exam/features/exams/presentation/question/view_model/cubit/question_cubit.dart';
 import 'package:online_exam/features/exams/presentation/question/view_model/cubit/question_intent.dart';
 import 'package:timer_builder/timer_builder.dart';
@@ -99,10 +100,8 @@ class QuestionScreen extends StatelessWidget {
                       const SizedBox(height: 16),
                       // Assuming answer is a list of objects with an 'answer' field
                       ...(question.answer?.map((ans) {
-                            final answerText = (ans is Map)
-                                ? ans['answer']
-                                : ans.toString();
-                            return RadioListTile(
+                            final answerText = ans.answer ?? "";
+                            return RadioListTile<String>(
                               title: Text(answerText),
                               value: answerText,
                               selectedTileColor: AppTheme.blue.withAlpha(20),
@@ -110,12 +109,14 @@ class QuestionScreen extends StatelessWidget {
                               selected: answerText == question.selectedAnswer,
                               groupValue: question.selectedAnswer,
                               onChanged: (value) {
-                                context.read<QuestionCubit>().doIntent(
-                                  SelectAnswerStateIntent(
-                                    questionId: question.id.toString(),
-                                    answer: value.toString(),
-                                  ),
-                                );
+                                if (value != null) {
+                                  context.read<QuestionCubit>().doIntent(
+                                    SelectAnswerStateIntent(
+                                      questionId: question.id.toString(),
+                                      answer: value,
+                                    ),
+                                  );
+                                }
                               },
                             );
                           }).toList() ??

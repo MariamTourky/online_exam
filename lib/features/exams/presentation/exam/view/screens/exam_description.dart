@@ -18,98 +18,95 @@ class ExamDescription extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final mediaQuery = MediaQuery.of(context);
-    return Padding(
-      padding: EdgeInsets.all(mediaQuery.size.width * 0.02),
-      child: Scaffold(
-        backgroundColor: Colors.white,
-        appBar: AppBar(
-          toolbarHeight: 70,
-          leading: IconButton(
-            icon: const Icon(Icons.arrow_back),
-            onPressed: () => context.pop(),
-          ),
-          bottom: PreferredSize(
-            preferredSize: Size.fromHeight(mediaQuery.size.height * 0.2),
-            child: Column(
-              children: [
-                Container(
-                  height: mediaQuery.size.height * 0.2,
-                  color: Colors.white,
-                  padding: EdgeInsets.all(mediaQuery.size.width * 0.02),
-                  margin: EdgeInsets.all(mediaQuery.size.width * 0.02),
-                  child: Column(
-                    children: [
-                      Row(
-                        children: [
-                          Image.asset(AppAssets.examCard),
-                          const SizedBox(width: 8),
-                          Text(
-                            '${exam.title!} Exam',
-                            style: AppTextStyles.medium20Black,
-                          ),
-                          const Spacer(),
-                          Text(
-                            '${exam.duration} mins',
-                            style: const TextStyle(color: AppTheme.primaryBlue),
-                          ),
-                        ],
-                      ),
-                      const SizedBox(height: 16),
-                      Row(
-                        children: [
-                          Text(
-                            'High Level | ${exam.numberOfQuestions} Questions',
-                            style: AppTextStyles.baseRegularBlack,
-                          ),
-                        ],
-                      ),
-                      Expanded(
-                        child: Divider(
-                          color: Colors.grey.withOpacity(0.2),
-                          indent: 10,
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-              ],
-            ),
-          ),
+    return Scaffold(
+      backgroundColor: Colors.white,
+      appBar: AppBar(
+        toolbarHeight: 70,
+        leading: IconButton(
+          icon: const Icon(Icons.arrow_back),
+          onPressed: () => context.pop(),
         ),
-        body: Container(
-          width: double.infinity,
-          alignment: Alignment.topLeft,
-          padding: EdgeInsets.all(mediaQuery.size.width * 0.02),
-          margin: EdgeInsets.all(mediaQuery.size.width * 0.02),
-          decoration: BoxDecoration(
-            color: Colors.white,
-            borderRadius: BorderRadius.circular(12),
-          ),
+        bottom: PreferredSize(
+          preferredSize: Size.fromHeight(mediaQuery.size.height * 0.2),
           child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text('Instuctions', style: AppTextStyles.baseRegularBlack),
-              SizedBox(height: mediaQuery.size.height * 0.05),
-              ..._getInstructions().map(
-                (instruction) => Padding(
-                  padding: const EdgeInsets.only(bottom: 16),
-                  child: _buildBulletPoint(instruction),
-                ),
-              ),
-              SizedBox(height: mediaQuery.size.height * 0.05),
-              Center(
-                child: ElevatedButton(
-                  onPressed: () {
-                    context.push(RouteNames.question, extra: exam);
-                  },
-                  child: const Text(
-                    'start exam',
-                    style: TextStyle(color: AppTheme.white),
-                  ),
+              Container(
+                height: mediaQuery.size.height * 0.2,
+                color: Colors.white,
+                padding: EdgeInsets.all(mediaQuery.size.width * 0.02),
+                margin: EdgeInsets.all(mediaQuery.size.width * 0.02),
+                child: Column(
+                  children: [
+                    Row(
+                      children: [
+                        Image.asset(AppAssets.examCard),
+                        const SizedBox(width: 8),
+                        Text(
+                          '${exam.title!} Exam',
+                          style: AppTextStyles.medium20Black,
+                        ),
+                        const Spacer(),
+                        Text(
+                          '${exam.duration} mins',
+                          style: const TextStyle(color: AppTheme.primaryBlue),
+                        ),
+                      ],
+                    ),
+                    const SizedBox(height: 16),
+                    Row(
+                      children: [
+                        Text(
+                          'High Level | ${exam.numberOfQuestions} Questions',
+                          style: AppTextStyles.baseRegularBlack,
+                        ),
+                      ],
+                    ),
+                    Expanded(
+                      child: Divider(
+                        color: Colors.grey.withOpacity(0.2),
+                        indent: 10,
+                      ),
+                    ),
+                  ],
                 ),
               ),
             ],
           ),
+        ),
+      ),
+      body: Container(
+        width: double.infinity,
+        alignment: Alignment.topLeft,
+        padding: EdgeInsets.all(mediaQuery.size.width * 0.02),
+        margin: EdgeInsets.all(mediaQuery.size.width * 0.02),
+        decoration: BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.circular(12),
+        ),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text('Instuctions', style: AppTextStyles.baseRegularBlack),
+            SizedBox(height: mediaQuery.size.height * 0.05),
+            ..._getInstructions().map(
+              (instruction) => Padding(
+                padding: const EdgeInsets.only(bottom: 16),
+                child: _buildBulletPoint(instruction),
+              ),
+            ),
+            SizedBox(height: mediaQuery.size.height * 0.05),
+            Center(
+              child: ElevatedButton(
+                onPressed: () {
+                  context.push(RouteNames.question, extra: exam);
+                },
+                child: const Text(
+                  'Start exam',
+                  style: TextStyle(color: AppTheme.white),
+                ),
+              ),
+            ),
+          ],
         ),
       ),
     );

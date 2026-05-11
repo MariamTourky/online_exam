@@ -1,4 +1,5 @@
 import 'package:json_annotation/json_annotation.dart';
+import 'package:online_exam/features/exams/domain/entities/answer_model.dart';
 import 'package:online_exam/features/exams/domain/entities/qouestion_model.dart';
 
 part 'question_response.g.dart';
@@ -83,7 +84,7 @@ class Question {
     return QuestionModel(
       id,
       question,
-      answers,
+      answers?.map((e) => AnswerModel(answer: e.answer, key: e.key)).toList(),
       type,
       correct,
       subject,

@@ -1,3 +1,5 @@
+import 'package:online_exam/features/exams/domain/entities/answer_model.dart';
+
 class QuestionModel {
   QuestionModel(
     this.id,
@@ -12,7 +14,7 @@ class QuestionModel {
   );
   String? id;
   String? question;
-  List? answer;
+  List<AnswerModel>? answer;
   String? type;
   String? correct;
   dynamic subject;
@@ -23,7 +25,7 @@ class QuestionModel {
   QuestionModel copyWith({
     String? id,
     String? question,
-    List<dynamic>? answer,
+    List<AnswerModel>? answer,
     String? type,
     String? correct,
     dynamic subject,
