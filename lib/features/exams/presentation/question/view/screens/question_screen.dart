@@ -72,9 +72,8 @@ class QuestionScreen extends StatelessWidget {
             return const Center(child: Text('No questions found'));
           }
 
-          return ListView.builder(
+          return PageView.builder(
             itemCount: state.questions.length,
-            padding: const EdgeInsets.all(16),
             itemBuilder: (context, index) {
               final question = state.questions[index];
               return Card(
@@ -133,6 +132,37 @@ class QuestionScreen extends StatelessWidget {
                               },
                               child: const Text(
                                 "Submit",
+                                style: TextStyle(color: AppTheme.white),
+                              ),
+                            ),
+                          ),
+                          const SizedBox(width: 16),
+                          // Expanded(
+                          //   child: ElevatedButton(
+                          //     onPressed: () {
+                          //       context.read<QuestionCubit>().doIntent(
+                          //         PreviousQuestionIntent(),
+                          //       );
+                          //     },
+                          //     child: const Text(
+                          //       "Previous",
+                          //       style: TextStyle(color: AppTheme.white),
+                          //     ),
+                          //   ),
+                          // ),
+                          const SizedBox(width: 16),
+                          Expanded(
+                            child: ElevatedButton(
+                              style: ElevatedButton.styleFrom(
+                                backgroundColor: AppTheme.gray,
+                              ),
+                              onPressed: () {
+                                context.read<QuestionCubit>().doIntent(
+                                  NextQuestionIntent(),
+                                );
+                              },
+                              child: const Text(
+                                "Next",
                                 style: TextStyle(color: AppTheme.white),
                               ),
                             ),
