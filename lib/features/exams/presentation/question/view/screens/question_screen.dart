@@ -9,7 +9,6 @@ import 'package:timer_builder/timer_builder.dart';
 
 class QuestionScreen extends StatelessWidget {
   const QuestionScreen({super.key});
-
   @override
   Widget build(BuildContext context) {
     final mediaQuery = MediaQuery.of(context);
@@ -73,10 +72,13 @@ class QuestionScreen extends StatelessWidget {
           }
 
           return PageView.builder(
+            controller: context.read<QuestionCubit>().pageController,
+            physics: const NeverScrollableScrollPhysics(),
             itemCount: state.questions.length,
             itemBuilder: (context, index) {
               final question = state.questions[index];
               return Card(
+                color: AppTheme.white,
                 margin: const EdgeInsets.only(bottom: 16),
                 child: Padding(
                   padding: const EdgeInsets.all(16),
@@ -122,51 +124,42 @@ class QuestionScreen extends StatelessWidget {
                         children: [
                           Expanded(
                             child: ElevatedButton(
+                              style: ElevatedButton.styleFrom(
+                                backgroundColor: AppTheme.white,
+                                side: const BorderSide(
+                                  color: AppTheme.blue,
+                                  width: 2,
+                                ),
+                              ),
                               onPressed: () {
                                 context.read<QuestionCubit>().doIntent(
-                                  SubmitAnswerIntent(
-                                    questionId: question.id.toString(),
-                                    answer: question.selectedAnswer ?? "",
-                                  ),
+                                  PreviousQuestionIntent(),
                                 );
                               },
                               child: const Text(
-                                "Submit",
-                                style: TextStyle(color: AppTheme.white),
+                                "Back",
+                                style: TextStyle(color: AppTheme.blue),
                               ),
                             ),
                           ),
                           const SizedBox(width: 16),
-                          // Expanded(
-                          //   child: ElevatedButton(
-                          //     onPressed: () {
-                          //       context.read<QuestionCubit>().doIntent(
-                          //         PreviousQuestionIntent(),
-                          //       );
-                          //     },
-                          //     child: const Text(
-                          //       "Previous",
-                          //       style: TextStyle(color: AppTheme.white),
-                          //     ),
-                          //   ),
-                          // ),
-                          const SizedBox(width: 16),
+
                           Expanded(
                             child: ElevatedButton(
-                              style: ElevatedButton.styleFrom(
-                                backgroundColor: AppTheme.gray,
-                              ),
                               onPressed: () {
                                 context.read<QuestionCubit>().doIntent(
                                   NextQuestionIntent(),
                                 );
                               },
-                              child: const Text(
-                                "Next",
-                                style: TextStyle(color: AppTheme.white),
+                              child: Text(
+                                state.currentIndex == state.questions.length - 1
+                                    ? "Submit"
+                                    : "Next",
+                                style: const TextStyle(color: AppTheme.white),
                               ),
                             ),
                           ),
+                          const SizedBox(width: 16),
                         ],
                       ),
                     ],

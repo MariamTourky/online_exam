@@ -1,3 +1,5 @@
+import 'package:flutter/material.dart';
+import 'package:online_exam/config/routes/app_router.dart';
 import 'package:online_exam/features/exams/domain/entities/exam_model.dart';
 
 sealed class QuestionIntent {}
@@ -18,7 +20,8 @@ class SkipQuestionIntent extends QuestionIntent {}
 
 class NextQuestionIntent extends QuestionIntent {}
 
-class PreviousQuestionIntent extends QuestionIntent {}
+class PreviousQuestionIntent extends QuestionIntent {
+}
 
 class SubmitExamIntent extends QuestionIntent {}
 
