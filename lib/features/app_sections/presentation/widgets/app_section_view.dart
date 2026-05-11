@@ -9,7 +9,6 @@ import 'package:online_exam/features/exams/presentation/exam/view/pages/exam_pag
 import 'package:online_exam/features/subjects/presentation/views/pages/subjects_page.dart';
 
 class AppSectionsView extends StatelessWidget {
-  
   const AppSectionsView({super.key});
 
   @override

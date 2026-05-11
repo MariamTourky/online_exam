@@ -57,7 +57,6 @@ class VerifyResetCodeForm extends StatelessWidget {
               ),
             const SizedBox(height: 20),
 
-            // Resend text
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [

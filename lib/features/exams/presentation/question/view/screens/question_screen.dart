@@ -3,7 +3,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:online_exam/config/theme/app_text_styles.dart';
 import 'package:online_exam/config/theme/app_theme.dart';
-import 'package:online_exam/features/exams/domain/entities/answer_model.dart';
 import 'package:online_exam/features/exams/presentation/question/view_model/cubit/question_cubit.dart';
 import 'package:online_exam/features/exams/presentation/question/view_model/cubit/question_intent.dart';
 import 'package:timer_builder/timer_builder.dart';
@@ -98,7 +97,6 @@ class QuestionScreen extends StatelessWidget {
                         style: const TextStyle(fontSize: 16),
                       ),
                       const SizedBox(height: 16),
-                      // Assuming answer is a list of objects with an 'answer' field
                       ...(question.answer?.map((ans) {
                             final answerText = ans.answer ?? "";
                             return RadioListTile<String>(
@@ -121,7 +119,6 @@ class QuestionScreen extends StatelessWidget {
                             );
                           }).toList() ??
                           []),
-                      //add button for next question
                       Row(
                         children: [
                           Expanded(

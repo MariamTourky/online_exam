@@ -83,10 +83,7 @@ class QuestionCubit extends Cubit<QuestionState> {
 
   void _submitAnswer({required String questionId, required String answer}) {}
 
-  void _answerCheckState({
-    required String questionId,
-    required String answer,
-  }) {
+  void _answerCheckState({required String questionId, required String answer}) {
     final updatedQuestions = state.questions.map((question) {
       if (question.id == questionId) {
         return question.copyWith(
