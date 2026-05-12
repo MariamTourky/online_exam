@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
+import 'package:online_exam/config/routes/route_names.dart';
 import 'package:online_exam/config/theme/app_text_styles.dart';
 import 'package:online_exam/config/theme/app_theme.dart';
 import 'package:online_exam/features/exams/presentation/question/view_model/cubit/question_cubit.dart';
 import 'package:online_exam/features/exams/presentation/question/view_model/cubit/question_intent.dart';
-import 'package:timer_builder/timer_builder.dart';
 
 class QuestionScreen extends StatelessWidget {
   const QuestionScreen({super.key});
@@ -21,35 +21,37 @@ class QuestionScreen extends StatelessWidget {
         title: Text("Exam", style: AppTextStyles.medium20Black),
 
         actions: [
-          BlocBuilder<QuestionCubit, QuestionState>(
+          BlocConsumer<QuestionCubit, QuestionState>(
+            listener: (context, state) {},
+            buildWhen: (previous, current) =>
+                previous.remainingTime != current.remainingTime,
             builder: (context, state) {
-              return TimerBuilder.periodic(
-                const Duration(seconds: 1),
-                builder: (context) {
-                  final duration = state.exam?.duration ?? 0;
-                  return Padding(
-                    padding: const EdgeInsets.only(right: 16.0),
-                    child: Center(
-                      child: Row(
-                        children: [
-                          const Icon(
-                            Icons.timer_outlined,
-                            color: AppTheme.green,
-                            size: 20,
-                          ),
-                          const SizedBox(width: 4),
-                          Text(
-                            "$duration:00",
-                            style: AppTextStyles.medium20Black.copyWith(
-                              color: AppTheme.green,
-                              fontSize: 16,
-                            ),
-                          ),
-                        ],
+              final remainingSeconds = state.remainingTime ?? 0;
+              final minutes = remainingSeconds ~/ 60;
+              final seconds = remainingSeconds % 60;
+              final timeString =
+                  "${minutes.toString().padLeft(2, '0')}:${seconds.toString().padLeft(2, '0')}";
+              return Padding(
+                padding: const EdgeInsets.only(right: 16.0),
+                child: Center(
+                  child: Row(
+                    children: [
+                      const Icon(
+                        Icons.timer_outlined,
+                        color: AppTheme.green,
+                        size: 20,
                       ),
-                    ),
-                  );
-                },
+                      const SizedBox(width: 4),
+                      Text(
+                        timeString,
+                        style: AppTextStyles.medium20Black.copyWith(
+                          color: AppTheme.green,
+                          fontSize: 16,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
               );
             },
           ),
@@ -108,6 +110,9 @@ class QuestionScreen extends StatelessWidget {
                               selected: answerText == question.selectedAnswer,
                               groupValue: question.selectedAnswer,
                               onChanged: (value) {
+                                String? selectedAnswer;
+                                selectedAnswer = value;
+                                debugPrint(selectedAnswer.toString());
                                 if (value != null) {
                                   context.read<QuestionCubit>().doIntent(
                                     SelectAnswerStateIntent(
@@ -116,10 +121,13 @@ class QuestionScreen extends StatelessWidget {
                                     ),
                                   );
                                 }
+                                debugPrint(state.questions.toString());
+                                debugPrint(question.selectedAnswer.toString());
                               },
                             );
                           }).toList() ??
                           []),
+                      SizedBox(height: mediaQuery.size.height * 0.2),
                       Row(
                         children: [
                           Expanded(
@@ -147,9 +155,64 @@ class QuestionScreen extends StatelessWidget {
                           Expanded(
                             child: ElevatedButton(
                               onPressed: () {
-                                context.read<QuestionCubit>().doIntent(
-                                  NextQuestionIntent(),
-                                );
+                                if (state.currentIndex ==
+                                    state.questions.length - 1) {
+                                  final hasUnanswered = state.questions.any(
+                                    (q) => q.selectedAnswer == null,
+                                  );
+                                  if (hasUnanswered) {
+                                    ScaffoldMessenger.of(context).showSnackBar(
+                                      SnackBar(
+                                        content: Text(
+                                          "Please answer all questions before submitting!",
+                                        ),
+                                        backgroundColor: Colors.red,
+                                      ),
+                                    );
+                                  } else if (hasUnanswered == false) {
+                                    final cubit = context.read<QuestionCubit>();
+                                    showDialog(
+                                      context: context,
+                                      builder: (dialogContext) {
+                                        return AlertDialog(
+                                          title: const Text("Submit Exam"),
+                                          content: const Text(
+                                            "Are you sure you want to submit the exam?",
+                                          ),
+                                          actions: [
+                                            TextButton(
+                                              onPressed: () {
+                                                Navigator.pop(dialogContext);
+                                              },
+                                              child: const Text("No"),
+                                            ),
+                                            TextButton(
+                                              onPressed: () {
+                                                cubit.doIntent(
+                                                  SubmitExamIntent(),
+                                                );
+                                                Navigator.pop(dialogContext);
+                                                context.go(
+                                                  RouteNames.results,
+                                                  extra: {
+                                                    'exam': state.exam,
+                                                    'questions':
+                                                        state.questions,
+                                                  },
+                                                );
+                                              },
+                                              child: const Text("Yes"),
+                                            ),
+                                          ],
+                                        );
+                                      },
+                                    );
+                                  }
+                                } else {
+                                  context.read<QuestionCubit>().doIntent(
+                                    NextQuestionIntent(),
+                                  );
+                                }
                               },
                               child: Text(
                                 state.currentIndex == state.questions.length - 1

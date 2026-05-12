@@ -6,6 +6,8 @@ class QuestionState extends Equatable {
   final bool isLoading;
   final String? errorMessage;
   final ExamModel? exam;
+  final Timer? timer;
+  final int? remainingTime;
 
   const QuestionState({
     this.questions = const [],
@@ -13,6 +15,8 @@ class QuestionState extends Equatable {
     this.isLoading = false,
     this.errorMessage,
     this.exam,
+    this.timer,
+    this.remainingTime,
   });
 
   QuestionState copyWith({
@@ -21,6 +25,8 @@ class QuestionState extends Equatable {
     bool? isLoading,
     String? errorMessage,
     ExamModel? exam,
+    Timer? timer,
+    int? remainingTime,
   }) {
     return QuestionState(
       questions: questions ?? this.questions,
@@ -28,6 +34,8 @@ class QuestionState extends Equatable {
       isLoading: isLoading ?? this.isLoading,
       errorMessage: errorMessage ?? this.errorMessage,
       exam: exam ?? this.exam,
+      timer: timer ?? this.timer,
+      remainingTime: remainingTime ?? this.remainingTime,
     );
   }
 
@@ -38,6 +46,8 @@ class QuestionState extends Equatable {
     isLoading,
     errorMessage,
     exam,
+    timer,
+    remainingTime,
   ];
 }
 

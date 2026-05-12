@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
@@ -27,10 +28,11 @@ class QuestionCubit extends Cubit<QuestionState> {
           emit(state.copyWith(exam: exam));
         }
         _getAllQuestion(examId: id);
-      case LoadExamIntent(examId: final id):
+      case LoadExamIntent(examId: final id, exam: final exam):
+        emit(state.copyWith(exam: exam));
         _getAllQuestion(examId: id);
       case SubmitAnswerIntent(questionId: final qId, answer: final ans):
-        // _submitAnswer(questionId: qId, answer: ans);
+      // _submitAnswer(questionId: qId, answer: ans);
       case SelectAnswerStateIntent(questionId: final qId, answer: final ans):
         _selectAnswer(questionId: qId, selectedAnswer: ans);
       case AnswerCheckStateIntent(questionId: final qId, answer: final ans):
@@ -59,6 +61,7 @@ class QuestionCubit extends Cubit<QuestionState> {
       switch (response) {
         case SuccessResponse(data: final questions):
           emit(state.copyWith(questions: questions, isLoading: false));
+          _startTimer();
         case ErrorResponse(error: final error):
           emit(
             state.copyWith(errorMessage: error.toString(), isLoading: false),
@@ -80,8 +83,8 @@ class QuestionCubit extends Cubit<QuestionState> {
       return question;
     }).toList();
 
-    emit(state.copyWith(questions: updatedQuestions,currentIndex: state.currentIndex + 1));
-  } 
+    emit(state.copyWith(questions: updatedQuestions));
+  }
 
   void _answerCheckState({required String questionId, required String answer}) {
     final updatedQuestions = state.questions.map((question) {
@@ -95,7 +98,7 @@ class QuestionCubit extends Cubit<QuestionState> {
 
     emit(state.copyWith(questions: updatedQuestions));
   }
-  
+
   void _nextQuestion() {
     if (state.currentIndex < state.questions.length - 1) {
       emit(state.copyWith(currentIndex: state.currentIndex + 1));
@@ -105,7 +108,7 @@ class QuestionCubit extends Cubit<QuestionState> {
       );
     }
   }
-  
+
   void _previousQuestion() {
     if (state.currentIndex > 0) {
       emit(state.copyWith(currentIndex: state.currentIndex - 1));
@@ -115,13 +118,42 @@ class QuestionCubit extends Cubit<QuestionState> {
       );
     }
   }
-  
-  void _timerTick() {}
-  
-  void _submitExam() {}
-  
+
+  void _timerTick() {
+    if (state.remainingTime != null && state.remainingTime! > 0) {
+      emit(state.copyWith(remainingTime: state.remainingTime! - 1));
+    } else {
+      state.timer?.cancel();
+      _submitExam();
+    }
+  }
+
+  void _startTimer() {
+    state.timer?.cancel();
+
+    int remainingSeconds = (state.exam?.duration ?? 0) * 60;
+    emit(state.copyWith(remainingTime: remainingSeconds));
+
+    final timer = Timer.periodic(const Duration(seconds: 1), (timer) {
+      _timerTick();
+    });
+
+    emit(state.copyWith(timer: timer));
+  }
+
+  void _submitExam() {
+    // if (state.currentIndex < state.questions.length - 1) {
+    //   final selectedAnswer = state.questions[state.currentIndex].selectedAnswer;
+    //   if (selectedAnswer == null) {
+    //     emit(state.copyWith(isLoading: true, errorMessage: null));
+
+    // }
+    // }
+  }
+
   @override
   Future<void> close() {
+    state.timer?.cancel();
     pageController.dispose();
     return super.close();
   }

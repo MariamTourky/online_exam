@@ -16,4 +16,24 @@ class ExamModel {
     this.active,
     this.createdAt,
   });
+
+  ExamModel copyWith({
+    String? id,
+    String? title,
+    int? duration,
+    String? subject,
+    int? numberOfQuestions,
+    bool? active,
+    DateTime? createdAt,
+  }) {
+    return ExamModel(
+      id: id ?? this.id,
+      title: title ?? this.title,
+      duration: duration ?? this.duration,
+      subject: subject ?? this.subject,
+      numberOfQuestions: numberOfQuestions ?? this.numberOfQuestions,
+      active: active ?? this.active,
+      createdAt: createdAt ?? this.createdAt,
+    );
+  }
 }
