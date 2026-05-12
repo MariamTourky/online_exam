@@ -1,10 +1,9 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
+import 'package:online_exam/core/base_response/base_response.dart';
 import 'package:retrofit/retrofit.dart';
 
-import 'api_result.dart';
-
-Future<ApiResult<T>> safeApiCall<T>({
+Future<BaseResponse<T>> safeApiCall<T>({
   required Future<HttpResponse<T>> Function() call,
   bool isBaseResponse = false,
 }) async {
@@ -13,10 +12,12 @@ Future<ApiResult<T>> safeApiCall<T>({
     final response = await call();
     if (response.response.statusCode! >= 200 &&
         response.response.statusCode! < 300) {
-      return SuccessApiResult(data: response.data);
+      return SuccessResponse(data: response.data);
     } else {
-      return ErrorApiResult(
-        error: "Failed with status code: ${response.response.statusCode}",
+      return ErrorResponse(
+        error: Exception(
+          "Failed with status code: ${response.response.statusCode}",
+        ),
       );
     }
   } on DioException catch (dioError) {
@@ -29,8 +30,8 @@ Future<ApiResult<T>> safeApiCall<T>({
     } else {
       errorDetail = 'Unknown Dio error';
     }
-    return ErrorApiResult(error: errorDetail);
+    return ErrorResponse(error: Exception(errorDetail));
   } catch (e) {
-    return ErrorApiResult(error: "Unexpected error: $e");
+    return ErrorResponse(error: Exception("Unexpected error: $e"));
   }
 }

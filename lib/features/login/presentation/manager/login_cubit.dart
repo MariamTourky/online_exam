@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:injectable/injectable.dart';
 import 'package:dartz/dartz.dart';
+import 'package:online_exam/core/storage/shared_prefs_service.dart';
 import '../../../../core/error/failure.dart';
 import '../../domain/entities/user_login_entity.dart';
 import '../../domain/use_cases/login_usecase.dart';
@@ -12,8 +13,10 @@ part 'login_state.dart';
 @injectable
 class LoginCubit extends Cubit<LoginState> {
   final LoginUseCase _loginUseCase;
+  final SharedPrefsService _sharedPrefsService;
 
-  LoginCubit(this._loginUseCase) : super(LoginState.initial());
+  LoginCubit(this._loginUseCase, this._sharedPrefsService)
+    : super(LoginState.initial());
 
   final formKey = GlobalKey<FormState>();
   final emailController = TextEditingController();
@@ -59,9 +62,17 @@ class LoginCubit extends Cubit<LoginState> {
     );
 
     result.fold(
-      (failure) =>
-          emit(state.copyWith(isLoading: false, errorMessage: failure.message)),
-      (_) => emit(state.copyWith(isLoading: false, success: true)),
+      (failure) {
+        if (!isClosed) {
+          emit(state.copyWith(isLoading: false, errorMessage: failure.message));
+        }
+      },
+      (user) {
+        if (!isClosed) {
+          emit(state.copyWith(isLoading: false, success: true));
+          _sharedPrefsService.saveToken(user.token!);
+        }
+      },
     );
   }
 

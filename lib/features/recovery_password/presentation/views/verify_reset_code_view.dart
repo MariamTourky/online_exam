@@ -37,7 +37,6 @@ class VerifyResetCodeView extends StatelessWidget {
           if (state.success) {
             showAppSnackbar(context, ScaffoldMessages.codeVerified);
             Future.delayed(const Duration(seconds: 1), () {
-              // ignore: use_build_context_synchronously
               context.push(RouteNames.resetPassword);
             });
           } else if (state.errorMessage != null) {

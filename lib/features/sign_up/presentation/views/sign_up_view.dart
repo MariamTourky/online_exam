@@ -33,7 +33,7 @@ class SignUpView extends StatelessWidget {
               style: AppTextStyles.medium20Black,
             ),
             leading: IconButton(
-              icon: Icon(Icons.arrow_back_ios_new), // choose any icon you like
+              icon: Icon(Icons.arrow_back_ios_new),
               onPressed: () => context.pop(),
             ),
           ),

@@ -8,6 +8,10 @@ class AppTheme {
   static const Color white = Colors.white;
   static const Color black = Colors.black;
   static const Color error = Colors.red;
+  static const Color green = Color(0xff52C41A);
+  static const Color red = Color(0xffFF4D4F);
+  static const Color yellow = Color(0xffFFC107);
+  static const Color blue = Color(0xff1890FF);
 
   static ThemeData lightTheme() {
     final textTheme = const TextTheme(

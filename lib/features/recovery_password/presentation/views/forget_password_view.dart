@@ -21,9 +21,8 @@ class ForgetPasswordView extends StatelessWidget {
           style: AppTextStyles.medium20Black,
         ),
         leading: IconButton(
-          icon: Icon(Icons.arrow_back_ios_new), // choose any icon you like
-          onPressed: () =>
-              context.go(RouteNames.login), // navigate to the login screen
+          icon: Icon(Icons.arrow_back_ios_new),
+          onPressed: () => context.go(RouteNames.login),
         ),
       ),
       body: ForgetPasswordForm(),

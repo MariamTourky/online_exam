@@ -18,6 +18,7 @@ void showAppSnackbar(
         backgroundColor: isError ? AppTheme.error : AppTheme.primaryBlue,
         behavior: SnackBarBehavior.floating,
         margin: const EdgeInsets.all(16),
+
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
         duration: const Duration(seconds: 3),
       ),
