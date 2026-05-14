@@ -69,8 +69,9 @@ class LoginCubit extends Cubit<LoginState> {
       },
       (user) {
         if (!isClosed) {
+          _sharedPrefsService.saveToken(user.token ?? '');
+          debugPrint('user token : ${user.token}');
           emit(state.copyWith(isLoading: false, success: true));
-          _sharedPrefsService.saveToken(user.token!);
         }
       },
     );
