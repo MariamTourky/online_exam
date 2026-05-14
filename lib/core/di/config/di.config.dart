@@ -74,6 +74,16 @@ import 'package:online_exam/features/recovery_password/presentation/manager/rese
     as _i280;
 import 'package:online_exam/features/recovery_password/presentation/manager/verify_reset_code/verify_reset_code_cubit.dart'
     as _i1012;
+import 'package:online_exam/features/results/api/result_local_datasource_impl.dart'
+    as _i444;
+import 'package:online_exam/features/results/data/datasources/result_local_datasource.dart'
+    as _i917;
+import 'package:online_exam/features/results/data/repos/result_repo_impl.dart'
+    as _i68;
+import 'package:online_exam/features/results/domain/repos/result_repo.dart'
+    as _i845;
+import 'package:online_exam/features/results/presentation/cubit/results_cubit.dart'
+    as _i1050;
 import 'package:online_exam/features/sign_up/data/repositories/sign_up_data_source_contract/sign_up_data_source_contract.dart'
     as _i1020;
 import 'package:online_exam/features/sign_up/data/repositories/sign_up_domain_impl/sign_up_domain_impl.dart'
@@ -117,12 +127,6 @@ extension GetItInjectableX on _i174.GetIt {
     );
     gh.lazySingleton<_i960.AppRouter>(() => _i960.AppRouter());
     gh.lazySingleton<_i361.Dio>(() => networkModule.dio);
-    gh.lazySingleton<_i1016.SharedPrefsService>(
-      () => _i1016.SharedPrefsService(gh<_i460.SharedPreferences>()),
-    );
-    gh.factory<_i498.AppSections>(
-      () => _i498.AppSections(key: gh<_i409.Key>()),
-    );
     gh.lazySingleton<_i121.LoginService>(
       () => _i121.LoginService(gh<_i361.Dio>()),
     );
@@ -133,11 +137,38 @@ extension GetItInjectableX on _i174.GetIt {
       () => _i81.SignUpService(gh<_i361.Dio>()),
     );
     gh.singleton<_i1063.ApiService>(() => _i1063.ApiService(gh<_i361.Dio>()));
-    gh.lazySingleton<_i1036.LoginDataSourceContract>(
-      () => _i648.LoginRemoteDataSourceImpl(gh<_i121.LoginService>()),
+    gh.factory<_i498.AppSections>(
+      () => _i498.AppSections(key: gh<_i409.Key>()),
+    );
+    gh.lazySingleton<_i1020.SignUpDataSourceContract>(
+      () => _i664.SignUpRemoteDataSourceImpl(gh<_i81.SignUpService>()),
+    );
+    gh.lazySingleton<_i1016.SharedPrefsService>(
+      () => _i1016.SharedPrefsService(gh<_i460.SharedPreferences>()),
+    );
+    gh.lazySingleton<_i964.SignUpDataContract>(
+      () => _i509.SignUpDomainImpl(
+        gh<_i1020.SignUpDataSourceContract>(),
+        gh<_i1016.SharedPrefsService>(),
+      ),
     );
     gh.factory<_i714.SubjectRemoteDatasources>(
       () => _i394.SubjectRemoteDatasourcesImpl(gh<_i1063.ApiService>()),
+    );
+    gh.lazySingleton<_i377.RecoverPasswordDataScourcContract>(
+      () => _i826.RecoverPasswordDataImpl(gh<_i917.RecoveryPasswordService>()),
+    );
+    gh.lazySingleton<_i917.ResultLocalDatasource>(
+      () => _i444.ResultLocalDatasourceImpl(gh<_i1016.SharedPrefsService>()),
+    );
+    gh.lazySingleton<_i1036.LoginDataSourceContract>(
+      () => _i648.LoginRemoteDataSourceImpl(gh<_i121.LoginService>()),
+    );
+    gh.lazySingleton<_i512.RecoveryPasswordDataContract>(
+      () => _i339.RercoveryPasswordDomainImpl(
+        gh<_i377.RecoverPasswordDataScourcContract>(),
+        gh<_i1016.SharedPrefsService>(),
+      ),
     );
     gh.factory<_i332.ExamRemoteDataSource>(
       () => _i811.ExamRemoteDataSourceImpl(gh<_i1063.ApiService>()),
@@ -145,18 +176,12 @@ extension GetItInjectableX on _i174.GetIt {
     gh.factory<_i193.AppSectionCubit>(
       () => _i193.AppSectionCubit(gh<_i1016.SharedPrefsService>()),
     );
-    gh.factory<_i736.SubjectRepo>(
-      () => _i97.SubjectRepoImpl(gh<_i714.SubjectRemoteDatasources>()),
+    gh.factory<_i1050.ResultsCubit>(
+      () => _i1050.ResultsCubit(gh<_i1016.SharedPrefsService>()),
     );
-    gh.lazySingleton<_i1020.SignUpDataSourceContract>(
-      () => _i664.SignUpRemoteDataSourceImpl(gh<_i81.SignUpService>()),
-    );
-    gh.lazySingleton<_i377.RecoverPasswordDataScourcContract>(
-      () => _i826.RecoverPasswordDataImpl(gh<_i917.RecoveryPasswordService>()),
-    );
-    gh.lazySingleton<_i964.SignUpDataContract>(
-      () => _i509.SignUpDomainImpl(
-        gh<_i1020.SignUpDataSourceContract>(),
+    gh.lazySingleton<_i346.LoginDataContract>(
+      () => _i536.LoginDomainImpl(
+        gh<_i1036.LoginDataSourceContract>(),
         gh<_i1016.SharedPrefsService>(),
       ),
     );
@@ -166,56 +191,8 @@ extension GetItInjectableX on _i174.GetIt {
         gh<_i1063.ApiService>(),
       ),
     );
-    gh.factory<_i278.GetAllQuestionUsecase>(
-      () => _i278.GetAllQuestionUsecase(gh<_i300.ExamRepo>()),
-    );
-    gh.lazySingleton<_i346.LoginDataContract>(
-      () => _i536.LoginDomainImpl(
-        gh<_i1036.LoginDataSourceContract>(),
-        gh<_i1016.SharedPrefsService>(),
-      ),
-    );
-    gh.factory<_i713.GetAllSubjectsUseCase>(
-      () => _i713.GetAllSubjectsUseCase(gh<_i736.SubjectRepo>()),
-    );
-    gh.lazySingleton<_i821.LoginUseCase>(
-      () => _i821.LoginUseCase(gh<_i346.LoginDataContract>()),
-    );
-    gh.factory<_i299.SubjectCubit>(
-      () => _i299.SubjectCubit(
-        gh<_i713.GetAllSubjectsUseCase>(),
-        gh<_i1016.SharedPrefsService>(),
-      ),
-    );
-    gh.factory<_i135.LoginCubit>(
-      () => _i135.LoginCubit(
-        gh<_i821.LoginUseCase>(),
-        gh<_i1016.SharedPrefsService>(),
-      ),
-    );
     gh.lazySingleton<_i983.SignUpUseCase>(
       () => _i983.SignUpUseCase(gh<_i964.SignUpDataContract>()),
-    );
-    gh.factory<_i532.QuestionCubit>(
-      () => _i532.QuestionCubit(
-        gh<_i278.GetAllQuestionUsecase>(),
-        gh<_i1016.SharedPrefsService>(),
-      ),
-    );
-    gh.factory<_i234.GetAllExamUseCaseUseCase>(
-      () => _i234.GetAllExamUseCaseUseCase(gh<_i300.ExamRepo>()),
-    );
-    gh.lazySingleton<_i512.RecoveryPasswordDataContract>(
-      () => _i339.RercoveryPasswordDomainImpl(
-        gh<_i377.RecoverPasswordDataScourcContract>(),
-        gh<_i1016.SharedPrefsService>(),
-      ),
-    );
-    gh.factory<_i955.ExamsCubit>(
-      () => _i955.ExamsCubit(
-        gh<_i1016.SharedPrefsService>(),
-        gh<_i234.GetAllExamUseCaseUseCase>(),
-      ),
     );
     gh.lazySingleton<_i341.ForgetPasswordUseCase>(
       () =>
@@ -230,8 +207,19 @@ extension GetItInjectableX on _i174.GetIt {
         gh<_i512.RecoveryPasswordDataContract>(),
       ),
     );
+    gh.factory<_i845.ResultsRepo>(
+      () => _i68.ResultRepoImpl(
+        resultLocalDatasource: gh<_i917.ResultLocalDatasource>(),
+      ),
+    );
     gh.factory<_i926.SignupCubit>(
       () => _i926.SignupCubit(gh<_i983.SignUpUseCase>()),
+    );
+    gh.factory<_i736.SubjectRepo>(
+      () => _i97.SubjectRepoImpl(gh<_i714.SubjectRemoteDatasources>()),
+    );
+    gh.factory<_i278.GetAllQuestionUsecase>(
+      () => _i278.GetAllQuestionUsecase(gh<_i300.ExamRepo>()),
     );
     gh.factoryParam<_i1012.VerifyResetCodeCubit, String, dynamic>(
       (email, _) => _i1012.VerifyResetCodeCubit(
@@ -240,11 +228,44 @@ extension GetItInjectableX on _i174.GetIt {
         email,
       ),
     );
-    gh.factory<_i280.ResetPasswordCubit>(
-      () => _i280.ResetPasswordCubit(gh<_i503.ResetPasswordUseCase>()),
+    gh.lazySingleton<_i821.LoginUseCase>(
+      () => _i821.LoginUseCase(gh<_i346.LoginDataContract>()),
     );
     gh.factory<_i330.ForgetPasswordCubit>(
       () => _i330.ForgetPasswordCubit(gh<_i341.ForgetPasswordUseCase>()),
+    );
+    gh.factory<_i234.GetAllExamUseCaseUseCase>(
+      () => _i234.GetAllExamUseCaseUseCase(gh<_i300.ExamRepo>()),
+    );
+    gh.factory<_i713.GetAllSubjectsUseCase>(
+      () => _i713.GetAllSubjectsUseCase(gh<_i736.SubjectRepo>()),
+    );
+    gh.factory<_i532.QuestionCubit>(
+      () => _i532.QuestionCubit(
+        gh<_i278.GetAllQuestionUsecase>(),
+        gh<_i1016.SharedPrefsService>(),
+      ),
+    );
+    gh.factory<_i280.ResetPasswordCubit>(
+      () => _i280.ResetPasswordCubit(gh<_i503.ResetPasswordUseCase>()),
+    );
+    gh.factory<_i135.LoginCubit>(
+      () => _i135.LoginCubit(
+        gh<_i821.LoginUseCase>(),
+        gh<_i1016.SharedPrefsService>(),
+      ),
+    );
+    gh.factory<_i955.ExamsCubit>(
+      () => _i955.ExamsCubit(
+        gh<_i1016.SharedPrefsService>(),
+        gh<_i234.GetAllExamUseCaseUseCase>(),
+      ),
+    );
+    gh.factory<_i299.SubjectCubit>(
+      () => _i299.SubjectCubit(
+        gh<_i713.GetAllSubjectsUseCase>(),
+        gh<_i1016.SharedPrefsService>(),
+      ),
     );
     return this;
   }

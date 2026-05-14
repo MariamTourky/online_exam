@@ -10,6 +10,7 @@ import 'package:online_exam/features/exams/domain/entities/exam_model.dart';
 import 'package:online_exam/features/exams/domain/entities/qouestion_model.dart';
 import 'package:online_exam/features/exams/domain/usecases/get_all_question_usecase.dart';
 import 'package:online_exam/features/exams/presentation/question/view_model/cubit/question_intent.dart';
+import 'package:online_exam/features/results/data/models/result_model.dart';
 
 part 'question_state.dart';
 
@@ -141,14 +142,29 @@ class QuestionCubit extends Cubit<QuestionState> {
     emit(state.copyWith(timer: timer));
   }
 
-  void _submitExam() {
-    // if (state.currentIndex < state.questions.length - 1) {
-    //   final selectedAnswer = state.questions[state.currentIndex].selectedAnswer;
-    //   if (selectedAnswer == null) {
-    //     emit(state.copyWith(isLoading: true, errorMessage: null));
+  void _submitExam() async {
+    int correctAnswers = 0;
+    int totalQuestions = state.questions.length;
 
-    // }
-    // }
+    for (var question in state.questions) {
+      if (question.selectedAnswer == question.correct) {
+        correctAnswers++;
+      }
+    }
+
+    int wrongAnswers = totalQuestions - correctAnswers;
+
+    final result = ResultModel(
+      totalQuestions: totalQuestions,
+      correctAnswers: correctAnswers,
+      wrongAnswers: wrongAnswers,
+      examTitle: state.exam?.title ?? "Exam",
+    );
+
+    // Save result to shared preferences
+
+    state.timer?.cancel();
+    emit(state.copyWith(isSubmitted: true, result: result));
   }
 
   @override

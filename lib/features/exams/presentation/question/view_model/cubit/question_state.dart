@@ -8,6 +8,8 @@ class QuestionState extends Equatable {
   final ExamModel? exam;
   final Timer? timer;
   final int? remainingTime;
+  final bool isSubmitted;
+  final ResultModel? result;
 
   const QuestionState({
     this.questions = const [],
@@ -17,6 +19,8 @@ class QuestionState extends Equatable {
     this.exam,
     this.timer,
     this.remainingTime,
+    this.isSubmitted = false,
+    this.result,
   });
 
   QuestionState copyWith({
@@ -27,6 +31,8 @@ class QuestionState extends Equatable {
     ExamModel? exam,
     Timer? timer,
     int? remainingTime,
+    bool? isSubmitted,
+    ResultModel? result,
   }) {
     return QuestionState(
       questions: questions ?? this.questions,
@@ -36,6 +42,8 @@ class QuestionState extends Equatable {
       exam: exam ?? this.exam,
       timer: timer ?? this.timer,
       remainingTime: remainingTime ?? this.remainingTime,
+      isSubmitted: isSubmitted ?? this.isSubmitted,
+      result: result ?? this.result,
     );
   }
 
@@ -48,6 +56,8 @@ class QuestionState extends Equatable {
     exam,
     timer,
     remainingTime,
+    isSubmitted,
+    result,
   ];
 }
 
