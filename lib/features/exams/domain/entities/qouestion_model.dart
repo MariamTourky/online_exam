@@ -45,4 +45,9 @@ class QuestionModel {
       selectedAnswer ?? this.selectedAnswer,
     );
   }
+
+  @override
+  String toString() {
+    return 'QuestionModel(id: $id, question: $question, correct: $correct, selectedAnswer: $selectedAnswer)';
+  }
 }

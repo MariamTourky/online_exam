@@ -11,6 +11,7 @@ import 'package:online_exam/features/exams/domain/entities/qouestion_model.dart'
 import 'package:online_exam/features/exams/domain/usecases/get_all_question_usecase.dart';
 import 'package:online_exam/features/exams/presentation/question/view_model/cubit/question_intent.dart';
 import 'package:online_exam/features/results/data/models/result_model.dart';
+import 'package:online_exam/features/results/domain/usecases/save_result_usecase.dart';
 
 part 'question_state.dart';
 
@@ -18,8 +19,9 @@ part 'question_state.dart';
 class QuestionCubit extends Cubit<QuestionState> {
   final GetAllQuestionUsecase _getAllQuestionUsecase;
   final SharedPrefsService _sharedPreferencesService;
+  final SaveResultUsecase _saveResultUsecase;
   final PageController pageController = PageController();
-  QuestionCubit(this._getAllQuestionUsecase, this._sharedPreferencesService)
+  QuestionCubit(this._getAllQuestionUsecase, this._sharedPreferencesService, this._saveResultUsecase)
     : super(const QuestionInitial());
 
   void doIntent(QuestionIntent intent) {
@@ -142,7 +144,7 @@ class QuestionCubit extends Cubit<QuestionState> {
     emit(state.copyWith(timer: timer));
   }
 
-  void _submitExam() async {
+  Future<void> _submitExam() async {
     int correctAnswers = 0;
     int totalQuestions = state.questions.length;
 
@@ -161,7 +163,12 @@ class QuestionCubit extends Cubit<QuestionState> {
       examTitle: state.exam?.title ?? "Exam",
     );
 
-    // Save result to shared preferences
+    // Save result to local storage via repository
+    try {
+      await _saveResultUsecase.saveResult(result);
+    } catch (e) {
+      debugPrint('Error saving result: $e');
+    }
 
     state.timer?.cancel();
     emit(state.copyWith(isSubmitted: true, result: result));

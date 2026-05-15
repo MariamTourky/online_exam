@@ -110,17 +110,15 @@ class QuestionScreen extends StatelessWidget {
                         const SizedBox(height: 16),
                         ...(question.answer?.map((ans) {
                               final answerText = ans.answer ?? "";
+                              final answerKey = ans.key ?? "";
                               return RadioListTile<String>(
                                 title: Text(answerText),
-                                value: answerText,
+                                value: answerKey,
                                 selectedTileColor: AppTheme.blue.withAlpha(20),
                                 minLeadingWidth: mediaQuery.size.width * 0.1,
-                                selected: answerText == question.selectedAnswer,
+                                selected: answerKey == question.selectedAnswer,
                                 groupValue: question.selectedAnswer,
                                 onChanged: (value) {
-                                  String? selectedAnswer;
-                                  selectedAnswer = value;
-                                  debugPrint(selectedAnswer.toString());
                                   if (value != null) {
                                     context.read<QuestionCubit>().doIntent(
                                       SelectAnswerStateIntent(
@@ -129,10 +127,6 @@ class QuestionScreen extends StatelessWidget {
                                       ),
                                     );
                                   }
-                                  debugPrint(state.questions.toString());
-                                  debugPrint(
-                                    question.selectedAnswer.toString(),
-                                  );
                                 },
                               );
                             }).toList() ??
