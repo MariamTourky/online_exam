@@ -30,7 +30,11 @@ class ResultsCubit extends Cubit<ResultsState> {
     try {
       final results = await _getAllResultUsecase.call();
       final lastResult = results.isNotEmpty ? results.last : null;
-      emit(state.copyWith(isLoading: false, lastResult: lastResult));
+      emit(state.copyWith(
+        isLoading: false,
+        allResults: results,
+        lastResult: lastResult,
+      ));
     } catch (e) {
       emit(state.copyWith(isLoading: false, errorMessage: e.toString()));
     }

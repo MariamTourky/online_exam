@@ -10,6 +10,8 @@ import 'package:online_exam/features/exams/presentation/question/view_model/cubi
 import 'package:online_exam/features/results/domain/entities/result_entity.dart';
 import 'package:online_exam/features/results/presentation/cubit/result_intent.dart';
 import 'package:online_exam/features/results/presentation/cubit/results_cubit.dart';
+import 'package:online_exam/features/results/presentation/pages/answers_review_screen.dart';
+import 'package:online_exam/features/results/presentation/pages/result_page.dart';
 import 'package:online_exam/features/results/presentation/pages/results_screen.dart';
 import 'package:online_exam/features/exams/presentation/question/view_model/cubit/question_intent.dart';
 import 'package:online_exam/features/login/presentation/manager/login_cubit.dart';
@@ -141,11 +143,14 @@ class AppRouter {
       GoRoute(
         path: RouteNames.results,
         builder: (context, state) {
-          return BlocProvider(
-            create: (_) => getIt<ResultsCubit>()
-              ..doIntent(LoadResultIntent()),
-            child: const ResultsScreen(),
-          );
+          return const ResultPage();
+        },
+      ),
+      GoRoute(
+        path: RouteNames.answers,
+        builder: (context, state) {
+          final result = state.extra as ResultEntity;
+          return AnswersReviewScreen(result: result);
         },
       ),
       GoRoute(

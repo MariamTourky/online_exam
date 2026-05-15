@@ -11,6 +11,7 @@ import 'package:online_exam/features/exams/domain/entities/qouestion_model.dart'
 import 'package:online_exam/features/exams/domain/usecases/get_all_question_usecase.dart';
 import 'package:online_exam/features/exams/presentation/question/view_model/cubit/question_intent.dart';
 import 'package:online_exam/features/results/data/models/result_model.dart';
+import 'package:online_exam/features/results/domain/entities/result_entity.dart';
 import 'package:online_exam/features/results/domain/usecases/save_result_usecase.dart';
 
 part 'question_state.dart';
@@ -148,10 +149,25 @@ class QuestionCubit extends Cubit<QuestionState> {
     int correctAnswers = 0;
     int totalQuestions = state.questions.length;
 
+    final answeredQuestions = <AnsweredQuestionEntity>[];
+
     for (var question in state.questions) {
       if (question.selectedAnswer == question.correct) {
         correctAnswers++;
       }
+
+      answeredQuestions.add(AnsweredQuestionEntity(
+        questionText: question.question ?? '',
+        selectedAnswerKey: question.selectedAnswer,
+        correctAnswerKey: question.correct,
+        options: question.answer
+                ?.map((a) => AnswerOptionEntity(
+                      key: a.key,
+                      text: a.answer,
+                    ))
+                .toList() ??
+            [],
+      ));
     }
 
     int wrongAnswers = totalQuestions - correctAnswers;
@@ -161,6 +177,10 @@ class QuestionCubit extends Cubit<QuestionState> {
       correctAnswers: correctAnswers,
       wrongAnswers: wrongAnswers,
       examTitle: state.exam?.title ?? "Exam",
+      subjectName: state.exam?.subject ?? "General",
+      duration: state.exam?.duration,
+      createdAt: DateTime.now(),
+      answeredQuestions: answeredQuestions,
     );
 
     // Save result to local storage via repository
