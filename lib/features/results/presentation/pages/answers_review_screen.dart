@@ -4,14 +4,19 @@ import 'package:online_exam/config/theme/app_text_styles.dart';
 import 'package:online_exam/config/theme/app_theme.dart';
 import 'package:online_exam/features/results/domain/entities/result_entity.dart';
 
-class AnswersReviewScreen extends StatelessWidget {
+class AnswersReviewScreen extends StatefulWidget {
   final ResultEntity result;
 
   const AnswersReviewScreen({super.key, required this.result});
 
   @override
+  State<AnswersReviewScreen> createState() => _AnswersReviewScreenState();
+}
+
+class _AnswersReviewScreenState extends State<AnswersReviewScreen> {
+  @override
   Widget build(BuildContext context) {
-    final questions = result.answeredQuestions ?? [];
+    final questions = widget.result.answeredQuestions ?? [];
 
     return Scaffold(
       backgroundColor: AppTheme.white,

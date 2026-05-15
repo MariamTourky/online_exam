@@ -7,7 +7,7 @@ class GetAllResultUsecase {
   final ResultsRepo _repo;
   GetAllResultUsecase(this._repo);
   
-  Future<List<ResultEntity>> call() async {
-    return await _repo.getAllResults();
+  Future<List<ResultEntity>> call(String userId) async {
+    return await _repo.getAllResults(userId);
   }
 }

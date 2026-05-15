@@ -223,6 +223,7 @@ extension GetItInjectableX on _i174.GetIt {
       () => _i1050.ResultsCubit(
         gh<_i412.SaveResultUsecase>(),
         gh<_i495.GetAllResultUsecase>(),
+        gh<_i1016.SharedPrefsService>(),
       ),
     );
     gh.factory<_i926.SignupCubit>(

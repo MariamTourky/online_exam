@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:injectable/injectable.dart';
 import 'package:online_exam/core/base_response/base_response.dart';
 import 'package:online_exam/core/storage/shared_prefs_service.dart';
+import 'package:online_exam/core/storage/storage_keys.dart';
 import 'package:online_exam/features/exams/domain/entities/answer_model.dart';
 import 'package:online_exam/features/exams/domain/entities/exam_model.dart';
 import 'package:online_exam/features/exams/domain/entities/qouestion_model.dart';
@@ -185,7 +186,8 @@ class QuestionCubit extends Cubit<QuestionState> {
 
     // Save result to local storage via repository
     try {
-      await _saveResultUsecase.saveResult(result);
+      final userId = _sharedPreferencesService.getString(StorageKeys.userId) ?? '';
+      await _saveResultUsecase.saveResult(result, userId);
     } catch (e) {
       debugPrint('Error saving result: $e');
     }

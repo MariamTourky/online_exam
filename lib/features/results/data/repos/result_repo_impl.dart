@@ -11,13 +11,13 @@ class ResultRepoImpl implements ResultsRepo {
   ResultRepoImpl({required this.resultLocalDatasource});
 
   @override
-  Future<void> saveResult(ResultEntity result) {
+  Future<void> saveResult(ResultEntity result, String userId) {
     final model = ResultModel.fromEntity(result);
-    return resultLocalDatasource.saveExamResult(model);
+    return resultLocalDatasource.saveExamResult(model, userId);
   }
   
   @override
-  Future<List<ResultEntity>> getAllResults() async {
-    return resultLocalDatasource.getAllResults();
+  Future<List<ResultEntity>> getAllResults(String userId) async {
+    return resultLocalDatasource.getAllResults(userId);
   }
 }

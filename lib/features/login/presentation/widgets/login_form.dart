@@ -74,7 +74,9 @@ class LoginForm extends StatelessWidget {
                   isLoading: state.isLoading,
                   onPressed: () {
                     cubit.doIntent(LoginIntent.submit);
-                    context.go(RouteNames.home);
+                    if (state.success) {
+                      context.go(RouteNames.home);
+                    }
                   },
                 );
               },

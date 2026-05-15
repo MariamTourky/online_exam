@@ -8,7 +8,7 @@ class SaveResultUsecase {
 
   SaveResultUsecase(this.repo);
 
-  Future<void> saveResult(ResultEntity result) async {
-    return await repo.saveResult(result);
+  Future<void> saveResult(ResultEntity result, String userId) async {
+    return await repo.saveResult(result, userId);
   }
 }
