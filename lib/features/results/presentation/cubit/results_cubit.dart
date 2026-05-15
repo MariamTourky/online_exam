@@ -22,15 +22,14 @@ class ResultsCubit extends Cubit<ResultsState> {
     this._sharedPrefsService,
   ) : super(const ResultsInitial());
 
-  String get _userId =>
-      _sharedPrefsService.getString(StorageKeys.userId) ?? '';
+  String get _userId => _sharedPrefsService.getString(StorageKeys.userId) ?? '';
 
-  void doIntent(ResultIntent intent) {
+  Future<void> doIntent(ResultIntent intent) async {
     switch (intent) {
       case LoadResultIntent():
-        _loadResults();
+        await _loadResults();
       case SaveResultIntent():
-        _saveResult();
+        await _saveResult();
     }
   }
 
@@ -39,11 +38,13 @@ class ResultsCubit extends Cubit<ResultsState> {
     try {
       final results = await _getAllResultUsecase.call(_userId);
       final lastResult = results.isNotEmpty ? results.last : null;
-      emit(state.copyWith(
-        isLoading: false,
-        allResults: results,
-        lastResult: lastResult,
-      ));
+      emit(
+        state.copyWith(
+          isLoading: false,
+          allResults: results,
+          lastResult: lastResult,
+        ),
+      );
     } catch (e) {
       emit(state.copyWith(isLoading: false, errorMessage: e.toString()));
     }

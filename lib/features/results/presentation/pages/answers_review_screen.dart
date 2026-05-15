@@ -67,10 +67,7 @@ class _AnswersReviewScreenState extends State<AnswersReviewScreen> {
                   : Colors.transparent,
               borderRadius: BorderRadius.circular(12),
               border: isFirstQuestion
-                  ? Border.all(
-                      color: AppTheme.blue.withAlpha(80),
-                      width: 1.5,
-                    )
+                  ? Border.all(color: AppTheme.blue.withAlpha(80), width: 1.5)
                   : null,
             ),
             child: Text(

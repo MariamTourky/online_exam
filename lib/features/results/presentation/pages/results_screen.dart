@@ -5,10 +5,22 @@ import 'package:online_exam/config/theme/app_theme.dart';
 import 'package:go_router/go_router.dart';
 import 'package:online_exam/config/routes/route_names.dart';
 import 'package:online_exam/features/results/domain/entities/result_entity.dart';
+import 'package:online_exam/features/results/presentation/cubit/result_intent.dart';
 import 'package:online_exam/features/results/presentation/cubit/results_cubit.dart';
 
-class ResultsScreen extends StatelessWidget {
+class ResultsScreen extends StatefulWidget {
   const ResultsScreen({super.key});
+
+  @override
+  State<ResultsScreen> createState() => _ResultsScreenState();
+}
+
+class _ResultsScreenState extends State<ResultsScreen> {
+  @override
+  void initState() {
+    super.initState();
+    context.read<ResultsCubit>().doIntent(LoadResultIntent());
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -21,9 +33,7 @@ class ResultsScreen extends StatelessWidget {
         }
 
         if (state.errorMessage != null) {
-          return Scaffold(
-            body: Center(child: Text(state.errorMessage!)),
-          );
+          return Scaffold(body: Center(child: Text(state.errorMessage!)));
         }
 
         final results = state.allResults;
@@ -46,8 +56,11 @@ class ResultsScreen extends StatelessWidget {
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Icon(Icons.assignment_outlined,
-                          size: 64, color: AppTheme.lightGray),
+                      Icon(
+                        Icons.assignment_outlined,
+                        size: 64,
+                        color: AppTheme.lightGray,
+                      ),
                       SizedBox(height: 16),
                       Text(
                         'No results yet',
@@ -74,8 +87,7 @@ class ResultsScreen extends StatelessWidget {
     );
   }
 
-  Widget _buildResultsList(
-      BuildContext context, List<ResultEntity> results) {
+  Widget _buildResultsList(BuildContext context, List<ResultEntity> results) {
     // Group results by subject
     final grouped = <String, List<ResultEntity>>{};
     for (final result in results) {
@@ -96,7 +108,10 @@ class ResultsScreen extends StatelessWidget {
   }
 
   Widget _buildSubjectSection(
-      BuildContext context, String subject, List<ResultEntity> results) {
+    BuildContext context,
+    String subject,
+    List<ResultEntity> results,
+  ) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -233,8 +248,8 @@ class ResultsScreen extends StatelessWidget {
     final color = percentage >= 70
         ? AppTheme.green
         : percentage >= 40
-            ? AppTheme.yellow
-            : AppTheme.red;
+        ? AppTheme.yellow
+        : AppTheme.red;
 
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 3),

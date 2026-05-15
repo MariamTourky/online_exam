@@ -7,7 +7,7 @@ import 'package:online_exam/features/results/domain/repos/result_repo.dart';
 @Injectable(as: ResultsRepo)
 class ResultRepoImpl implements ResultsRepo {
   final ResultLocalDatasource resultLocalDatasource;
-  
+
   ResultRepoImpl({required this.resultLocalDatasource});
 
   @override
@@ -15,7 +15,7 @@ class ResultRepoImpl implements ResultsRepo {
     final model = ResultModel.fromEntity(result);
     return resultLocalDatasource.saveExamResult(model, userId);
   }
-  
+
   @override
   Future<List<ResultEntity>> getAllResults(String userId) async {
     return resultLocalDatasource.getAllResults(userId);

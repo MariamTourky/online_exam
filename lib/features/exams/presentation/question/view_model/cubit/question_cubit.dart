@@ -23,8 +23,11 @@ class QuestionCubit extends Cubit<QuestionState> {
   final SharedPrefsService _sharedPreferencesService;
   final SaveResultUsecase _saveResultUsecase;
   final PageController pageController = PageController();
-  QuestionCubit(this._getAllQuestionUsecase, this._sharedPreferencesService, this._saveResultUsecase)
-    : super(const QuestionInitial());
+  QuestionCubit(
+    this._getAllQuestionUsecase,
+    this._sharedPreferencesService,
+    this._saveResultUsecase,
+  ) : super(const QuestionInitial());
 
   void doIntent(QuestionIntent intent) {
     switch (intent) {
@@ -157,18 +160,18 @@ class QuestionCubit extends Cubit<QuestionState> {
         correctAnswers++;
       }
 
-      answeredQuestions.add(AnsweredQuestionEntity(
-        questionText: question.question ?? '',
-        selectedAnswerKey: question.selectedAnswer,
-        correctAnswerKey: question.correct,
-        options: question.answer
-                ?.map((a) => AnswerOptionEntity(
-                      key: a.key,
-                      text: a.answer,
-                    ))
-                .toList() ??
-            [],
-      ));
+      answeredQuestions.add(
+        AnsweredQuestionEntity(
+          questionText: question.question ?? '',
+          selectedAnswerKey: question.selectedAnswer,
+          correctAnswerKey: question.correct,
+          options:
+              question.answer
+                  ?.map((a) => AnswerOptionEntity(key: a.key, text: a.answer))
+                  .toList() ??
+              [],
+        ),
+      );
     }
 
     int wrongAnswers = totalQuestions - correctAnswers;
@@ -186,7 +189,8 @@ class QuestionCubit extends Cubit<QuestionState> {
 
     // Save result to local storage via repository
     try {
-      final userId = _sharedPreferencesService.getString(StorageKeys.userId) ?? '';
+      final userId =
+          _sharedPreferencesService.getString(StorageKeys.userId) ?? '';
       await _saveResultUsecase.saveResult(result, userId);
     } catch (e) {
       debugPrint('Error saving result: $e');

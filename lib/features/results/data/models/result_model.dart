@@ -35,17 +35,16 @@ class ResultModel extends ResultEntity {
       'duration': duration,
       'createdAt': createdAt?.toIso8601String(),
       'answeredQuestions': answeredQuestions
-          ?.map((q) => {
-                'questionText': q.questionText,
-                'selectedAnswerKey': q.selectedAnswerKey,
-                'correctAnswerKey': q.correctAnswerKey,
-                'options': q.options
-                    .map((o) => {
-                          'key': o.key,
-                          'text': o.text,
-                        })
-                    .toList(),
-              })
+          ?.map(
+            (q) => {
+              'questionText': q.questionText,
+              'selectedAnswerKey': q.selectedAnswerKey,
+              'correctAnswerKey': q.correctAnswerKey,
+              'options': q.options
+                  .map((o) => {'key': o.key, 'text': o.text})
+                  .toList(),
+            },
+          )
           .toList(),
     };
   }
@@ -62,18 +61,21 @@ class ResultModel extends ResultEntity {
           ? DateTime.tryParse(json['createdAt'])
           : null,
       answeredQuestions: (json['answeredQuestions'] as List<dynamic>?)
-          ?.map((q) => AnsweredQuestionEntity(
-                questionText: q['questionText'] ?? '',
-                selectedAnswerKey: q['selectedAnswerKey'],
-                correctAnswerKey: q['correctAnswerKey'],
-                options: (q['options'] as List<dynamic>?)
-                        ?.map((o) => AnswerOptionEntity(
-                              key: o['key'],
-                              text: o['text'],
-                            ))
-                        .toList() ??
-                    [],
-              ))
+          ?.map(
+            (q) => AnsweredQuestionEntity(
+              questionText: q['questionText'] ?? '',
+              selectedAnswerKey: q['selectedAnswerKey'],
+              correctAnswerKey: q['correctAnswerKey'],
+              options:
+                  (q['options'] as List<dynamic>?)
+                      ?.map(
+                        (o) =>
+                            AnswerOptionEntity(key: o['key'], text: o['text']),
+                      )
+                      .toList() ??
+                  [],
+            ),
+          )
           .toList(),
     );
   }

@@ -41,5 +41,5 @@ class ResultLocalDatasourceImpl implements ResultLocalDatasource {
     return resultsList
         .map((json) => ResultModel.fromJson(json as Map<String, dynamic>))
         .toList();
-    }
+  }
 }

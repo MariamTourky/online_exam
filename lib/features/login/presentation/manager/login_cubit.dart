@@ -48,7 +48,6 @@ class LoginCubit extends Cubit<LoginState> {
   }
 
   Future<void> _submitLogin() async {
-
     final isValid = formKey.currentState?.validate() ?? false;
     if (!isValid) return;
 
@@ -71,11 +70,11 @@ class LoginCubit extends Cubit<LoginState> {
       },
       (user) {
         if (!isClosed) {
-          if(user.id != null){
+          if (user.id != null) {
             _sharedPrefsService.saveString(StorageKeys.userId, user.id!);
           }
           emit(state.copyWith(isLoading: false, success: true));
-          if(user.token != null){
+          if (user.token != null) {
             _sharedPrefsService.saveToken(user.token!);
           }
           debugPrint('user id : ${user.id}');
