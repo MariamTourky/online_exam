@@ -12,9 +12,11 @@
 import 'package:dio/dio.dart' as _i361;
 import 'package:flutter/material.dart' as _i409;
 import 'package:get_it/get_it.dart' as _i174;
+import 'package:go_router/go_router.dart' as _i583;
 import 'package:injectable/injectable.dart' as _i526;
 import 'package:online_exam/config/routes/app_router.dart' as _i960;
 import 'package:online_exam/core/di/modules/dio_module.dart' as _i471;
+import 'package:online_exam/core/di/modules/router_module.dart' as _i372;
 import 'package:online_exam/core/di/modules/shared_prefs_module.dart' as _i818;
 import 'package:online_exam/core/network/api_service.dart' as _i1063;
 import 'package:online_exam/core/storage/shared_prefs_service.dart' as _i1016;
@@ -74,6 +76,20 @@ import 'package:online_exam/features/recovery_password/presentation/manager/rese
     as _i280;
 import 'package:online_exam/features/recovery_password/presentation/manager/verify_reset_code/verify_reset_code_cubit.dart'
     as _i1012;
+import 'package:online_exam/features/results/api/result_local_datasource_impl.dart'
+    as _i444;
+import 'package:online_exam/features/results/data/datasources/result_local_datasource.dart'
+    as _i917;
+import 'package:online_exam/features/results/data/repos/result_repo_impl.dart'
+    as _i68;
+import 'package:online_exam/features/results/domain/repos/result_repo.dart'
+    as _i845;
+import 'package:online_exam/features/results/domain/usecases/get_all_result_usecase.dart'
+    as _i495;
+import 'package:online_exam/features/results/domain/usecases/save_result_usecase.dart'
+    as _i412;
+import 'package:online_exam/features/results/presentation/cubit/results_cubit.dart'
+    as _i1050;
 import 'package:online_exam/features/sign_up/data/repositories/sign_up_data_source_contract/sign_up_data_source_contract.dart'
     as _i1020;
 import 'package:online_exam/features/sign_up/data/repositories/sign_up_domain_impl/sign_up_domain_impl.dart'
@@ -111,12 +127,14 @@ extension GetItInjectableX on _i174.GetIt {
     final gh = _i526.GetItHelper(this, environment, environmentFilter);
     final sharedPrefsModule = _$SharedPrefsModule();
     final networkModule = _$NetworkModule();
+    final routerModule = _$RouterModule();
     await gh.factoryAsync<_i460.SharedPreferences>(
       () => sharedPrefsModule.prefs,
       preResolve: true,
     );
     gh.lazySingleton<_i960.AppRouter>(() => _i960.AppRouter());
     gh.lazySingleton<_i361.Dio>(() => networkModule.dio);
+    gh.lazySingleton<_i583.GoRouter>(() => routerModule.goRouter);
     gh.lazySingleton<_i121.LoginService>(
       () => _i121.LoginService(gh<_i361.Dio>()),
     );
@@ -130,11 +148,22 @@ extension GetItInjectableX on _i174.GetIt {
     gh.factory<_i498.AppSections>(
       () => _i498.AppSections(key: gh<_i409.Key>()),
     );
+    gh.lazySingleton<_i917.ResultLocalDatasource>(
+      () => _i444.ResultLocalDatasourceImpl(),
+    );
     gh.lazySingleton<_i1020.SignUpDataSourceContract>(
       () => _i664.SignUpRemoteDataSourceImpl(gh<_i81.SignUpService>()),
     );
     gh.lazySingleton<_i1016.SharedPrefsService>(
       () => _i1016.SharedPrefsService(gh<_i460.SharedPreferences>()),
+    );
+    gh.factory<_i845.ResultsRepo>(
+      () => _i68.ResultRepoImpl(
+        resultLocalDatasource: gh<_i917.ResultLocalDatasource>(),
+      ),
+    );
+    gh.lazySingleton<_i495.GetAllResultUsecase>(
+      () => _i495.GetAllResultUsecase(gh<_i845.ResultsRepo>()),
     );
     gh.lazySingleton<_i964.SignUpDataContract>(
       () => _i509.SignUpDomainImpl(
@@ -163,6 +192,9 @@ extension GetItInjectableX on _i174.GetIt {
     gh.factory<_i193.AppSectionCubit>(
       () => _i193.AppSectionCubit(gh<_i1016.SharedPrefsService>()),
     );
+    gh.lazySingleton<_i412.SaveResultUsecase>(
+      () => _i412.SaveResultUsecase(gh<_i845.ResultsRepo>()),
+    );
     gh.lazySingleton<_i346.LoginDataContract>(
       () => _i536.LoginDomainImpl(
         gh<_i1036.LoginDataSourceContract>(),
@@ -189,6 +221,13 @@ extension GetItInjectableX on _i174.GetIt {
     gh.lazySingleton<_i170.VerifyResetCodeUseCase>(
       () => _i170.VerifyResetCodeUseCase(
         gh<_i512.RecoveryPasswordDataContract>(),
+      ),
+    );
+    gh.factory<_i1050.ResultsCubit>(
+      () => _i1050.ResultsCubit(
+        gh<_i412.SaveResultUsecase>(),
+        gh<_i495.GetAllResultUsecase>(),
+        gh<_i1016.SharedPrefsService>(),
       ),
     );
     gh.factory<_i926.SignupCubit>(
@@ -219,12 +258,6 @@ extension GetItInjectableX on _i174.GetIt {
     gh.factory<_i713.GetAllSubjectsUseCase>(
       () => _i713.GetAllSubjectsUseCase(gh<_i736.SubjectRepo>()),
     );
-    gh.factory<_i532.QuestionCubit>(
-      () => _i532.QuestionCubit(
-        gh<_i278.GetAllQuestionUsecase>(),
-        gh<_i1016.SharedPrefsService>(),
-      ),
-    );
     gh.factory<_i280.ResetPasswordCubit>(
       () => _i280.ResetPasswordCubit(gh<_i503.ResetPasswordUseCase>()),
     );
@@ -240,6 +273,13 @@ extension GetItInjectableX on _i174.GetIt {
         gh<_i234.GetAllExamUseCaseUseCase>(),
       ),
     );
+    gh.factory<_i532.QuestionCubit>(
+      () => _i532.QuestionCubit(
+        gh<_i278.GetAllQuestionUsecase>(),
+        gh<_i1016.SharedPrefsService>(),
+        gh<_i412.SaveResultUsecase>(),
+      ),
+    );
     gh.factory<_i299.SubjectCubit>(
       () => _i299.SubjectCubit(
         gh<_i713.GetAllSubjectsUseCase>(),
@@ -253,3 +293,5 @@ extension GetItInjectableX on _i174.GetIt {
 class _$SharedPrefsModule extends _i818.SharedPrefsModule {}
 
 class _$NetworkModule extends _i471.NetworkModule {}
+
+class _$RouterModule extends _i372.RouterModule {}

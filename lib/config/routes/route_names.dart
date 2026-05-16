@@ -16,4 +16,5 @@ class RouteNames {
   static const String subjects = '/subjects';
   static const String question = '/question';
   static const String examDescription = '/exam-description';
+  static const String answers = '/answers';
 }

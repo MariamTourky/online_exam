@@ -12,6 +12,10 @@ class SharedPrefsService {
     await _prefs.setString(key, value);
   }
 
+  String? getString(String key) {
+    return _prefs.getString(key);
+  }
+
   Future<String?> getToken() async {
     return _prefs.getString(_tokenKey);
   }

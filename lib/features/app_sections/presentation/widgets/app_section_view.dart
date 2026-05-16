@@ -5,7 +5,7 @@ import 'package:online_exam/features/app_sections/presentation/manager/app_secti
 import 'package:online_exam/features/app_sections/presentation/manager/app_section_states.dart';
 import 'package:online_exam/features/app_sections/presentation/pages/home_page_test.dart';
 import 'package:online_exam/features/app_sections/presentation/pages/profile_page_test.dart';
-import 'package:online_exam/features/exams/presentation/exam/view/pages/exam_page.dart';
+import 'package:online_exam/features/results/presentation/pages/result_page.dart';
 import 'package:online_exam/features/subjects/presentation/views/pages/subjects_page.dart';
 
 class AppSectionsView extends StatelessWidget {
@@ -20,7 +20,7 @@ class AppSectionsView extends StatelessWidget {
         bodyWidget = const SubjectsPage();
         break;
       case 1:
-        bodyWidget = ExamPage();
+        bodyWidget = ResultPage();
         break;
       case 2:
         bodyWidget = ProfilePageTest();

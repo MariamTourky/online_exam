@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:injectable/injectable.dart';
 import 'package:dartz/dartz.dart';
 import 'package:online_exam/core/storage/shared_prefs_service.dart';
+import 'package:online_exam/core/storage/storage_keys.dart';
 import '../../../../core/error/failure.dart';
 import '../../domain/entities/user_login_entity.dart';
 import '../../domain/use_cases/login_usecase.dart';
@@ -69,8 +70,15 @@ class LoginCubit extends Cubit<LoginState> {
       },
       (user) {
         if (!isClosed) {
+          if (user.id != null) {
+            _sharedPrefsService.saveString(StorageKeys.userId, user.id!);
+          }
           emit(state.copyWith(isLoading: false, success: true));
-          _sharedPrefsService.saveToken(user.token!);
+          if (user.token != null) {
+            _sharedPrefsService.saveToken(user.token!);
+          }
+          debugPrint('user id : ${user.id}');
+          debugPrint('user token : ${user.token}');
         }
       },
     );

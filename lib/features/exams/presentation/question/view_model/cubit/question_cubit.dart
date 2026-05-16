@@ -5,11 +5,15 @@ import 'package:flutter/material.dart';
 import 'package:injectable/injectable.dart';
 import 'package:online_exam/core/base_response/base_response.dart';
 import 'package:online_exam/core/storage/shared_prefs_service.dart';
+import 'package:online_exam/core/storage/storage_keys.dart';
 import 'package:online_exam/features/exams/domain/entities/answer_model.dart';
 import 'package:online_exam/features/exams/domain/entities/exam_model.dart';
 import 'package:online_exam/features/exams/domain/entities/qouestion_model.dart';
 import 'package:online_exam/features/exams/domain/usecases/get_all_question_usecase.dart';
 import 'package:online_exam/features/exams/presentation/question/view_model/cubit/question_intent.dart';
+import 'package:online_exam/features/results/data/models/result_model.dart';
+import 'package:online_exam/features/results/domain/entities/result_entity.dart';
+import 'package:online_exam/features/results/domain/usecases/save_result_usecase.dart';
 
 part 'question_state.dart';
 
@@ -17,9 +21,13 @@ part 'question_state.dart';
 class QuestionCubit extends Cubit<QuestionState> {
   final GetAllQuestionUsecase _getAllQuestionUsecase;
   final SharedPrefsService _sharedPreferencesService;
+  final SaveResultUsecase _saveResultUsecase;
   final PageController pageController = PageController();
-  QuestionCubit(this._getAllQuestionUsecase, this._sharedPreferencesService)
-    : super(const QuestionInitial());
+  QuestionCubit(
+    this._getAllQuestionUsecase,
+    this._sharedPreferencesService,
+    this._saveResultUsecase,
+  ) : super(const QuestionInitial());
 
   void doIntent(QuestionIntent intent) {
     switch (intent) {
@@ -141,14 +149,55 @@ class QuestionCubit extends Cubit<QuestionState> {
     emit(state.copyWith(timer: timer));
   }
 
-  void _submitExam() {
-    // if (state.currentIndex < state.questions.length - 1) {
-    //   final selectedAnswer = state.questions[state.currentIndex].selectedAnswer;
-    //   if (selectedAnswer == null) {
-    //     emit(state.copyWith(isLoading: true, errorMessage: null));
+  Future<void> _submitExam() async {
+    int correctAnswers = 0;
+    int totalQuestions = state.questions.length;
 
-    // }
-    // }
+    final answeredQuestions = <AnsweredQuestionEntity>[];
+
+    for (var question in state.questions) {
+      if (question.selectedAnswer == question.correct) {
+        correctAnswers++;
+      }
+
+      answeredQuestions.add(
+        AnsweredQuestionEntity(
+          questionText: question.question ?? '',
+          selectedAnswerKey: question.selectedAnswer,
+          correctAnswerKey: question.correct,
+          options:
+              question.answer
+                  ?.map((a) => AnswerOptionEntity(key: a.key, text: a.answer))
+                  .toList() ??
+              [],
+        ),
+      );
+    }
+
+    int wrongAnswers = totalQuestions - correctAnswers;
+
+    final result = ResultModel(
+      totalQuestions: totalQuestions,
+      correctAnswers: correctAnswers,
+      wrongAnswers: wrongAnswers,
+      examTitle: state.exam?.title ?? "Exam",
+      subjectName: state.exam?.subject ?? "General",
+      duration: state.exam?.duration,
+      createdAt: DateTime.now(),
+      answeredQuestions: answeredQuestions,
+    );
+
+    // Save result to local storage via repository
+    try {
+      final userId =
+          _sharedPreferencesService.getString(StorageKeys.userId) ?? '';
+      await _saveResultUsecase.saveResult(result, userId);
+    } catch (e) {
+      debugPrint('Error saving result: $e');
+    }
+
+    state.timer?.cancel();
+    emit(state.copyWith(isSubmitted: true, result: result));
   }
 
   @override

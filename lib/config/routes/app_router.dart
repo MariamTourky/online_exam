@@ -3,12 +3,13 @@ import 'package:injectable/injectable.dart';
 import 'package:online_exam/features/app_sections/presentation/manager/app_section_cubit.dart';
 import 'package:online_exam/features/app_sections/presentation/pages/app_sections.dart';
 import 'package:online_exam/features/exams/domain/entities/exam_model.dart';
-import 'package:online_exam/features/exams/domain/entities/qouestion_model.dart';
 import 'package:online_exam/features/exams/presentation/exam/view/pages/exam_page.dart';
 import 'package:online_exam/features/exams/presentation/exam/view/screens/exam_description.dart';
 import 'package:online_exam/features/exams/presentation/question/view/pages/question_page.dart';
-import 'package:online_exam/features/exams/presentation/question/view/screens/exam_results.dart';
 import 'package:online_exam/features/exams/presentation/question/view_model/cubit/question_cubit.dart';
+import 'package:online_exam/features/results/domain/entities/result_entity.dart';
+import 'package:online_exam/features/results/presentation/pages/answers_review_screen.dart';
+import 'package:online_exam/features/results/presentation/pages/result_page.dart';
 import 'package:online_exam/features/exams/presentation/question/view_model/cubit/question_intent.dart';
 import 'package:online_exam/features/login/presentation/manager/login_cubit.dart';
 import 'package:online_exam/features/recovery_password/presentation/manager/forget_password/forget_password_cubit.dart';
@@ -81,28 +82,6 @@ class AppRouter {
         ),
       ),
       GoRoute(
-        path: RouteNames.resetPassword,
-        builder: (context, state) => BlocProvider(
-          create: (_) => getIt<ResetPasswordCubit>(),
-          child: const ResetPasswordView(),
-        ),
-      ),
-      GoRoute(
-        path: RouteNames.resetPassword,
-        builder: (context, state) => BlocProvider(
-          create: (_) => getIt<ResetPasswordCubit>(),
-          child: const ResetPasswordView(),
-        ),
-      ),
-      GoRoute(
-        path: RouteNames.emailVerification,
-        builder: (context, state) => const VerifyResetCodeView(),
-      ),
-      GoRoute(
-        path: RouteNames.resetPassword,
-        builder: (context, state) => const ResetPasswordView(),
-      ),
-      GoRoute(
         path: RouteNames.subjects,
         builder: (context, state) => BlocProvider(
           create: (_) => getIt<SubjectCubit>(),
@@ -139,10 +118,14 @@ class AppRouter {
       GoRoute(
         path: RouteNames.results,
         builder: (context, state) {
-          final extra = state.extra as Map<String, dynamic>;
-          final exam = extra['exam'] as ExamModel;
-          final questions = extra['questions'] as List<QuestionModel>;
-          return ExamResults(exam: exam, questions: questions);
+          return const ResultPage();
+        },
+      ),
+      GoRoute(
+        path: RouteNames.answers,
+        builder: (context, state) {
+          final result = state.extra as ResultEntity;
+          return AnswersReviewScreen(result: result);
         },
       ),
       GoRoute(
