@@ -9,7 +9,8 @@ import 'package:online_exam/features/results/data/models/result_model.dart';
 @LazySingleton(as: ResultLocalDatasource)
 class ResultLocalDatasourceImpl implements ResultLocalDatasource {
   /// Returns a unique box name for each user to ensure data isolation and persistence.
-  String _userBoxName(String userId) => 'results_${userId.isEmpty ? "guest" : userId}';
+  String _userBoxName(String userId) =>
+      'results_${userId.isEmpty ? "guest" : userId}';
 
   Future<Box> _openUserBox(String userId) async {
     final boxName = _userBoxName(userId);
@@ -27,10 +28,10 @@ class ResultLocalDatasourceImpl implements ResultLocalDatasource {
   Future<void> saveExamResult(ResultModel result, String userId) async {
     final box = await _openUserBox(userId);
     debugPrint('Saving new exam result for user: $userId');
-    
+
     // Use box.add to append a new entry automatically
     await box.add(jsonEncode(result.toJson()));
-    
+
     debugPrint('Successfully saved. Total results in box: ${box.length}');
   }
 
@@ -38,12 +39,12 @@ class ResultLocalDatasourceImpl implements ResultLocalDatasource {
   Future<List<ResultModel>> getAllResults(String userId) async {
     final box = await _openUserBox(userId);
     debugPrint('Fetching all results from box: ${box.name}');
-    
+
     final results = box.values.map((encodedJson) {
       final Map<String, dynamic> json = jsonDecode(encodedJson as String);
       return ResultModel.fromJson(json);
     }).toList();
-        
+
     debugPrint('Returning ${results.length} results');
     return results;
   }

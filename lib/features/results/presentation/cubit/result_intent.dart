@@ -10,4 +10,3 @@ sealed class ResultIntent extends Equatable {
 class LoadResultIntent extends ResultIntent {}
 
 class SaveResultIntent extends ResultIntent {}
-

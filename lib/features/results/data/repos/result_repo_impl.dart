@@ -19,6 +19,5 @@ class ResultRepoImpl implements ResultsRepo {
   @override
   Future<List<ResultEntity>> getAllResults(String userId) async {
     return await resultLocalDatasource.getAllResults(userId);
-
   }
 }

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:online_exam/config/constants/app_assets.dart';
 import 'package:online_exam/config/theme/app_text_styles.dart';
 import 'package:online_exam/config/theme/app_theme.dart';
 import 'package:go_router/go_router.dart';
@@ -150,7 +151,7 @@ class _ResultsScreenState extends State<ResultsScreen> {
         ],
       ),
       child: Material(
-        color: Colors.transparent,
+        color: AppTheme.transparent,
         borderRadius: BorderRadius.circular(16),
         child: InkWell(
           borderRadius: BorderRadius.circular(16),
@@ -173,11 +174,7 @@ class _ResultsScreenState extends State<ResultsScreen> {
                     color: AppTheme.blue.withAlpha(20),
                     borderRadius: BorderRadius.circular(12),
                   ),
-                  child: const Icon(
-                    Icons.description_outlined,
-                    color: AppTheme.blue,
-                    size: 24,
-                  ),
+                  child: Image.asset(AppAssets.examCard),
                 ),
                 const SizedBox(width: 12),
                 // Exam info
