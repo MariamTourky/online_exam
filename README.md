@@ -1,16 +1,39 @@
-# online_exam
+# 🎓 Online Exam App
 
-A new Flutter project.
+## 💻 Overview  
+Online Exam App is a Flutter application for taking and managing online exams with a smooth, secure, and responsive experience. It follows Clean Architecture and uses Bloc/Cubit for scalable state management.
 
-## Getting Started
+---
 
-This project is a starting point for a Flutter application.
+## 🏗️ Architecture  
+Presentation: UI, screens, Cubits  
+Domain: business logic, entities, use cases  
+Data: APIs, models, repositories  
+Core: shared services, networking, utilities  
 
-A few resources to get you started if this is your first Flutter project:
+---
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+## ✨ Features  
+Authentication (login, register, OTP, reset password)  
+Take exams with timer-based questions  
+View results and answer review  
+Exam history tracking  
+Arabic & English support (RTL ready)  
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+---
+
+## 🛠️ Tech Stack  
+Flutter Dart CleanArchitecture BLoC Cubit Firebase RESTAPI Dio Retrofit Localization DependencyInjection  
+
+---
+
+## 🚀 Getting Started  
+git clone <repo-url>  
+flutter pub get  
+dart run build_runner build --delete-conflicting-outputs  
+flutter run  
+
+---
+
+## 🧪 Testing  
+flutter test
