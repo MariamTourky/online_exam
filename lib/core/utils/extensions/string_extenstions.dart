@@ -4,9 +4,8 @@ extension StringExtension on String {
   ).hasMatch(this);
 
   bool get isValidPassword =>
-      length >= 6 &&
-          contains(RegExp(r'[A-Z]')) &&
-          contains(RegExp(r'[0-9]'));
+      length >= 6 && contains(RegExp(r'[A-Z]')) && contains(RegExp(r'[0-9]'));
 
-  String capitalize() => isEmpty ? this : '${this[0].toUpperCase()}${substring(1)}';
+  String capitalize() =>
+      isEmpty ? this : '${this[0].toUpperCase()}${substring(1)}';
 }

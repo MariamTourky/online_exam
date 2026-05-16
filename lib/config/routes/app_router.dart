@@ -4,6 +4,7 @@ import 'package:go_router/go_router.dart';
 // import '../../features/home/presentation/views/home_view.dart';
 // import '../../features/login/presentation/views/login_view.dart';
 import 'route_names.dart';
+
 class AppRouter {
   GoRouter get router => GoRouter(
     debugLogDiagnostics: true,
@@ -12,12 +13,12 @@ class AppRouter {
       GoRoute(
         path: RouteNames.login,
         name: 'Login',
-    //    builder: (context, state) => const LoginView(),
+        //    builder: (context, state) => const LoginView(),
       ),
       GoRoute(
         path: RouteNames.signup,
         name: 'Signup',
-     //   builder: (context, state) => const SignUpView(),
+        //   builder: (context, state) => const SignUpView(),
       ),
       GoRoute(
         path: RouteNames.forgetPassword,
@@ -27,21 +28,20 @@ class AppRouter {
       GoRoute(
         path: RouteNames.home,
         name: 'Home',
-       // builder: (context, state) => const HomeView(),
+        // builder: (context, state) => const HomeView(),
       ),
     ],
   );
 }
 
-      //
-      // GoRoute(
-      //   path: RouteNames.emailVerification,
-      //   name: 'EmailVerification',
-      //   builder: (context, state) => const EmailVerificationView(),
-      // ),
-      // GoRoute(
-      //   path: RouteNames.resetPassword,
-      //   name: 'ResetPassword',
-      //   builder: (context, state) => const ResetPasswordView(),
-      // ),
-
+//
+// GoRoute(
+//   path: RouteNames.emailVerification,
+//   name: 'EmailVerification',
+//   builder: (context, state) => const EmailVerificationView(),
+// ),
+// GoRoute(
+//   path: RouteNames.resetPassword,
+//   name: 'ResetPassword',
+//   builder: (context, state) => const ResetPasswordView(),
+// ),

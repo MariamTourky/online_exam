@@ -1,4 +1,3 @@
-
 class AppConstants {
   // ====================== Authentication Texts
   static const String login = 'Login';
@@ -24,12 +23,14 @@ class AppConstants {
 
   static const String enterYourEmail = 'Enter your email';
   static const String enterYourPassword = 'Enter your password';
-  static const String pleaseEnterAssociatedEmail ='Please enter your email associated with your account';
+  static const String pleaseEnterAssociatedEmail =
+      'Please enter your email associated with your account';
 
   // ===================== Verification & Reset
 
   static const String emailVerification = 'Email verification';
-  static const String verificationInstruction = 'Please enter the code that was sent to your email address';
+  static const String verificationInstruction =
+      'Please enter the code that was sent to your email address';
   static const String didNotReceiveCode = "Didn't receive code?";
   static const String resend = 'Resend';
   static const String resetPassword = 'Reset password';

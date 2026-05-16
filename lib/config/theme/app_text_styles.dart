@@ -19,7 +19,6 @@ class AppTextStyles {
     color: AppColors.black,
   );
 
-
   static const TextStyle baseMedium16 = TextStyle(
     fontFamily: _fontFamily,
     fontWeight: FontWeight.w500,

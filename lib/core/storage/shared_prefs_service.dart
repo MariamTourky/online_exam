@@ -7,7 +7,6 @@ class SharedPrefsService {
 
   SharedPrefsService(this._prefs);
 
-
   Future<void> saveString(String key, String value) async {
     await _prefs.setString(key, value);
   }

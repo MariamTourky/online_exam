@@ -14,18 +14,13 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
     final goRouter = getIt<AppRouter>().router;
 
     return MaterialApp.router(
       debugShowCheckedModeBanner: false,
       routerConfig: goRouter,
       title: 'Online Exam',
-      theme: ThemeData(
-        useMaterial3: true,
-        fontFamily: 'Inter',
-      ),
+      theme: ThemeData(useMaterial3: true, fontFamily: 'Inter'),
     );
   }
 }
-
