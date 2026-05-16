@@ -74,29 +74,24 @@ class LoginForm extends StatelessWidget {
                   isLoading: state.isLoading,
                   onPressed: () {
                     cubit.doIntent(LoginIntent.submit);
-                    if (state.success) {
-                      context.go(RouteNames.home);
-                    }
                   },
                 );
               },
             ),
             const SizedBox(height: 16),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 40.0),
-              child: Row(
-                children: [
-                  Text(
-                    AppConstants.dontHaveAccount,
-                    style: AppTextStyles.baseRegularBlack,
-                  ),
-                  const SizedBox(width: 8),
-                  CustomActionText(
-                    text: AppConstants.signup,
-                    onTapAction: () => context.push(RouteNames.signup),
-                  ),
-                ],
-              ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text(
+                  AppConstants.dontHaveAccount,
+                  style: AppTextStyles.baseRegularBlack,
+                ),
+                const SizedBox(width: 8),
+                CustomActionText(
+                  text: AppConstants.signup,
+                  onTapAction: () => context.push(RouteNames.signup),
+                ),
+              ],
             ),
           ],
         ),
