@@ -61,7 +61,10 @@ class ProfileTextField extends StatelessWidget {
                     ),
                   )
                 : null,
-            contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+            contentPadding: const EdgeInsets.symmetric(
+              horizontal: 16,
+              vertical: 12,
+            ),
           ),
           style: const TextStyle(
             fontSize: 16,

@@ -37,22 +37,20 @@ abstract class ProfileState extends Equatable {
     isVerified,
     createdAt,
   ];
-
- 
 }
 
 class ProfileInitial extends ProfileState {
   ProfileInitial({
-     super.id,
-     super.username,
-     super.firstName,
-     super.lastName,
-     super.email,
-     super.phone,
-     super.role,
-     super.password,
-     super.isVerified,
-     super.createdAt,
+    super.id,
+    super.username,
+    super.firstName,
+    super.lastName,
+    super.email,
+    super.phone,
+    super.role,
+    super.password,
+    super.isVerified,
+    super.createdAt,
   });
 
   @override
@@ -69,7 +67,7 @@ class ProfileInitial extends ProfileState {
     createdAt,
   ];
 
- ProfileState copyWith({
+  ProfileState copyWith({
     String? id,
     String? username,
     String? firstName,

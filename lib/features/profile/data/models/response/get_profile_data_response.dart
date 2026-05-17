@@ -1,5 +1,4 @@
 import 'package:json_annotation/json_annotation.dart';
-import 'dart:convert';
 
 import 'package:online_exam/features/profile/domain/entities/profile_data_model.dart';
 

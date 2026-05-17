@@ -10,7 +10,10 @@ class EditProfileUseCase {
 
   EditProfileUseCase(this._repo);
 
-  Future<BaseResponse<EditProfileModel>> call(String token, EditProfileRequest request) {
+  Future<BaseResponse<EditProfileModel>> call(
+    String token,
+    EditProfileRequest request,
+  ) {
     return _repo.editProfile(token, request);
   }
 }

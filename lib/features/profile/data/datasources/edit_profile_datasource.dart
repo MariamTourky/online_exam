@@ -11,7 +11,7 @@ abstract class EditProfileDatasource {
     EditProfileRequest request,
   );
   Future<BaseResponse<GetProfileDataResponse>> getProfileData(String token);
-  
+
   Future<BaseResponse<ChangePasswordResponse>> changePassword(
     String token,
     ChangePasswordRequest request,
