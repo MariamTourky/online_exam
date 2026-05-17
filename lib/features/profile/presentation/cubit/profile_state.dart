@@ -1,21 +1,21 @@
 part of 'profile_cubit.dart';
 
 sealed class ProfileState extends Equatable {
- final String? id;
- final String? username;
- final String? firstName;
- final String? lastName;
- final String? email;
- final String? phone;
- final String? role;
- final String? password;
- final String? isVerified;
- final String? createdAt;
- final Exception? error;
- final String? message;
- final String? token;
+  final String? id;
+  final String? username;
+  final String? firstName;
+  final String? lastName;
+  final String? email;
+  final String? phone;
+  final String? role;
+  final String? password;
+  final String? isVerified;
+  final String? createdAt;
+  final Exception? error;
+  final String? message;
+  final String? token;
 
-  ProfileState({
+  const ProfileState({
     this.id,
     this.username,
     this.firstName,
@@ -82,7 +82,7 @@ sealed class ProfileState extends Equatable {
 }
 
 class ProfileInitial extends ProfileState {
-  ProfileInitial({
+  const ProfileInitial({
     super.id,
     super.username,
     super.firstName,

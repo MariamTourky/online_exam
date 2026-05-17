@@ -34,6 +34,7 @@ class ProfileTextField extends StatelessWidget {
           readOnly: readOnly,
           keyboardType: keyboardType,
           decoration: InputDecoration(
+            hintText: "Enter your $label",
             labelText: label,
             labelStyle: const TextStyle(color: AppColors.black, fontSize: 14),
             floatingLabelBehavior: FloatingLabelBehavior.always,

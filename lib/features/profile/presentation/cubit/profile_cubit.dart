@@ -89,17 +89,13 @@ class ProfileCubit extends Cubit<ProfileState> {
         break;
     }
   }
+
   void _changePassword(ChangePasswordRequest request) async {
     final token = await _sharedPrefsService.getToken();
     final response = await _changePasswordUseCase(token!, request);
     switch (response) {
       case SuccessResponse(data: final data):
-        emit(
-          state.copyWith(
-            message: data.message!,
-            token: response.data!.token!,
-          ),
-        );
+        emit(state.copyWith(message: data.message, token: data.token));
         break;
       case ErrorResponse():
         emit(state.copyWith(error: response.error));
