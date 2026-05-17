@@ -62,8 +62,12 @@ import 'package:online_exam/features/profile/data/repositories/edit_profile_repo
     as _i1056;
 import 'package:online_exam/features/profile/domain/repositories/edit_profile_repo.dart'
     as _i60;
+import 'package:online_exam/features/profile/domain/usecases/change_password_usecase.dart'
+    as _i258;
 import 'package:online_exam/features/profile/domain/usecases/edit_profile_usecase.dart'
     as _i1000;
+import 'package:online_exam/features/profile/domain/usecases/get_profile_data_usecase.dart'
+    as _i584;
 import 'package:online_exam/features/profile/presentation/cubit/profile_cubit.dart'
     as _i513;
 import 'package:online_exam/features/recovery_password/data/repositories/recovery_password_data_source_contract/recovery_password_data_scource_contract.dart'
@@ -213,8 +217,14 @@ extension GetItInjectableX on _i174.GetIt {
     gh.lazySingleton<_i412.SaveResultUsecase>(
       () => _i412.SaveResultUsecase(gh<_i845.ResultsRepo>()),
     );
+    gh.factory<_i258.ChangePasswordUseCase>(
+      () => _i258.ChangePasswordUseCase(gh<_i60.EditProfileRepo>()),
+    );
     gh.factory<_i1000.EditProfileUseCase>(
       () => _i1000.EditProfileUseCase(gh<_i60.EditProfileRepo>()),
+    );
+    gh.factory<_i584.GetProfileDataUseCase>(
+      () => _i584.GetProfileDataUseCase(gh<_i60.EditProfileRepo>()),
     );
     gh.lazySingleton<_i346.LoginDataContract>(
       () => _i536.LoginDomainImpl(
@@ -230,12 +240,6 @@ extension GetItInjectableX on _i174.GetIt {
     );
     gh.lazySingleton<_i983.SignUpUseCase>(
       () => _i983.SignUpUseCase(gh<_i964.SignUpDataContract>()),
-    );
-    gh.factory<_i513.ProfileCubit>(
-      () => _i513.ProfileCubit(
-        gh<_i1000.EditProfileUseCase>(),
-        gh<_i1016.SharedPrefsService>(),
-      ),
     );
     gh.lazySingleton<_i341.ForgetPasswordUseCase>(
       () =>
@@ -305,6 +309,14 @@ extension GetItInjectableX on _i174.GetIt {
         gh<_i278.GetAllQuestionUsecase>(),
         gh<_i1016.SharedPrefsService>(),
         gh<_i412.SaveResultUsecase>(),
+      ),
+    );
+    gh.factory<_i513.ProfileCubit>(
+      () => _i513.ProfileCubit(
+        gh<_i1000.EditProfileUseCase>(),
+        gh<_i1016.SharedPrefsService>(),
+        gh<_i584.GetProfileDataUseCase>(),
+        gh<_i258.ChangePasswordUseCase>(),
       ),
     );
     gh.factory<_i299.SubjectCubit>(
