@@ -1,5 +1,6 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
+import 'package:flutter/foundation.dart';
 import 'package:injectable/injectable.dart';
 import 'package:online_exam/core/base_response/base_response.dart';
 import 'package:online_exam/core/storage/shared_prefs_service.dart';
@@ -56,20 +57,29 @@ class ProfileCubit extends Cubit<ProfileState> {
             role: data.role,
             isVerified: data.isVerified,
             createdAt: data.createdAt,
+            message: data.message,
           ),
         );
         break;
       case ErrorResponse():
         emit(state.copyWith(error: response.error));
+        debugPrint("ProfileCubit: Error editing profile: ${response.error}");
         break;
     }
   }
 
   void _getProfileData() async {
+    debugPrint("ProfileCubit: Starting _getProfileData...");
     final token = await _sharedPrefsService.getToken();
     final response = await _getProfileDataUseCase(token!);
+    debugPrint(
+      "ProfileCubit: _getProfileData response type: ${response.runtimeType}",
+    );
     switch (response) {
       case SuccessResponse(data: final data):
+        debugPrint(
+          "ProfileCubit: Success fetching data. Username: ${data.username}",
+        );
         emit(
           state.copyWith(
             id: data.id,
@@ -85,6 +95,7 @@ class ProfileCubit extends Cubit<ProfileState> {
         );
         break;
       case ErrorResponse():
+        print("ProfileCubit: Error fetching data: ${response.error}");
         emit(state.copyWith(error: response.error));
         break;
     }
@@ -99,6 +110,7 @@ class ProfileCubit extends Cubit<ProfileState> {
         break;
       case ErrorResponse():
         emit(state.copyWith(error: response.error));
+        debugPrint("ProfileCubit: Error change password: ${response.error}");
         break;
     }
   }

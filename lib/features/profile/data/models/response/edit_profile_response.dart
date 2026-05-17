@@ -88,7 +88,7 @@ class User {
 
   Map<String, dynamic> toJson() => _$UserToJson(this);
 
-  EditProfileModel toEntity() {
+  EditProfileModel toEntity([String? message]) {
     return EditProfileModel(
       id,
       username,
@@ -98,8 +98,9 @@ class User {
       phone,
       role,
       password,
-      isVerified.toString(),
-      createdAt.toString(),
+      isVerified?.toString(),
+      createdAt?.toString(),
+      message,
     );
   }
 }

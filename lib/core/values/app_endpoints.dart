@@ -3,7 +3,7 @@ class AppEndpoints {
   static const String allSubjects = '/subjects';
   static const String allExamsOnSubject = '/exams';
   static const String allQuestionsOnExam = '/questions';
-  static const String editProfile = '/editProfile';
-  static const String profileData = '/profileData';
-  static const String changePassword = '/changePassword';
+  static const String editProfile = '/auth/editProfile';
+  static const String profileData = '/auth/profileData';
+  static const String changePassword = '/auth/changePassword';
 }

@@ -127,7 +127,7 @@ class _ApiService implements ApiService {
       Options(method: 'PUT', headers: _headers, extra: _extra)
           .compose(
             _dio.options,
-            '/editProfile',
+            '/auth/editProfile',
             queryParameters: queryParameters,
             data: _data,
           )
@@ -158,7 +158,7 @@ class _ApiService implements ApiService {
       Options(method: 'GET', headers: _headers, extra: _extra)
           .compose(
             _dio.options,
-            '/profileData',
+            '/auth/profileData',
             queryParameters: queryParameters,
             data: _data,
           )
@@ -188,10 +188,10 @@ class _ApiService implements ApiService {
     final _data = <String, dynamic>{};
     _data.addAll(request.toJson());
     final _options = _setStreamType<HttpResponse<ChangePasswordResponse>>(
-      Options(method: 'PUT', headers: _headers, extra: _extra)
+      Options(method: 'PATCH', headers: _headers, extra: _extra)
           .compose(
             _dio.options,
-            '/changePassword',
+            '/auth/changePassword',
             queryParameters: queryParameters,
             data: _data,
           )

@@ -46,7 +46,7 @@ abstract class ApiService {
     @Header("token") String token,
   );
 
-  @PUT(AppEndpoints.changePassword)
+  @PATCH(AppEndpoints.changePassword)
   Future<HttpResponse<ChangePasswordResponse>> changePassword(
     @Header("token") String token,
     @Body() ChangePasswordRequest request,

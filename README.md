@@ -37,3 +37,24 @@ flutter run
 
 ## 🧪 Testing  
 flutter test
+
+
+# Auth
+./assets/screenshots/login.jpeg
+./assets/screenshots/signup.jpeg
+./assets/screenshots/forget_password.jpeg
+./assets/screenshots/change_password.jpeg
+
+# Subjects
+./assets/screenshots/subjects.jpeg
+
+# Exam
+./assets/screenshots/exam.jpeg
+./assets/screenshots/exam_description.jpeg
+
+# Profile
+./assets/screenshots/profile.jpeg
+
+# Results & Answers
+./assets/screenshots/results.jpeg
+./assets/screenshots/answers.jpeg

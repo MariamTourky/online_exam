@@ -22,7 +22,7 @@ class EditProfileRepoImpl implements EditProfileRepo {
     final response = await _datasource.editProfile(token, request);
     switch (response) {
       case SuccessResponse(data: final data):
-        return SuccessResponse(data: data.user!.toEntity());
+        return SuccessResponse(data: data.user!.toEntity(data.message));
       case ErrorResponse(error: final error):
         return ErrorResponse(error: error);
     }

@@ -30,12 +30,13 @@ class _ProfileScreenState extends State<ProfileScreen> {
   void initState() {
     super.initState();
     _profileCubit = getIt<ProfileCubit>()..doIntent(GetProfileDataIntent());
-    _usernameController = TextEditingController();
-    _firstNameController = TextEditingController();
-    _lastNameController = TextEditingController();
-    _emailController = TextEditingController();
+    final state = _profileCubit.state;
+    _usernameController = TextEditingController(text: state.username);
+    _firstNameController = TextEditingController(text: state.firstName);
+    _lastNameController = TextEditingController(text: state.lastName);
+    _emailController = TextEditingController(text: state.email);
     _passwordController = TextEditingController(text: "********");
-    _phoneController = TextEditingController();
+    _phoneController = TextEditingController(text: state.phone);
   }
 
   @override
@@ -54,7 +55,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
     if (state.username != null && _usernameController.text != state.username) {
       _usernameController.text = state.username!;
     }
-    if (state.firstName != null && _firstNameController.text != state.firstName) {
+    if (state.firstName != null &&
+        _firstNameController.text != state.firstName) {
       _firstNameController.text = state.firstName!;
     }
     if (state.lastName != null && _lastNameController.text != state.lastName) {
@@ -101,6 +103,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
           },
           builder: (context, state) {
             return SingleChildScrollView(
+              physics: const NeverScrollableScrollPhysics(),
               padding: const EdgeInsets.all(16.0),
               child: Form(
                 key: _formKey,
@@ -202,7 +205,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                   lastName: _lastNameController.text,
                                   email: _emailController.text,
                                   phone: _phoneController.text,
-                                  role: state.role ?? "user",
                                 ),
                               ),
                             );

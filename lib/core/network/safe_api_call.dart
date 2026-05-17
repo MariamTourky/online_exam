@@ -23,8 +23,14 @@ Future<BaseResponse<T>> safeApiCall<T>({
   } on DioException catch (dioError) {
     final responseData = dioError.response?.data;
     String errorDetail;
-    if (responseData is Map && responseData['error'] != null) {
-      errorDetail = responseData['error'].toString();
+    if (responseData is Map) {
+      if (responseData['message'] != null) {
+        errorDetail = responseData['message'].toString();
+      } else if (responseData['error'] != null) {
+        errorDetail = responseData['error'].toString();
+      } else {
+        errorDetail = dioError.message ?? 'Unknown Dio error';
+      }
     } else if (dioError.message != null && dioError.message!.isNotEmpty) {
       errorDetail = dioError.message!;
     } else {

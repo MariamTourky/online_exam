@@ -11,6 +11,7 @@ class EditProfileModel {
   final String? password;
   final String? isVerified;
   final String? createdAt;
+  final String? message;
 
   EditProfileModel(
     this.id,
@@ -23,5 +24,6 @@ class EditProfileModel {
     this.password,
     this.isVerified,
     this.createdAt,
+    this.message,
   );
 }
