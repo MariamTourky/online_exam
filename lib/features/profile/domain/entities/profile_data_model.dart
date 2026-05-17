@@ -1,6 +1,4 @@
-import 'dart:core';
-
-class EditProfileModel {
+class ProfileDataModel {
   final String? id;
   final String? username;
   final String? firstName;
@@ -8,11 +6,10 @@ class EditProfileModel {
   final String? email;
   final String? phone;
   final String? role;
-  final String? password;
   final String? isVerified;
   final String? createdAt;
 
-  EditProfileModel(
+  ProfileDataModel(
     this.id,
     this.username,
     this.firstName,
@@ -20,7 +17,6 @@ class EditProfileModel {
     this.email,
     this.phone,
     this.role,
-    this.password,
     this.isVerified,
     this.createdAt,
   );
