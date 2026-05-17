@@ -1,4 +1,4 @@
-import 'package:online_exam/features/profile/data/models/edit_profile_request.dart';
+import 'package:online_exam/features/profile/data/models/request/edit_profile_request.dart';
 
 sealed class ProfileIntent {}
 

@@ -2,7 +2,7 @@ import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:injectable/injectable.dart';
 import 'package:online_exam/core/storage/shared_prefs_service.dart';
-import 'package:online_exam/features/profile/data/models/edit_profile_request.dart';
+import 'package:online_exam/features/profile/data/models/request/edit_profile_request.dart';
 import 'package:online_exam/features/profile/domain/usecases/edit_profile_usecase.dart';
 import 'package:online_exam/features/profile/presentation/cubit/profile_intent.dart';
 

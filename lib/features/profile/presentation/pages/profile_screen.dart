@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:online_exam/config/theme/app_colors.dart';
-import 'package:online_exam/features/profile/data/models/edit_profile_response.dart';
+import 'package:online_exam/features/profile/data/models/response/edit_profile_response.dart';
 import 'package:online_exam/features/profile/presentation/widgets/profile_text_field.dart';
 
 class ProfileScreen extends StatefulWidget {
