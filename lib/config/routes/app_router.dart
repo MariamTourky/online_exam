@@ -7,6 +7,7 @@ import 'package:online_exam/features/exams/presentation/exam/view/pages/exam_pag
 import 'package:online_exam/features/exams/presentation/exam/view/screens/exam_description.dart';
 import 'package:online_exam/features/exams/presentation/question/view/pages/question_page.dart';
 import 'package:online_exam/features/exams/presentation/question/view_model/cubit/question_cubit.dart';
+import 'package:online_exam/features/profile/presentation/pages/profile_page.dart';
 import 'package:online_exam/features/results/domain/entities/result_entity.dart';
 import 'package:online_exam/features/results/presentation/pages/answers_review_screen.dart';
 import 'package:online_exam/features/results/presentation/pages/result_page.dart';
@@ -127,6 +128,12 @@ class AppRouter {
           final result = state.extra as ResultEntity;
           return AnswersReviewScreen(result: result);
         },
+      ),
+
+      // profile
+      GoRoute(
+        path: RouteNames.profile,
+        builder: (context, state) => const ProfilePage(),
       ),
       GoRoute(
         path: RouteNames.appStart,
