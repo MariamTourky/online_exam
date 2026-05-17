@@ -4,4 +4,6 @@ class AppEndpoints {
   static const String allExamsOnSubject = '/exams';
   static const String allQuestionsOnExam = '/questions';
   static const String editProfile = '/editProfile';
+  static const String profileData = '/profileData';
+  static const String changePassword = '/changePassword';
 }

@@ -1,6 +1,5 @@
 import 'package:injectable/injectable.dart';
 import 'package:online_exam/core/base_response/base_response.dart';
-import 'package:online_exam/core/network/safe_api_call.dart';
 import 'package:online_exam/features/profile/data/datasources/edit_profile_datasource.dart';
 import 'package:online_exam/features/profile/data/models/request/edit_profile_request.dart';
 import 'package:online_exam/features/profile/data/models/response/edit_profile_response.dart';

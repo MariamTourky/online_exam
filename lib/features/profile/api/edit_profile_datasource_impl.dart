@@ -6,7 +6,6 @@ import 'package:online_exam/features/profile/data/datasources/edit_profile_datas
 import 'package:online_exam/features/profile/data/models/request/change_password_request.dart';
 import 'package:online_exam/features/profile/data/models/request/edit_profile_request.dart';
 import 'package:online_exam/features/profile/data/models/response/edit_profile_response.dart';
-import 'package:retrofit/retrofit.dart';
 
 @Injectable(as: EditProfileDatasource)
 class EditProfileDatasourceImpl implements EditProfileDatasource {

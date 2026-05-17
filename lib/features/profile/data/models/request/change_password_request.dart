@@ -1,6 +1,35 @@
-class ChangePasswordRequest {
-  final String password;
-  ChangePasswordRequest({required this.password});
+import 'package:json_annotation/json_annotation.dart';
+import 'dart:convert';
 
-  Map<String, dynamic> toJson() => {"password": password};
+part 'change_password_request.g.dart';
+
+@JsonSerializable()
+class ChangePasswordRequest {
+    @JsonKey(name: "oldPassword")
+    final String? oldPassword;
+    @JsonKey(name: "password")
+    final String? password;
+    @JsonKey(name: "rePassword")
+    final String? rePassword;
+
+    ChangePasswordRequest({
+        this.oldPassword,
+        this.password,
+        this.rePassword,
+    });
+
+    ChangePasswordRequest copyWith({
+        String? oldPassword,
+        String? password,
+        String? rePassword,
+    }) => 
+        ChangePasswordRequest(
+            oldPassword: oldPassword ?? this.oldPassword,
+            password: password ?? this.password,
+            rePassword: rePassword ?? this.rePassword,
+        );
+
+    factory ChangePasswordRequest.fromJson(Map<String, dynamic> json) => _$ChangePasswordRequestFromJson(json);
+
+    Map<String, dynamic> toJson() => _$ChangePasswordRequestToJson(this);
 }
