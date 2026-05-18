@@ -40,21 +40,31 @@ flutter test
 
 
 # Auth
-./assets/screenshots/login.jpeg
-./assets/screenshots/signup.jpeg
-./assets/screenshots/forget_password.jpeg
-./assets/screenshots/change_password.jpeg
+<p float="left">
+  <img src="./assets/screenshots/login.jpeg" width="200" />
+  <img src="./assets/screenshots/signup.jpeg" width="200" />
+  <img src="./assets/screenshots/forget_password.jpeg" width="200" />
+  <img src="./assets/screenshots/change_password.jpeg" width="200" />
+</p>
 
 # Subjects
-./assets/screenshots/subjects.jpeg
+<p float="left">
+  <img src="./assets/screenshots/subjects.jpeg" width="200" />
+</p>
 
 # Exam
-./assets/screenshots/exam.jpeg
-./assets/screenshots/exam_description.jpeg
+<p float="left">
+  <img src="./assets/screenshots/exam.jpeg" width="200" />
+  <img src="./assets/screenshots/exam_description.jpeg" width="200" />
+</p>
 
 # Profile
-./assets/screenshots/profile.jpeg
+<p float="left">
+  <img src="./assets/screenshots/profile.jpeg" width="200" />
+</p>
 
 # Results & Answers
-./assets/screenshots/results.jpeg
-./assets/screenshots/answers.jpeg
+<p float="left">
+  <img src="./assets/screenshots/results.jpeg" width="200" />
+  <img src="./assets/screenshots/answers.jpeg" width="200" />
+</p>
