@@ -10,14 +10,128 @@
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'package:dio/dio.dart' as _i361;
+import 'package:flutter/material.dart' as _i409;
 import 'package:get_it/get_it.dart' as _i174;
 import 'package:go_router/go_router.dart' as _i583;
 import 'package:injectable/injectable.dart' as _i526;
+import 'package:online_exam/config/routes/app_router.dart' as _i960;
 import 'package:online_exam/core/di/modules/dio_module.dart' as _i471;
 import 'package:online_exam/core/di/modules/router_module.dart' as _i372;
 import 'package:online_exam/core/di/modules/shared_prefs_module.dart' as _i818;
 import 'package:online_exam/core/network/api_service.dart' as _i1063;
 import 'package:online_exam/core/storage/shared_prefs_service.dart' as _i1016;
+import 'package:online_exam/features/app_sections/presentation/manager/app_section_cubit.dart'
+    as _i193;
+import 'package:online_exam/features/app_sections/presentation/pages/app_sections.dart'
+    as _i498;
+import 'package:online_exam/features/exams/api/exam_remote_datasource_impl.dart'
+    as _i811;
+import 'package:online_exam/features/exams/data/datasources/exam_remote_datasource.dart'
+    as _i332;
+import 'package:online_exam/features/exams/data/repos/exam_repo_impl.dart'
+    as _i367;
+import 'package:online_exam/features/exams/domain/repos/exam_repo.dart'
+    as _i300;
+import 'package:online_exam/features/exams/domain/usecases/get_all_exam_usecase.dart'
+    as _i234;
+import 'package:online_exam/features/exams/domain/usecases/get_all_question_usecase.dart'
+    as _i278;
+import 'package:online_exam/features/exams/presentation/exam/view_model/cubit/exams_cubit.dart'
+    as _i955;
+import 'package:online_exam/features/exams/presentation/question/view_model/cubit/question_cubit.dart'
+    as _i532;
+import 'package:online_exam/features/login/data/repositories/login_data_source_contract/login_data_source_contract.dart'
+    as _i1036;
+import 'package:online_exam/features/login/data/repositories/login_domain_impl/login_domain_impl.dart'
+    as _i536;
+import 'package:online_exam/features/login/data_sources/remote/login_remote_data_source.dart'
+    as _i648;
+import 'package:online_exam/features/login/data_sources/remote/login_service/login_service.dart'
+    as _i121;
+import 'package:online_exam/features/login/domain/repositories_contract/login_data_contract.dart'
+    as _i346;
+import 'package:online_exam/features/login/domain/use_cases/login_usecase.dart'
+    as _i821;
+import 'package:online_exam/features/login/presentation/manager/login_cubit.dart'
+    as _i135;
+import 'package:online_exam/features/profile/api/edit_profile_datasource_impl.dart'
+    as _i223;
+import 'package:online_exam/features/profile/data/datasources/edit_profile_datasource.dart'
+    as _i729;
+import 'package:online_exam/features/profile/data/repositories/edit_profile_repo_impl.dart'
+    as _i1056;
+import 'package:online_exam/features/profile/domain/repositories/edit_profile_repo.dart'
+    as _i60;
+import 'package:online_exam/features/profile/domain/usecases/change_password_usecase.dart'
+    as _i258;
+import 'package:online_exam/features/profile/domain/usecases/edit_profile_usecase.dart'
+    as _i1000;
+import 'package:online_exam/features/profile/domain/usecases/get_profile_data_usecase.dart'
+    as _i584;
+import 'package:online_exam/features/profile/presentation/cubit/profile_cubit.dart'
+    as _i513;
+import 'package:online_exam/features/recovery_password/data/repositories/recovery_password_data_source_contract/recovery_password_data_scource_contract.dart'
+    as _i377;
+import 'package:online_exam/features/recovery_password/data/repositories/recovery_password_domain_impl/recovery_password_domain_impl.dart'
+    as _i339;
+import 'package:online_exam/features/recovery_password/data_sources/remote/recovery_password_data_impl.dart'
+    as _i826;
+import 'package:online_exam/features/recovery_password/data_sources/remote/recovery_password_service/recovery_password_service.dart'
+    as _i917;
+import 'package:online_exam/features/recovery_password/domain/repositories_contract/recovery_password_data_contract.dart'
+    as _i512;
+import 'package:online_exam/features/recovery_password/domain/use_cases/forget_password_usecase.dart'
+    as _i341;
+import 'package:online_exam/features/recovery_password/domain/use_cases/reset_password_usecase.dart'
+    as _i503;
+import 'package:online_exam/features/recovery_password/domain/use_cases/verify_reset_code_usecase.dart'
+    as _i170;
+import 'package:online_exam/features/recovery_password/presentation/manager/forget_password/forget_password_cubit.dart'
+    as _i330;
+import 'package:online_exam/features/recovery_password/presentation/manager/reset_password/reset_password_cubit.dart'
+    as _i280;
+import 'package:online_exam/features/recovery_password/presentation/manager/verify_reset_code/verify_reset_code_cubit.dart'
+    as _i1012;
+import 'package:online_exam/features/results/api/result_local_datasource_impl.dart'
+    as _i444;
+import 'package:online_exam/features/results/data/datasources/result_local_datasource.dart'
+    as _i917;
+import 'package:online_exam/features/results/data/repos/result_repo_impl.dart'
+    as _i68;
+import 'package:online_exam/features/results/domain/repos/result_repo.dart'
+    as _i845;
+import 'package:online_exam/features/results/domain/usecases/get_all_result_usecase.dart'
+    as _i495;
+import 'package:online_exam/features/results/domain/usecases/save_result_usecase.dart'
+    as _i412;
+import 'package:online_exam/features/results/presentation/cubit/results_cubit.dart'
+    as _i1050;
+import 'package:online_exam/features/sign_up/data/repositories/sign_up_data_source_contract/sign_up_data_source_contract.dart'
+    as _i1020;
+import 'package:online_exam/features/sign_up/data/repositories/sign_up_domain_impl/sign_up_domain_impl.dart'
+    as _i509;
+import 'package:online_exam/features/sign_up/data_sources/remote/sign_up_remote_data_source.dart'
+    as _i664;
+import 'package:online_exam/features/sign_up/data_sources/remote/sign_up_service/sign_up_service.dart'
+    as _i81;
+import 'package:online_exam/features/sign_up/domain/repositories_contract/sign_up_data_contract.dart'
+    as _i964;
+import 'package:online_exam/features/sign_up/domain/use_cases/sign_up_usecase.dart'
+    as _i983;
+import 'package:online_exam/features/sign_up/presentation/manager/signup_cubit.dart'
+    as _i926;
+import 'package:online_exam/features/subjects/api/subject_remote_datasources_impl.dart'
+    as _i394;
+import 'package:online_exam/features/subjects/data/data_source/subject_remote_datasources.dart'
+    as _i714;
+import 'package:online_exam/features/subjects/data/repos/subject_repo_impl.dart'
+    as _i97;
+import 'package:online_exam/features/subjects/domain/repos/subject_repo.dart'
+    as _i736;
+import 'package:online_exam/features/subjects/domain/usecases/get_all_subjects_usecase.dart'
+    as _i713;
+import 'package:online_exam/features/subjects/presentation/view_model/cubit/subject_cubit.dart'
+    as _i299;
 import 'package:shared_preferences/shared_preferences.dart' as _i460;
 
 extension GetItInjectableX on _i174.GetIt {
@@ -34,13 +148,182 @@ extension GetItInjectableX on _i174.GetIt {
       () => sharedPrefsModule.prefs,
       preResolve: true,
     );
+    gh.lazySingleton<_i960.AppRouter>(() => _i960.AppRouter());
     gh.lazySingleton<_i361.Dio>(() => networkModule.dio);
     gh.lazySingleton<_i583.GoRouter>(() => routerModule.goRouter);
+    gh.lazySingleton<_i121.LoginService>(
+      () => _i121.LoginService(gh<_i361.Dio>()),
+    );
+    gh.lazySingleton<_i917.RecoveryPasswordService>(
+      () => _i917.RecoveryPasswordService(gh<_i361.Dio>()),
+    );
+    gh.lazySingleton<_i81.SignUpService>(
+      () => _i81.SignUpService(gh<_i361.Dio>()),
+    );
+    gh.singleton<_i1063.ApiService>(() => _i1063.ApiService(gh<_i361.Dio>()));
+    gh.factory<_i498.AppSections>(
+      () => _i498.AppSections(key: gh<_i409.Key>()),
+    );
+    gh.lazySingleton<_i917.ResultLocalDatasource>(
+      () => _i444.ResultLocalDatasourceImpl(),
+    );
+    gh.factory<_i729.EditProfileDatasource>(
+      () => _i223.EditProfileDatasourceImpl(gh<_i1063.ApiService>()),
+    );
+    gh.lazySingleton<_i1020.SignUpDataSourceContract>(
+      () => _i664.SignUpRemoteDataSourceImpl(gh<_i81.SignUpService>()),
+    );
     gh.lazySingleton<_i1016.SharedPrefsService>(
       () => _i1016.SharedPrefsService(gh<_i460.SharedPreferences>()),
     );
-    gh.lazySingleton<_i1063.ApiService>(
-      () => _i1063.ApiService(gh<_i361.Dio>()),
+    gh.factory<_i845.ResultsRepo>(
+      () => _i68.ResultRepoImpl(
+        resultLocalDatasource: gh<_i917.ResultLocalDatasource>(),
+      ),
+    );
+    gh.factory<_i60.EditProfileRepo>(
+      () => _i1056.EditProfileRepoImpl(gh<_i729.EditProfileDatasource>()),
+    );
+    gh.lazySingleton<_i495.GetAllResultUsecase>(
+      () => _i495.GetAllResultUsecase(gh<_i845.ResultsRepo>()),
+    );
+    gh.lazySingleton<_i964.SignUpDataContract>(
+      () => _i509.SignUpDomainImpl(
+        gh<_i1020.SignUpDataSourceContract>(),
+        gh<_i1016.SharedPrefsService>(),
+      ),
+    );
+    gh.factory<_i714.SubjectRemoteDatasources>(
+      () => _i394.SubjectRemoteDatasourcesImpl(gh<_i1063.ApiService>()),
+    );
+    gh.lazySingleton<_i377.RecoverPasswordDataScourcContract>(
+      () => _i826.RecoverPasswordDataImpl(gh<_i917.RecoveryPasswordService>()),
+    );
+    gh.lazySingleton<_i1036.LoginDataSourceContract>(
+      () => _i648.LoginRemoteDataSourceImpl(gh<_i121.LoginService>()),
+    );
+    gh.lazySingleton<_i512.RecoveryPasswordDataContract>(
+      () => _i339.RercoveryPasswordDomainImpl(
+        gh<_i377.RecoverPasswordDataScourcContract>(),
+        gh<_i1016.SharedPrefsService>(),
+      ),
+    );
+    gh.factory<_i332.ExamRemoteDataSource>(
+      () => _i811.ExamRemoteDataSourceImpl(gh<_i1063.ApiService>()),
+    );
+    gh.factory<_i193.AppSectionCubit>(
+      () => _i193.AppSectionCubit(gh<_i1016.SharedPrefsService>()),
+    );
+    gh.lazySingleton<_i412.SaveResultUsecase>(
+      () => _i412.SaveResultUsecase(gh<_i845.ResultsRepo>()),
+    );
+    gh.factory<_i258.ChangePasswordUseCase>(
+      () => _i258.ChangePasswordUseCase(gh<_i60.EditProfileRepo>()),
+    );
+    gh.factory<_i1000.EditProfileUseCase>(
+      () => _i1000.EditProfileUseCase(gh<_i60.EditProfileRepo>()),
+    );
+    gh.factory<_i584.GetProfileDataUseCase>(
+      () => _i584.GetProfileDataUseCase(gh<_i60.EditProfileRepo>()),
+    );
+    gh.lazySingleton<_i346.LoginDataContract>(
+      () => _i536.LoginDomainImpl(
+        gh<_i1036.LoginDataSourceContract>(),
+        gh<_i1016.SharedPrefsService>(),
+      ),
+    );
+    gh.factory<_i300.ExamRepo>(
+      () => _i367.ExamRepoImpl(
+        gh<_i332.ExamRemoteDataSource>(),
+        gh<_i1063.ApiService>(),
+      ),
+    );
+    gh.lazySingleton<_i983.SignUpUseCase>(
+      () => _i983.SignUpUseCase(gh<_i964.SignUpDataContract>()),
+    );
+    gh.lazySingleton<_i341.ForgetPasswordUseCase>(
+      () =>
+          _i341.ForgetPasswordUseCase(gh<_i512.RecoveryPasswordDataContract>()),
+    );
+    gh.lazySingleton<_i503.ResetPasswordUseCase>(
+      () =>
+          _i503.ResetPasswordUseCase(gh<_i512.RecoveryPasswordDataContract>()),
+    );
+    gh.lazySingleton<_i170.VerifyResetCodeUseCase>(
+      () => _i170.VerifyResetCodeUseCase(
+        gh<_i512.RecoveryPasswordDataContract>(),
+      ),
+    );
+    gh.factory<_i1050.ResultsCubit>(
+      () => _i1050.ResultsCubit(
+        gh<_i412.SaveResultUsecase>(),
+        gh<_i495.GetAllResultUsecase>(),
+        gh<_i1016.SharedPrefsService>(),
+      ),
+    );
+    gh.factory<_i926.SignupCubit>(
+      () => _i926.SignupCubit(gh<_i983.SignUpUseCase>()),
+    );
+    gh.factory<_i736.SubjectRepo>(
+      () => _i97.SubjectRepoImpl(gh<_i714.SubjectRemoteDatasources>()),
+    );
+    gh.factory<_i278.GetAllQuestionUsecase>(
+      () => _i278.GetAllQuestionUsecase(gh<_i300.ExamRepo>()),
+    );
+    gh.factoryParam<_i1012.VerifyResetCodeCubit, String, dynamic>(
+      (email, _) => _i1012.VerifyResetCodeCubit(
+        gh<_i170.VerifyResetCodeUseCase>(),
+        gh<_i341.ForgetPasswordUseCase>(),
+        email,
+      ),
+    );
+    gh.lazySingleton<_i821.LoginUseCase>(
+      () => _i821.LoginUseCase(gh<_i346.LoginDataContract>()),
+    );
+    gh.factory<_i330.ForgetPasswordCubit>(
+      () => _i330.ForgetPasswordCubit(gh<_i341.ForgetPasswordUseCase>()),
+    );
+    gh.factory<_i234.GetAllExamUseCaseUseCase>(
+      () => _i234.GetAllExamUseCaseUseCase(gh<_i300.ExamRepo>()),
+    );
+    gh.factory<_i713.GetAllSubjectsUseCase>(
+      () => _i713.GetAllSubjectsUseCase(gh<_i736.SubjectRepo>()),
+    );
+    gh.factory<_i280.ResetPasswordCubit>(
+      () => _i280.ResetPasswordCubit(gh<_i503.ResetPasswordUseCase>()),
+    );
+    gh.factory<_i135.LoginCubit>(
+      () => _i135.LoginCubit(
+        gh<_i821.LoginUseCase>(),
+        gh<_i1016.SharedPrefsService>(),
+      ),
+    );
+    gh.factory<_i955.ExamsCubit>(
+      () => _i955.ExamsCubit(
+        gh<_i1016.SharedPrefsService>(),
+        gh<_i234.GetAllExamUseCaseUseCase>(),
+      ),
+    );
+    gh.factory<_i532.QuestionCubit>(
+      () => _i532.QuestionCubit(
+        gh<_i278.GetAllQuestionUsecase>(),
+        gh<_i1016.SharedPrefsService>(),
+        gh<_i412.SaveResultUsecase>(),
+      ),
+    );
+    gh.factory<_i513.ProfileCubit>(
+      () => _i513.ProfileCubit(
+        gh<_i1000.EditProfileUseCase>(),
+        gh<_i1016.SharedPrefsService>(),
+        gh<_i584.GetProfileDataUseCase>(),
+        gh<_i258.ChangePasswordUseCase>(),
+      ),
+    );
+    gh.factory<_i299.SubjectCubit>(
+      () => _i299.SubjectCubit(
+        gh<_i713.GetAllSubjectsUseCase>(),
+        gh<_i1016.SharedPrefsService>(),
+      ),
     );
     return this;
   }

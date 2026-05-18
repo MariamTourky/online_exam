@@ -37,3 +37,37 @@ flutter run
 
 ## 🧪 Testing  
 flutter test
+
+
+# Auth
+<p float="left">
+  <img src="./assets/screenshots/login.jpeg" width="200" />
+  <img src="./assets/screenshots/signup.jpeg" width="200" />
+  <img src="./assets/screenshots/forget_password.jpeg" width="200" />
+  <img src="./assets/screenshots/change_password.jpeg" width="200" />
+</p>
+
+# Subjects
+<p float="left">
+  <img src="./assets/screenshots/subjects.jpeg" width="200" />
+</p>
+
+# Exam
+<p float="left">
+  <img src="./assets/screenshots/exam.jpeg" width="200" />
+  <img src="./assets/screenshots/exam_description.jpeg" width="200" />
+</p>
+
+# Profile
+<p float="left">
+  <img src="./assets/screenshots/profile.jpeg" width="200" />
+    <img src="./assets/screenshots/change_password.jpeg" width="200" />
+
+</p>
+
+# Results & Answers
+<p float="left">
+  <img src="./assets/screenshots/results.jpeg" width="200" />
+  <img src="./assets/screenshots/answers.jpeg" width="200" />
+  <img src="./assets/screenshots/answers2.jpeg" width="200" />
+</p>

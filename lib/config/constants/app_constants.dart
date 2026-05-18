@@ -1,4 +1,13 @@
+import 'dart:ui';
+
 class AppConstants {
+  static const String appName = 'Online Exam';
+  static const String appVersion = '1.0.0';
+  static const Locale enLangKey = Locale('en');
+  static const Locale arLangKey = Locale('ar');
+
+  static String localizationPath(String locale) =>
+      'assets/translations/$locale.json';
   // ====================== Authentication Texts
   static const String login = 'Login';
   static const String signup = 'Sign Up';
@@ -22,15 +31,20 @@ class AppConstants {
   // ====================== Hints / Inputs
 
   static const String enterYourEmail = 'Enter your email';
-  static const String enterYourPassword = 'Enter your password';
+  static const String enterYourfirstName = 'Enter First Name';
+  static const String enterYourlastName = 'Enter Last Name';
+  static const String enterYourPassword = 'Enter Password';
+  static const String enterRePassword = "Re-enter password";
+  static const String enterYourPhoneNumber = 'Enter Your Phone Number';
+
   static const String pleaseEnterAssociatedEmail =
-      'Please enter your email associated with your account';
+      'Please enter your email associated \n with your account';
 
   // ===================== Verification & Reset
 
   static const String emailVerification = 'Email verification';
   static const String verificationInstruction =
-      'Please enter the code that was sent to your email address';
+      'Please enter the code that was sent to\n your email address';
   static const String didNotReceiveCode = "Didn't receive code?";
   static const String resend = 'Resend';
   static const String resetPassword = 'Reset password';
@@ -38,4 +52,20 @@ class AppConstants {
   // ====================== Validation Messages
   static const String passwordValidationMessage =
       'Password must not be empty and must contain at least 6 characters, including one uppercase letter and one number.';
+
+  // ====================== Main App
+  static const String home = 'Home';
+  static const String profile = 'Profile';
+  static const String explore = 'Explore';
+  static const String results = 'Results';
+
+  static const String subjects = 'Subjects';
+  static const String mySubjects = 'My subjects';
+
+  static const String noSubjectsFound = 'No subjects found';
+  static const String noExamsFound = 'No exams found';
+  static const String noResultsFound = 'No results found';
+  static const String survey = 'Survey';
+  static const String browseBySubjects = 'Browse by subjects';
+  static const String search = 'Search';
 }
