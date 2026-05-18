@@ -61,10 +61,13 @@ flutter test
 # Profile
 <p float="left">
   <img src="./assets/screenshots/profile.jpeg" width="200" />
+    <img src="./assets/screenshots/change_password.jpeg" width="200" />
+
 </p>
 
 # Results & Answers
 <p float="left">
   <img src="./assets/screenshots/results.jpeg" width="200" />
   <img src="./assets/screenshots/answers.jpeg" width="200" />
+  <img src="./assets/screenshots/answers2.jpeg" width="200" />
 </p>
