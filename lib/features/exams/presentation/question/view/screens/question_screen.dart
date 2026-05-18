@@ -108,29 +108,38 @@ class QuestionScreen extends StatelessWidget {
                           style: const TextStyle(fontSize: 16),
                         ),
                         const SizedBox(height: 16),
-                        ...(question.answer?.map((ans) {
-                              final answerText = ans.answer ?? "";
-                              final answerKey = ans.key ?? "";
-                              return RadioListTile<String>(
-                                title: Text(answerText),
-                                value: answerKey,
-                                selectedTileColor: AppTheme.blue.withAlpha(20),
-                                minLeadingWidth: mediaQuery.size.width * 0.1,
-                                selected: answerKey == question.selectedAnswer,
-                                groupValue: question.selectedAnswer,
-                                onChanged: (value) {
-                                  if (value != null) {
-                                    context.read<QuestionCubit>().doIntent(
-                                      SelectAnswerStateIntent(
-                                        questionId: question.id.toString(),
-                                        answer: value,
-                                      ),
-                                    );
-                                  }
-                                },
+                        RadioGroup<String>(
+                          groupValue: question.selectedAnswer,
+                          onChanged: (value) {
+                            if (value != null) {
+                              context.read<QuestionCubit>().doIntent(
+                                SelectAnswerStateIntent(
+                                  questionId: question.id.toString(),
+                                  answer: value,
+                                ),
                               );
-                            }).toList() ??
-                            []),
+                            }
+                          },
+                          child: Column(
+                            children:
+                                question.answer?.map((ans) {
+                                  final answerText = ans.answer ?? "";
+                                  final answerKey = ans.key ?? "";
+                                  return RadioListTile<String>(
+                                    title: Text(answerText),
+                                    value: answerKey,
+                                    selectedTileColor: AppTheme.blue.withAlpha(
+                                      20,
+                                    ),
+                                    minLeadingWidth:
+                                        mediaQuery.size.width * 0.1,
+                                    selected:
+                                        answerKey == question.selectedAnswer,
+                                  );
+                                }).toList() ??
+                                [],
+                          ),
+                        ),
                         SizedBox(height: mediaQuery.size.height * 0.2),
                         Row(
                           children: [

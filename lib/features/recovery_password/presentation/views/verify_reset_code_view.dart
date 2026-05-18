@@ -33,12 +33,13 @@ class VerifyResetCodeView extends StatelessWidget {
         listenWhen: (previous, current) =>
             previous.success != current.success ||
             previous.errorMessage != current.errorMessage,
-        listener: (context, state) {
+        listener: (context, state) async {
           if (state.success) {
             showAppSnackbar(context, ScaffoldMessages.codeVerified);
-            Future.delayed(const Duration(seconds: 1), () {
+            await Future.delayed(const Duration(seconds: 1));
+            if (context.mounted) {
               context.push(RouteNames.resetPassword);
-            });
+            }
           } else if (state.errorMessage != null) {
             showAppSnackbar(context, state.errorMessage!, isError: true);
           }
