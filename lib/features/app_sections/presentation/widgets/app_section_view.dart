@@ -3,8 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:online_exam/config/theme/app_theme.dart';
 import 'package:online_exam/features/app_sections/presentation/manager/app_section_cubit.dart';
 import 'package:online_exam/features/app_sections/presentation/manager/app_section_states.dart';
-import 'package:online_exam/features/app_sections/presentation/pages/home_page_test.dart';
-import 'package:online_exam/features/app_sections/presentation/pages/profile_page_test.dart';
+import 'package:online_exam/features/profile/presentation/pages/profile_page.dart';
 import 'package:online_exam/features/results/presentation/pages/result_page.dart';
 import 'package:online_exam/features/subjects/presentation/views/pages/subjects_page.dart';
 
@@ -23,13 +22,11 @@ class AppSectionsView extends StatelessWidget {
         bodyWidget = ResultPage();
         break;
       case 2:
-        bodyWidget = ProfilePageTest();
-        break;
-      case 3:
-        bodyWidget = ProfilePageTest();
+        bodyWidget = const ProfilePage();
         break;
       default:
-        bodyWidget = HomePageTest();
+        bodyWidget = const SubjectsPage();
+        break;
     }
 
     return Scaffold(
@@ -54,13 +51,6 @@ class AppSectionsView extends StatelessWidget {
                 icon: Icon(Icons.person_outline, color: AppTheme.primaryBlue),
                 label: 'profile',
                 enabled: true,
-              ),
-              NavigationDestination(
-                icon: Icon(
-                  Icons.settings_outlined,
-                  color: AppTheme.primaryBlue,
-                ),
-                label: 'Settings',
               ),
             ],
             indicatorColor: const Color(0xffCCD7EB),
