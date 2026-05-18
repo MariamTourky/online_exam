@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'package:go_router/go_router.dart';
 import 'package:injectable/injectable.dart';
 import 'package:online_exam/features/app_sections/presentation/manager/app_section_cubit.dart';
@@ -33,6 +34,7 @@ class AppRouter {
   GoRouter get router => GoRouter(
     debugLogDiagnostics: true,
     initialLocation: RouteNames.login,
+    extraCodec: const MyExtraCodec(),
     routes: [
       GoRoute(
         path: RouteNames.home,
@@ -141,4 +143,48 @@ class AppRouter {
       ),
     ],
   );
+}
+
+class MyExtraCodec extends Codec<Object?, Object?> {
+  const MyExtraCodec();
+
+  @override
+  Converter<Object?, Object?> get encoder => const _MyExtraEncoder();
+
+  @override
+  Converter<Object?, Object?> get decoder => const _MyExtraDecoder();
+}
+
+class _MyExtraEncoder extends Converter<Object?, Object?> {
+  const _MyExtraEncoder();
+
+  @override
+  Object? convert(Object? input) {
+    if (input is ExamModel) {
+      return {'__type__': 'ExamModel', 'data': input.toJson()};
+    }
+    if (input is ResultEntity) {
+      return {'__type__': 'ResultEntity', 'data': input.toJson()};
+    }
+    return input;
+  }
+}
+
+class _MyExtraDecoder extends Converter<Object?, Object?> {
+  const _MyExtraDecoder();
+
+  @override
+  Object? convert(Object? input) {
+    if (input is Map<String, dynamic>) {
+      final type = input['__type__'];
+      final data = input['data'];
+      if (type == 'ExamModel') {
+        return ExamModel.fromJson(data as Map<String, dynamic>);
+      }
+      if (type == 'ResultEntity') {
+        return ResultEntity.fromJson(data as Map<String, dynamic>);
+      }
+    }
+    return input;
+  }
 }

@@ -36,4 +36,30 @@ class ExamModel {
       createdAt: createdAt ?? this.createdAt,
     );
   }
+
+  Map<String, dynamic> toJson() {
+    return {
+      'id': id,
+      'title': title,
+      'duration': duration,
+      'subject': subject,
+      'numberOfQuestions': numberOfQuestions,
+      'active': active,
+      'createdAt': createdAt?.toIso8601String(),
+    };
+  }
+
+  factory ExamModel.fromJson(Map<String, dynamic> json) {
+    return ExamModel(
+      id: json['id'] as String?,
+      title: json['title'] as String?,
+      duration: json['duration'] as int?,
+      subject: json['subject'] as String?,
+      numberOfQuestions: json['numberOfQuestions'] as int?,
+      active: json['active'] as bool?,
+      createdAt: json['createdAt'] != null
+          ? DateTime.parse(json['createdAt'] as String)
+          : null,
+    );
+  }
 }

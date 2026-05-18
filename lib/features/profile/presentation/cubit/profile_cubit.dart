@@ -95,7 +95,7 @@ class ProfileCubit extends Cubit<ProfileState> {
         );
         break;
       case ErrorResponse():
-        print("ProfileCubit: Error fetching data: ${response.error}");
+        debugPrint("ProfileCubit: Error fetching data: ${response.error}");
         emit(state.copyWith(error: response.error));
         break;
     }

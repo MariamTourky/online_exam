@@ -25,6 +25,7 @@ class ResultModel extends ResultEntity {
     );
   }
 
+  @override
   Map<String, dynamic> toJson() {
     return {
       'totalQuestions': totalQuestions,
