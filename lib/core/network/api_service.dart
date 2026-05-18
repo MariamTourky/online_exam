@@ -2,6 +2,11 @@ import 'package:dio/dio.dart';
 import 'package:online_exam/core/values/app_endpoints.dart';
 import 'package:online_exam/features/exams/data/models/exam_response.dart';
 import 'package:online_exam/features/exams/data/models/question_response.dart';
+import 'package:online_exam/features/profile/data/models/request/change_password_request.dart';
+import 'package:online_exam/features/profile/data/models/request/edit_profile_request.dart';
+import 'package:online_exam/features/profile/data/models/response/change_password_response.dart';
+import 'package:online_exam/features/profile/data/models/response/edit_profile_response.dart';
+import 'package:online_exam/features/profile/data/models/response/get_profile_data_response.dart';
 import 'package:online_exam/features/subjects/data/models/subject_response.dart';
 import 'package:retrofit/retrofit.dart';
 import 'package:injectable/injectable.dart';
@@ -29,5 +34,21 @@ abstract class ApiService {
   Future<HttpResponse<QuestionResponse>> getAllQuestionsOnExam(
     @Header("token") String token,
     @Query("exam") String examId,
+  );
+
+  @PUT(AppEndpoints.editProfile)
+  Future<HttpResponse<EditProfileResponse>> editProfile(
+    @Header("token") String token,
+    @Body() EditProfileRequest request,
+  );
+  @GET(AppEndpoints.profileData)
+  Future<HttpResponse<GetProfileDataResponse>> getProfileData(
+    @Header("token") String token,
+  );
+
+  @PATCH(AppEndpoints.changePassword)
+  Future<HttpResponse<ChangePasswordResponse>> changePassword(
+    @Header("token") String token,
+    @Body() ChangePasswordRequest request,
   );
 }

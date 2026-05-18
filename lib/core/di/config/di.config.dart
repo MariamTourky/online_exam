@@ -54,6 +54,22 @@ import 'package:online_exam/features/login/domain/use_cases/login_usecase.dart'
     as _i821;
 import 'package:online_exam/features/login/presentation/manager/login_cubit.dart'
     as _i135;
+import 'package:online_exam/features/profile/api/edit_profile_datasource_impl.dart'
+    as _i223;
+import 'package:online_exam/features/profile/data/datasources/edit_profile_datasource.dart'
+    as _i729;
+import 'package:online_exam/features/profile/data/repositories/edit_profile_repo_impl.dart'
+    as _i1056;
+import 'package:online_exam/features/profile/domain/repositories/edit_profile_repo.dart'
+    as _i60;
+import 'package:online_exam/features/profile/domain/usecases/change_password_usecase.dart'
+    as _i258;
+import 'package:online_exam/features/profile/domain/usecases/edit_profile_usecase.dart'
+    as _i1000;
+import 'package:online_exam/features/profile/domain/usecases/get_profile_data_usecase.dart'
+    as _i584;
+import 'package:online_exam/features/profile/presentation/cubit/profile_cubit.dart'
+    as _i513;
 import 'package:online_exam/features/recovery_password/data/repositories/recovery_password_data_source_contract/recovery_password_data_scource_contract.dart'
     as _i377;
 import 'package:online_exam/features/recovery_password/data/repositories/recovery_password_domain_impl/recovery_password_domain_impl.dart'
@@ -151,6 +167,9 @@ extension GetItInjectableX on _i174.GetIt {
     gh.lazySingleton<_i917.ResultLocalDatasource>(
       () => _i444.ResultLocalDatasourceImpl(),
     );
+    gh.factory<_i729.EditProfileDatasource>(
+      () => _i223.EditProfileDatasourceImpl(gh<_i1063.ApiService>()),
+    );
     gh.lazySingleton<_i1020.SignUpDataSourceContract>(
       () => _i664.SignUpRemoteDataSourceImpl(gh<_i81.SignUpService>()),
     );
@@ -161,6 +180,9 @@ extension GetItInjectableX on _i174.GetIt {
       () => _i68.ResultRepoImpl(
         resultLocalDatasource: gh<_i917.ResultLocalDatasource>(),
       ),
+    );
+    gh.factory<_i60.EditProfileRepo>(
+      () => _i1056.EditProfileRepoImpl(gh<_i729.EditProfileDatasource>()),
     );
     gh.lazySingleton<_i495.GetAllResultUsecase>(
       () => _i495.GetAllResultUsecase(gh<_i845.ResultsRepo>()),
@@ -194,6 +216,15 @@ extension GetItInjectableX on _i174.GetIt {
     );
     gh.lazySingleton<_i412.SaveResultUsecase>(
       () => _i412.SaveResultUsecase(gh<_i845.ResultsRepo>()),
+    );
+    gh.factory<_i258.ChangePasswordUseCase>(
+      () => _i258.ChangePasswordUseCase(gh<_i60.EditProfileRepo>()),
+    );
+    gh.factory<_i1000.EditProfileUseCase>(
+      () => _i1000.EditProfileUseCase(gh<_i60.EditProfileRepo>()),
+    );
+    gh.factory<_i584.GetProfileDataUseCase>(
+      () => _i584.GetProfileDataUseCase(gh<_i60.EditProfileRepo>()),
     );
     gh.lazySingleton<_i346.LoginDataContract>(
       () => _i536.LoginDomainImpl(
@@ -278,6 +309,14 @@ extension GetItInjectableX on _i174.GetIt {
         gh<_i278.GetAllQuestionUsecase>(),
         gh<_i1016.SharedPrefsService>(),
         gh<_i412.SaveResultUsecase>(),
+      ),
+    );
+    gh.factory<_i513.ProfileCubit>(
+      () => _i513.ProfileCubit(
+        gh<_i1000.EditProfileUseCase>(),
+        gh<_i1016.SharedPrefsService>(),
+        gh<_i584.GetProfileDataUseCase>(),
+        gh<_i258.ChangePasswordUseCase>(),
       ),
     );
     gh.factory<_i299.SubjectCubit>(

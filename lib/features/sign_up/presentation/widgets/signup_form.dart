@@ -131,21 +131,19 @@ class SignupForm extends StatelessWidget {
               },
             ),
             const SizedBox(height: 16),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 40.0),
-              child: Row(
-                children: [
-                  Text(
-                    AppConstants.alreadyHaveAccount,
-                    style: AppTextStyles.baseRegularBlack,
-                  ),
-                  const SizedBox(width: 8),
-                  CustomActionText(
-                    text: AppConstants.login,
-                    onTapAction: () => context.go(RouteNames.login),
-                  ),
-                ],
-              ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text(
+                  AppConstants.alreadyHaveAccount,
+                  style: AppTextStyles.baseRegularBlack,
+                ),
+                const SizedBox(width: 8),
+                CustomActionText(
+                  text: AppConstants.login,
+                  onTapAction: () => context.go(RouteNames.login),
+                ),
+              ],
             ),
           ],
         ),
